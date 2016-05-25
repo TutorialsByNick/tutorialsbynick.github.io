@@ -5,6 +5,10 @@ title: How To Install Ubuntu in a Virtual Machine on Windows
 
 This tutorial will teach you how to install Ubuntu Linux in a virtual machine on Windows. This is a good way to start setting up a programming development environment because many developer tools and programs are hard to install on Windows or only run on a Linux like Ubuntu. VirtualBox is a program that emulates a computer, so that you can install different operating systems onto the virtual computer. Ubuntu is a Linux distribution that is easy to use and configure which makes it ideal for a beginner to use. When you combine these two technologies together, you get an accessible way to develop programs on Windows without the hassle of downloading and installing Linux on your real non-virtualized computer.
 
+# Table of Contents
+* TOC
+{:toc}
+
 # Downloading VirtualBox
 
 Go to [Downloads - Oracle VM VirtualBox] to download the virtualization program.
@@ -15,11 +19,11 @@ Select the download link for Windows hosts because the computer that is "hosting
 
 # Installing VirtualBox
 
-Just click next and go through the installation with the default options.
+Just click `Next` and go through the installation with the default options.
 
 ![VirtualBox Installation First Step]
 
-A "Warning: Network Interfaces" step may appear, but don't worry -- just proceed with the installation. All this means is that VirtualBox is going to install drivers, so that the virtual computer can access the internet by connecting to the your real non-virtualized computer's internet.
+A `Warning: Network Interfaces` dialogue may appear, but don't worry -- just proceed with the installation. All this means is that VirtualBox is going to install drivers, so that the virtual computer can access the internet by connecting to the your real non-virtualized computer's internet.
 
 ![VirtualBox Network Interfaces Warning]
 
@@ -27,7 +31,7 @@ Another dialogue may pop up titled "Windows Security" asking whether you "Would 
 
 # Downloading Ubuntu
 
-Go to [Download Ubuntu Desktop] and click the download button on the right to download the desktop version of Ubuntu (There are other versions to accommodate use cases like servers and phones).
+Go to [Download Ubuntu Desktop] and click the `Download` button on the right to download the desktop version of Ubuntu (There are other versions to accommodate use cases like servers and phones).
 
 ![Ubuntu Download Page]
 
@@ -37,7 +41,7 @@ Unless you would like to donate, you can skip the donation
 
 # Running Virtualbox
 
-Open VirtualBox and select the new button.
+Open VirtualBox and select the `New` button.
 
 ![VirtualBox Program]
 
@@ -53,7 +57,7 @@ I would keep the default values for this, but maybe increase the hard drive size
 
 ![VirtualBox Hard Drive Size]
 
-Keep the default option here and click next -- these are just different virtual hard drive formats to choose from.
+Keep the default option here and click `Next` -- these are just different virtual hard drive formats to choose from.
 
 ![VirtualBox Hard Drive Type]
 
@@ -95,11 +99,11 @@ Select these options if you want. Downloading updates now means that it takes lo
 
 Even though this window says that the first option will erase the whole disk, it means the *virtual* disk. So you don't need to worry about wiping all of your personal files. Select the first option unless you'd like to use another method yourself.
 
-Select Install Now to start the process.
+Select Install `Now` to start the process.
 
 ![Ubuntu Disk Options]
 
-Click Continue.
+Click `Continue`.
 
 ![Ubuntu Disk Verification]
 
@@ -119,7 +123,7 @@ You should see this screen as Ubuntu installs and downloads files to your virtua
 
 ![Ubuntu Installing]
 
-Click Restart to finish installing Ubuntu.
+Click `Restart` to finish installing Ubuntu.
 
 ![Ubuntu Restart]
 
@@ -127,7 +131,7 @@ If this image comes up, you'll have to reset the virtual machine manually.
 
 ![Ubuntu Hang]
 
-Click Machine, then Reset
+Click `Machine`, then `Reset`.
 
 ![VirtualBox Reset]
 
@@ -169,6 +173,22 @@ Reboot to finish the changes.
 
 ![Ubuntu Reboot Confirm]
 
+# Setting up the virtual machine to handle server capabilities
+
+If you want to use your virtual machine as a server or to develop web applications and server programs, you have to switch the virtual machine's networking to bridged.
+
+First, go to the settings in VirtualBox
+
+![VirtualBox Settings]
+
+Then, select the `Network` option on the side and select `Bridged Adapter` from the `Attached to:` dropdown in the center.
+
+![VirtualBox Networking]
+
+# Conclusion
+
+Now you have a capable Linux virtual machine installed. You could learn how to program on it, run open source software, or learn how to do security testing. Those are just a few options of what you can do in this Ubuntu installation.
+
 [Downloads - Oracle VM VirtualBox]: https://www.virtualbox.org/wiki/Downloads
 [VirtualBox Download Page]: {{ site.url }}/images/virtualbox-download-page.jpg
 [VirtualBox Installation First Step]: {{ site.url }}/images/virtualbox-installation-first-step.jpg
@@ -181,7 +201,7 @@ Reboot to finish the changes.
 [VirtualBox Ram Size]: {{ site.url }}/images/virtualbox-ram-size.jpg
 [VirtualBox Hard Drive Size]: {{ site.url }}/images/virtualbox-hard-drive-size.jpg
 [VirtualBox Hard Drive Type]: {{ site.url }}/images/virtualbox-hard-drive-type.jpg
-[VirtualBox Hard Drive Allocation]: {{ site.url }}/images/virtualbox-hard-drive-allocation.jpg
+[VirtualBox Hard Drive Allocation]: {{ site.url }}/images/virtualbox-hard-drive-allocation.JPG
 [VirtualBox Hard Drive Location]: {{ site.url }}/images/virtualbox-hard-drive-location.jpg
 [VirtualBox Main Window with Ubuntu]: {{ site.url }}/images/virtualbox-main-window-with-ubuntu.jpg
 [VirtualBox Startup Disk]: {{ site.url }}/images/virtualbox-startup-disk.jpg
@@ -207,3 +227,5 @@ Reboot to finish the changes.
 [Ubuntu Hang]: {{ site.url }}/images/ubuntu-hang.png
 [VirtualBox Reset]: {{ site.url }}/images/virtualbox-reset.jpg
 [VirtualBox Reset Confirm]: {{ site.url }}/images/virtualbox-reset-confirm.jpg
+[VirtualBox Settings]: {{ site.url }}/images/virtualbox-settings.jpg
+[VirtualBox Networking]: {{ site.url }}/images/virtualbox-network-bridged.jpg
