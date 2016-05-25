@@ -9,7 +9,7 @@
 title: Tutorials By Nick
 email: nick@tutorialsbynick.com
 description: > # this means to ignore newlines until "baseurl:"
-  This is where I put tutorials on how to program and 
+  This is where I put tutorials on how to program and
   use them on the computer
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://tutorialsbynick.com" # the base hostname & protocol for your site
