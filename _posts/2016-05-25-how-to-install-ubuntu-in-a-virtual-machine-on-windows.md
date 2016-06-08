@@ -27,7 +27,7 @@ A `Warning: Network Interfaces` dialogue may appear, but don't worry -- just pro
 
 ![VirtualBox Network Interfaces Warning]
 
-Another dialogue may pop up titled "Windows Security" asking whether you "Would like to install this device software?". Proceed with the installation because this is also part of the driver installation process.
+Another dialogue may pop up titled "Windows Security" asking whether or not you would like to install this device software. Proceed with the installation because this is also part of the driver installation process.
 
 # Downloading Ubuntu
 
@@ -97,7 +97,7 @@ Select these options if you want. Downloading updates now means that it takes lo
 
 ![Ubuntu First Step]
 
-Even though this window says that the first option will erase the whole disk, it means the *virtual* disk. So you don't need to worry about wiping all of your personal files. Select the first option unless you'd like to use another method yourself.
+Even though this window says that the first option will erase the whole disk, it means the *virtual* disk. So, you don't need to worry about wiping all of your personal files. Select the first option unless you'd like to use another method yourself.
 
 Select Install `Now` to start the process.
 
