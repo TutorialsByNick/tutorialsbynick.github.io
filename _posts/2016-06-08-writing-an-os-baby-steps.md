@@ -28,7 +28,9 @@ you can still follow along by [installing Ubuntu in a virtual machine]
 
 You'll need `nasm`, `build-essentials`, and `qemu`.
 
-`sudo apt-get install nasm build-essentials qemu`
+```console
+$ sudo apt-get install nasm build-essentials qemu
+```
 
 * `nasm` is an assembler, which translates assembly code into binary code that the
   computer can directly execute, unlike code that involves _actual_ words.
@@ -56,7 +58,7 @@ What I'll do is show you some code and we'll deconstruct it bit by bit. Don't wo
 
 Type this snippet into your favorite text editor as `boot.asm`:
 
-{% highlight nasm linenos %}
+```nasm
 ; boot.asm
 hang:
     jmp hang
@@ -67,7 +69,7 @@ hang:
 
     db 0x55
     db 0xAA
-{% endhighlight %}
+```
 
 * `hang:` is just a named marker in the code
 * `jmp hang` means jump to the hang marker
@@ -78,9 +80,9 @@ hang:
 
 Enter this into the command line to assemble the file into a binary file that the computer can actually execute:
 
-{% highlight console %}
+```console
 $ nasm -f bin boot.asm boot.bin
-{% endhighlight %}
+```
 
 * `-f bin` ensures that nasm assembles it into the binary format instead of something like elf which is used for general purpose programs in Linux
 * `boot.asm` is the source code assembly file that nasm is trying to assemble
@@ -109,7 +111,7 @@ We'll do this with `make`, a program that is for setting up build toolchains for
 
 First, let's make a file named `Makefile` and put this into it:
 
-{% highlight make linenos %}
+```make
 boot.bin:
     nasm -f bin boot.asm -o boot.bin
 
@@ -118,7 +120,7 @@ qemu: boot.bin
 
 clean:
     rm *.bin
-{% endhighlight %}
+```
 
 The values before the colons are names for the list of commands that come afterwards. This way you can type `make clean` and `make` will execute `rm *.bin` for you, which removes all of the assembled files.
 
@@ -128,7 +130,7 @@ The values that come after the colon are dependencies. So when you type `make qe
 
 Change your `boot.asm` assembly file, so that it looks like this:
 
-{% highlight nasm linenos %}
+```nasm
 ; boot.asm
 mov ax, 0x07c0
 mov ds, ax
@@ -160,7 +162,10 @@ hang:
 
     db 0x55
     db 0xAA
-{% endhighlight %}
+```
+
+Now use `make clean` and `make qemu` to clean, assemble, and run your operating
+system.
 
 I know this looks daunting! We'll go through it line by line though.
 
@@ -175,10 +180,10 @@ If you look at some of these instructions, they have certain pieces information 
 
 Let's use this knowledge to figure out our first chunk:
 
-{% highlight nasm linenos %}
+```nasm
 mov ax, 0x07c0
 mov ds, ax
-{% endhighlight %}
+```
 
 In the first line, we move the value `0x07c0` into the register `ax`. `0x07c0` is
 a hex value, which is a different number format and more convenient for assembly programmers to use than
@@ -212,10 +217,10 @@ A segmented address is generally referred to in this format
 
 # Back to Our Code
 
-{% highlight nasm linenos %}
+```nasm
 mov ax, 0x07c0
 mov ds, ax
-{% endhighlight %}
+```
 
 Now you should see that this chunk of code loads `0x07c0` into register
 `ds`, or data segment, for segment addressing. But, why would we need this?
@@ -266,7 +271,8 @@ operates, but able to send the text to a computer or printer.
 
 Finally, we're at the part where we actually print
 characters to the screen:
-{% highlight nasm linenos %}
+
+```nasm
 print_character_loop:
     lodsb
 
@@ -276,7 +282,7 @@ print_character_loop:
     int 0x10
 
     jmp print_character_loop
-{% endhighlight %}
+```
 
 The `lodsb` instruction loads a byte from the segmented address `ds:si` and moves the `si`
   register onto the next byte. We want to load bytes from the `msg:`
@@ -307,10 +313,10 @@ The string terminates with a NULL character, which is a zero byte in binary
 under the ASCII standard. A `0` compared against a `0` would be a zero.
 So we use the `or` instruction to check if the string has ended. 
 
-{% highlight nasm linenos %}
+```nasm
     or al, al
     jz hang
-{% endhighlight %}
+```
 
 So, why are these two instructions together?
 
@@ -323,11 +329,11 @@ aren't there in the string.
 
 Now, we're finally at the last parts of the loop:
 
-{% highlight nasm linenos %}
+```nasm
      int 0x10
  
      jmp print_character_loop
-{% endhighlight %}
+```
 
 If you remember from earlier, `0x0E` is in the `ah` register. This means that we
 can use `int 0x10` for printing characters to the screen that are stored in
