@@ -16,5 +16,7 @@ url: "http://tutorialsbynick.com" # the base hostname & protocol for your site
 twitter_username: nicholasbday
 github_username: nicholasday
 
+highlighter: pygments
+
 # Build settings
 markdown: kramdown
