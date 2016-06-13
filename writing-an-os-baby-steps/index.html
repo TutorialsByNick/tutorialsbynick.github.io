@@ -348,9 +348,9 @@ characters.</li>
 <code>si</code> register. We use <code>si</code> because the <code>lodsb</code> instruction uses the
 segemented address <code>ds:si</code> to load a byte from that location.</p>
 
-<p><code>mov ah, 0x0E</code> uses the <code>ah</code> register again. It tells the <code>0x10</code> interrupt we
-use in the loop to allow us to utilize the interrupt for printing characters to
-the screen. This is referred to as teletype output because it emulates the
+<p><code>mov ah, 0x0E</code> uses the <code>ah</code> register again. <code>0x0E</code> in the register <code>ah</code> lets us
+use the <code>0x10</code> interrupt for printing characters to the screen.
+This is referred to as teletype output because it emulates the
 functionality of a teletypewriter, which is similar to how a typewriter
 operates, but able to send the text to a computer or printer.</p>
 
@@ -367,11 +367,11 @@ characters to the screen:</p>
 <span class="lineno">8</span> 
 <span class="lineno">9</span>     <span class="nf">jmp</span> <span class="nv">print_character_loop</span></code></pre></figure>
 
-<p>The <code>lodsb</code> instruction loads a byte from the segmented address <code>ds:si</code> and moves the <code>si</code>
-  register onto the next byte. We want to load bytes from the <code>msg:</code>
-  location because that’s where our characters for the message we want to
-  print are stored. Conveniently
-  enough, the ASCII standard (American Standard Code for Information Interchange), gives us a standardized list of numbers that correspond English letters and punctuation.</p>
+<p>The <code>lodsb</code> instruction loads a byte into register <code>al</code> from the segmented address <code>ds:si</code> and moves the <code>si</code>
+register onto the next byte. We want to load bytes from the <code>msg:</code>
+location because that’s where our characters for the message we want to
+print are stored. Conveniently
+enough, the ASCII standard (American Standard Code for Information Interchange), gives us a standardized list of numbers that correspond English letters and punctuation.</p>
 
 <p><code>or al, al</code> performs an <code>or</code> of the <code>al</code> register against itself. An OR
 instruction compares each bit of the first operand against the
@@ -395,6 +395,11 @@ change the third bit also to <code>1</code>.</li>
 <p>The string terminates with a NULL character, which is a zero byte in binary
 under the ASCII standard. A <code>0</code> compared against a <code>0</code> would be a zero.
 So we use the <code>or</code> instruction to check if the string has ended.</p>
+
+<p>You may have noticed that we use the <code>al</code> register even after we “modified” it
+with the <code>or</code> instruction. This works because when bits the bits being <code>or</code>‘d
+are the same, the result that is stored in the first operand is also the same.
+So <code>or al, al</code> is equivalent to just setting the zero flag if the byte in the <code>al</code> register is zero.</p>
 
 <figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><span class="lineno">1</span>     <span class="nf">or</span> <span class="nb">al</span><span class="p">,</span> <span class="nb">al</span>
 <span class="lineno">2</span>     <span class="nf">jz</span> <span class="nv">hang</span></code></pre></figure>
@@ -442,16 +447,17 @@ character if the string has not ended</li>
 means is also store these decimal numbers as bytes too.</p>
 
 <ul>
-  <li><code>10</code> translates to line feed or <code>\n</code> in ASCII. This moves our cursor to
-the next line</li>
   <li><code>13</code> translates to carriage return or <code>\r</code> in ASCII. This moves our cursor to the
 start of the line</li>
+  <li><code>10</code> translates to line feed or <code>\n</code> in ASCII. This moves our cursor to
+the next line</li>
   <li><code>0</code> tells our program that this is the end of the string</li>
 </ul>
 
 <p><em>(Thanks @beernuts in the comments for the correction!)</em></p>
 
-<p>Both of these values are legacies left over from teletypewriters.</p>
+<p>Both <code>\n</code> and <code>\r</code> are legacy values left over from teletypewriters that we
+still use today.</p>
 
 <p>This operating system we made wasn’t <em>that</em> terrible when we broke it up, right?
 Programming an OS is not something to be taken lightly (we haven’t even gotten

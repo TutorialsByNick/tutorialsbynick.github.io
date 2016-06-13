@@ -6,8 +6,8 @@
 </description>
     <link>http://tutorialsbynick.com/</link>
     <atom:link href="http://tutorialsbynick.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 13 Jun 2016 11:46:36 -0400</pubDate>
-    <lastBuildDate>Mon, 13 Jun 2016 11:46:36 -0400</lastBuildDate>
+    <pubDate>Mon, 13 Jun 2016 13:21:48 -0400</pubDate>
+    <lastBuildDate>Mon, 13 Jun 2016 13:21:48 -0400</lastBuildDate>
     <generator>Jekyll v3.1.6</generator>
     
       <item>
@@ -290,9 +290,9 @@ characters.&lt;/li&gt;
 &lt;code&gt;si&lt;/code&gt; register. We use &lt;code&gt;si&lt;/code&gt; because the &lt;code&gt;lodsb&lt;/code&gt; instruction uses the
 segemented address &lt;code&gt;ds:si&lt;/code&gt; to load a byte from that location.&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;mov ah, 0x0E&lt;/code&gt; uses the &lt;code&gt;ah&lt;/code&gt; register again. It tells the &lt;code&gt;0x10&lt;/code&gt; interrupt we
-use in the loop to allow us to utilize the interrupt for printing characters to
-the screen. This is referred to as teletype output because it emulates the
+&lt;p&gt;&lt;code&gt;mov ah, 0x0E&lt;/code&gt; uses the &lt;code&gt;ah&lt;/code&gt; register again. &lt;code&gt;0x0E&lt;/code&gt; in the register &lt;code&gt;ah&lt;/code&gt; lets us
+use the &lt;code&gt;0x10&lt;/code&gt; interrupt for printing characters to the screen.
+This is referred to as teletype output because it emulates the
 functionality of a teletypewriter, which is similar to how a typewriter
 operates, but able to send the text to a computer or printer.&lt;/p&gt;
 
@@ -309,11 +309,11 @@ characters to the screen:&lt;/p&gt;
 &lt;span class=&quot;lineno&quot;&gt;8&lt;/span&gt; 
 &lt;span class=&quot;lineno&quot;&gt;9&lt;/span&gt;     &lt;span class=&quot;nf&quot;&gt;jmp&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;print_character_loop&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;The &lt;code&gt;lodsb&lt;/code&gt; instruction loads a byte from the segmented address &lt;code&gt;ds:si&lt;/code&gt; and moves the &lt;code&gt;si&lt;/code&gt;
-  register onto the next byte. We want to load bytes from the &lt;code&gt;msg:&lt;/code&gt;
-  location because that’s where our characters for the message we want to
-  print are stored. Conveniently
-  enough, the ASCII standard (American Standard Code for Information Interchange), gives us a standardized list of numbers that correspond English letters and punctuation.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;lodsb&lt;/code&gt; instruction loads a byte into register &lt;code&gt;al&lt;/code&gt; from the segmented address &lt;code&gt;ds:si&lt;/code&gt; and moves the &lt;code&gt;si&lt;/code&gt;
+register onto the next byte. We want to load bytes from the &lt;code&gt;msg:&lt;/code&gt;
+location because that’s where our characters for the message we want to
+print are stored. Conveniently
+enough, the ASCII standard (American Standard Code for Information Interchange), gives us a standardized list of numbers that correspond English letters and punctuation.&lt;/p&gt;
 
 &lt;p&gt;&lt;code&gt;or al, al&lt;/code&gt; performs an &lt;code&gt;or&lt;/code&gt; of the &lt;code&gt;al&lt;/code&gt; register against itself. An OR
 instruction compares each bit of the first operand against the
@@ -337,6 +337,11 @@ change the third bit also to &lt;code&gt;1&lt;/code&gt;.&lt;/li&gt;
 &lt;p&gt;The string terminates with a NULL character, which is a zero byte in binary
 under the ASCII standard. A &lt;code&gt;0&lt;/code&gt; compared against a &lt;code&gt;0&lt;/code&gt; would be a zero.
 So we use the &lt;code&gt;or&lt;/code&gt; instruction to check if the string has ended.&lt;/p&gt;
+
+&lt;p&gt;You may have noticed that we use the &lt;code&gt;al&lt;/code&gt; register even after we “modified” it
+with the &lt;code&gt;or&lt;/code&gt; instruction. This works because when bits the bits being &lt;code&gt;or&lt;/code&gt;‘d
+are the same, the result that is stored in the first operand is also the same.
+So &lt;code&gt;or al, al&lt;/code&gt; is equivalent to just setting the zero flag if the byte in the &lt;code&gt;al&lt;/code&gt; register is zero.&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-nasm&quot; data-lang=&quot;nasm&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt;     &lt;span class=&quot;nf&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;al&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;al&lt;/span&gt;
 &lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt;     &lt;span class=&quot;nf&quot;&gt;jz&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;hang&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
@@ -384,16 +389,17 @@ character if the string has not ended&lt;/li&gt;
 means is also store these decimal numbers as bytes too.&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;&lt;code&gt;10&lt;/code&gt; translates to line feed or &lt;code&gt;\n&lt;/code&gt; in ASCII. This moves our cursor to
-the next line&lt;/li&gt;
   &lt;li&gt;&lt;code&gt;13&lt;/code&gt; translates to carriage return or &lt;code&gt;\r&lt;/code&gt; in ASCII. This moves our cursor to the
 start of the line&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;10&lt;/code&gt; translates to line feed or &lt;code&gt;\n&lt;/code&gt; in ASCII. This moves our cursor to
+the next line&lt;/li&gt;
   &lt;li&gt;&lt;code&gt;0&lt;/code&gt; tells our program that this is the end of the string&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;em&gt;(Thanks @beernuts in the comments for the correction!)&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;Both of these values are legacies left over from teletypewriters.&lt;/p&gt;
+&lt;p&gt;Both &lt;code&gt;\n&lt;/code&gt; and &lt;code&gt;\r&lt;/code&gt; are legacy values left over from teletypewriters that we
+still use today.&lt;/p&gt;
 
 &lt;p&gt;This operating system we made wasn’t &lt;em&gt;that&lt;/em&gt; terrible when we broke it up, right?
 Programming an OS is not something to be taken lightly (we haven’t even gotten
