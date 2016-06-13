@@ -6,8 +6,8 @@
 </description>
     <link>http://tutorialsbynick.com/</link>
     <atom:link href="http://tutorialsbynick.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 11 Jun 2016 12:15:04 -0400</pubDate>
-    <lastBuildDate>Sat, 11 Jun 2016 12:15:04 -0400</lastBuildDate>
+    <pubDate>Sun, 12 Jun 2016 20:00:08 -0400</pubDate>
+    <lastBuildDate>Sun, 12 Jun 2016 20:00:08 -0400</lastBuildDate>
     <generator>Jekyll v3.1.6</generator>
     
       <item>
@@ -383,12 +383,14 @@ character if the string has not ended&lt;/li&gt;
 means is also store these decimal numbers as bytes too.&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;&lt;code&gt;13&lt;/code&gt; translates to carriage return or &lt;code&gt;\n&lt;/code&gt; in ASCII. This moves our cursor to
+  &lt;li&gt;&lt;code&gt;10&lt;/code&gt; translates to line feed or &lt;code&gt;\n&lt;/code&gt; in ASCII. This moves our cursor to
 the next line&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;10&lt;/code&gt; translates to new line or &lt;code&gt;\r&lt;/code&gt; in ASCII. This moves our cursor to the
+  &lt;li&gt;&lt;code&gt;13&lt;/code&gt; translates to carriage return or &lt;code&gt;\r&lt;/code&gt; in ASCII. This moves our cursor to the
 start of the line&lt;/li&gt;
   &lt;li&gt;&lt;code&gt;0&lt;/code&gt; tells our program that this is the end of the string&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;(Thanks @beernuts in the comments for the correction!)&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;Both of these values are legacies left over from teletypewriters.&lt;/p&gt;
 

@@ -441,12 +441,14 @@ character if the string has not ended</li>
 means is also store these decimal numbers as bytes too.</p>
 
 <ul>
-  <li><code>13</code> translates to carriage return or <code>\n</code> in ASCII. This moves our cursor to
+  <li><code>10</code> translates to line feed or <code>\n</code> in ASCII. This moves our cursor to
 the next line</li>
-  <li><code>10</code> translates to new line or <code>\r</code> in ASCII. This moves our cursor to the
+  <li><code>13</code> translates to carriage return or <code>\r</code> in ASCII. This moves our cursor to the
 start of the line</li>
   <li><code>0</code> tells our program that this is the end of the string</li>
 </ul>
+
+<p><em>(Thanks @beernuts in the comments for the correction!)</em></p>
 
 <p>Both of these values are legacies left over from teletypewriters.</p>
 
