@@ -6,8 +6,8 @@
 </description>
     <link>http://tutorialsbynick.com/</link>
     <atom:link href="http://tutorialsbynick.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 13 Jun 2016 10:01:27 -0400</pubDate>
-    <lastBuildDate>Mon, 13 Jun 2016 10:01:27 -0400</lastBuildDate>
+    <pubDate>Mon, 13 Jun 2016 11:46:36 -0400</pubDate>
+    <lastBuildDate>Mon, 13 Jun 2016 11:46:36 -0400</lastBuildDate>
     <generator>Jekyll v3.1.6</generator>
     
       <item>
@@ -276,7 +276,7 @@ just chosen without rhyme or reason, so don’t be afraid to look up information
 about the BIOS interrupt you’re using online.&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;&lt;code&gt;0x0&lt;/code&gt; in register &lt;code&gt;ah&lt;/code&gt; refers to setting the video mode and size. In the second line, we use&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;0x0&lt;/code&gt; in register &lt;code&gt;ah&lt;/code&gt; refers to setting the video mode and size.&lt;/li&gt;
   &lt;li&gt;&lt;code&gt;0x3&lt;/code&gt; in register &lt;code&gt;al&lt;/code&gt; tells &lt;code&gt;int 0x10&lt;/code&gt; that the video size should be 80 characters by 25
 characters.&lt;/li&gt;
 &lt;/ul&gt;
