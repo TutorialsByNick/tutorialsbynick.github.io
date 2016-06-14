@@ -162,6 +162,7 @@ For our purposes, Real Mode is fine because it’s the only mode which allows us
   </li>
   <li><code>times 510-($-$$) db 0</code> is NASM syntax for fill the rest of the remaining bytes up with zeroes
     <ul>
+      <li>$ and $$ are two special NASM tokens. $ and $$ evaluate to the assembly positions at the beginning of the current expression and the beginning of the current section respectively.</li>
       <li>We don’t use <code>512</code> to fill up the rest of the MBR’s 512 bytes because the two <code>db</code> commands afterward store two bytes at the end</li>
     </ul>
   </li>
