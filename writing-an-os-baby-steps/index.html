@@ -81,7 +81,7 @@ and what tools you’ll need to operate.</p>
 <p>Most popular operating systems like OSX, Linux, or Windows contain drivers and provide interfaces to the hardware, ensure a certain level of safety and security, keep the processes from fighting each other, and provide essential libraries for programs to use the computer. However, ours won’t be nearly as complicated. :) By the end of this tutorial, you should have an operating system that prints a message to the screen!</p>
 
 <p>I attempted to explain everything as simple as possible, but if I made any errors
-or you’d like to suggest changes to my article, feel free to <a href="https://github.com/TutorialsByNick/TutorialsByNick.github.io/issues">make an issue</a> on
+or you’d like to suggest changes to my article, feel free to <a href="https://github.com/TutorialsByNick/tutorialsbynick/issues/new">make an issue</a> on
 Github or email me.</p>
 
 <h1 id="table-of-contents">Table of Contents</h1>
@@ -162,6 +162,9 @@ For our purposes, Real Mode is fine because it’s the only mode which allows us
   </li>
   <li><code>times 510-($-$$) db 0</code> is NASM syntax for fill the rest of the remaining bytes up with zeroes
     <ul>
+      <li><code>$</code> means start of the current line</li>
+      <li><code>$$</code> references the start of the file/section</li>
+      <li><code>($-$$)</code> means subtract the current location from the beginning of the file</li>
       <li>We don’t use <code>512</code> to fill up the rest of the MBR’s 512 bytes because the two <code>db</code> commands afterward store two bytes at the end</li>
     </ul>
   </li>
