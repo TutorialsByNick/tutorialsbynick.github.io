@@ -11,7 +11,7 @@ dl, dd, ol, ul, figure {
  * Basic styling
  */
 body {
-  font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font: 400 18px/1.5 "Georgia", serif;
   color: #111;
   background-color: #fdfdfd;
   -webkit-text-size-adjust: 100%;
@@ -44,7 +44,7 @@ figure > img {
   display: block; }
 
 figcaption {
-  font-size: 14px; }
+  font-size: 15.75px; }
 
 /**
  * Lists
@@ -147,66 +147,88 @@ pre {
 /**
  * Site header
  */
+.float-left {
+  padding: 10px;
+  float: left;
+  width: 45%; }
+  @media screen and (max-width: 600px) {
+    .float-left {
+      float: left;
+      width: 100%;
+      text-align: center; } }
+
+.guide-image {
+  width: 175px;
+  display: block;
+  margin: 0 auto; }
+
+.intro {
+  padding-bottom: 40px; }
+
+.intro-above {
+  padding-top: 30px; }
+
+.clear {
+  clear: both; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+  font-family: 'Lato', sans-serif; }
+
+.center {
+  text-align: center; }
+
 .site-header {
-  border-top: 5px solid #424242;
+  font-family: 'Lato', sans-serif;
+  border-top: 6px solid #424242;
   border-bottom: 1px solid #e8e8e8;
-  min-height: 56px;
+  min-height: 80px;
   position: relative; }
 
 .site-title {
   font-size: 26px;
-  font-weight: 300;
-  line-height: 56px;
+  font-weight: bold;
+  line-height: 80px;
   letter-spacing: -1px;
   margin-bottom: 0;
   float: left; }
   .site-title, .site-title:visited {
     color: #424242; }
+  @media screen and (max-width: 600px) {
+    .site-title {
+      float: left;
+      width: 100%;
+      text-align: center; } }
+
+.site-title:link {
+  text-decoration: none; }
+
+.site-title:hover {
+  color: #0074D9; }
 
 .site-nav {
   float: right;
-  line-height: 56px; }
+  line-height: 80px;
+  font-size: 16px; }
   .site-nav .menu-icon {
     display: none; }
   .site-nav .page-link {
     color: #111;
-    line-height: 1.5; }
+    line-height: 1.5;
+    text-transform: uppercase;
+    text-decoration: none; }
     .site-nav .page-link:not(:last-child) {
       margin-right: 20px; }
+  .site-nav .page-link:hover {
+    color: #0074D9;
+    padding-bottom: 1px;
+    border-bottom: 2px solid #0074D9; }
   @media screen and (max-width: 600px) {
     .site-nav {
-      position: absolute;
-      top: 9px;
-      right: 15px;
-      background-color: #fdfdfd;
-      border: 1px solid #e8e8e8;
-      border-radius: 5px;
-      text-align: right; }
-      .site-nav .menu-icon {
-        display: block;
-        float: right;
-        width: 36px;
-        height: 26px;
-        line-height: 0;
-        padding-top: 10px;
-        text-align: center; }
-        .site-nav .menu-icon > svg {
-          width: 18px;
-          height: 15px; }
-          .site-nav .menu-icon > svg path {
-            fill: #424242; }
-      .site-nav .trigger {
-        clear: both;
-        display: none; }
-      .site-nav:hover .trigger {
-        display: block;
-        padding-bottom: 5px; }
-      .site-nav .page-link {
-        display: block;
-        padding: 5px 10px;
-        margin-left: 20px; }
-        .site-nav .page-link:not(:last-child) {
-          margin-right: 0; } }
+      border-top: 1px solid #e8e8e8;
+      float: left;
+      text-align: center;
+      width: 100%; } }
 
 /**
  * Site footer
@@ -276,8 +298,20 @@ pre {
     margin-bottom: 30px; }
 
 .post-meta {
-  font-size: 14px;
+  padding-top: 20px;
+  font-size: 15.75px;
   color: #828282; }
+
+.author:link {
+  text-decoration: none;
+  color: #828282; }
+
+.author:visited {
+  color: #828282; }
+
+.author:hover {
+  color: #0074D9;
+  text-decoration: underline; }
 
 .post-link {
   display: block;
@@ -287,15 +321,32 @@ pre {
  * Posts
  */
 .post-header {
+  padding-bottom: 10px;
+  padding-top: 30px;
   margin-bottom: 30px; }
 
-.post-title {
+.page-header {
+  padding-top: 30px;
+  margin-bottom: 30px; }
+
+.post-title, .page-title {
+  font-weight: bold;
+  font-family: 'Lato', sans-serif;
   font-size: 42px;
   letter-spacing: -1px;
   line-height: 1; }
   @media screen and (max-width: 800px) {
-    .post-title {
+    .post-title, .page-title {
       font-size: 36px; } }
+
+.page-title {
+  text-align: center; }
+
+.post-title {
+  padding-bottom: 10px; }
+
+.post-line {
+  border-top: 1px dotted #424242; }
 
 .post-content {
   margin-bottom: 30px; }

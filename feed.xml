@@ -2,12 +2,12 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tutorials By Nick</title>
-    <description>This is where I put tutorials on how to program and use them on the computer
+    <description>I like to learn how computers work and share my knowledge in my newsletter.
 </description>
     <link>http://tutorialsbynick.com/</link>
     <atom:link href="http://tutorialsbynick.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 14 Jun 2016 09:15:41 -0400</pubDate>
-    <lastBuildDate>Tue, 14 Jun 2016 09:15:41 -0400</lastBuildDate>
+    <pubDate>Fri, 17 Jun 2016 04:45:31 -0400</pubDate>
+    <lastBuildDate>Fri, 17 Jun 2016 04:45:31 -0400</lastBuildDate>
     <generator>Jekyll v3.1.6</generator>
     
       <item>
