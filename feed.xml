@@ -6,8 +6,8 @@
 </description>
     <link>http://tutorialsbynick.com/</link>
     <atom:link href="http://tutorialsbynick.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 18 Jun 2016 22:58:22 -0400</pubDate>
-    <lastBuildDate>Sat, 18 Jun 2016 22:58:22 -0400</lastBuildDate>
+    <pubDate>Sun, 19 Jun 2016 20:57:01 -0400</pubDate>
+    <lastBuildDate>Sun, 19 Jun 2016 20:57:01 -0400</lastBuildDate>
     <generator>Jekyll v3.1.6</generator>
     
       <item>
@@ -153,7 +153,7 @@ when assembling the source code file&lt;/li&gt;
 
 &lt;p&gt;First, let’s make a file named &lt;code&gt;Makefile&lt;/code&gt; and put this into it:&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-make&quot; data-lang=&quot;make&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;boot.bin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-make&quot; data-lang=&quot;make&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;boot.bin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;boot&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;asm&lt;/span&gt;
 &lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt; 	nasm -f bin boot.asm -o boot.bin
 &lt;span class=&quot;lineno&quot;&gt;3&lt;/span&gt; 
 &lt;span class=&quot;lineno&quot;&gt;4&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;qemu&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;boot&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;bin&lt;/span&gt;

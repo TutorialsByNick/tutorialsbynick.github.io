@@ -209,7 +209,7 @@ when assembling the source code file</li>
 
 <p>First, let’s make a file named <code>Makefile</code> and put this into it:</p>
 
-<figure class="highlight"><pre><code class="language-make" data-lang="make"><span class="lineno">1</span> <span class="nf">boot.bin</span><span class="o">:</span>
+<figure class="highlight"><pre><code class="language-make" data-lang="make"><span class="lineno">1</span> <span class="nf">boot.bin</span><span class="o">:</span> <span class="n">boot</span>.<span class="n">asm</span>
 <span class="lineno">2</span> 	nasm -f bin boot.asm -o boot.bin
 <span class="lineno">3</span> 
 <span class="lineno">4</span> <span class="nf">qemu</span><span class="o">:</span> <span class="n">boot</span>.<span class="n">bin</span>
