@@ -6,9 +6,97 @@
 </description>
     <link>http://tutorialsbynick.com/</link>
     <atom:link href="http://tutorialsbynick.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 19 Jun 2016 20:57:01 -0400</pubDate>
-    <lastBuildDate>Sun, 19 Jun 2016 20:57:01 -0400</lastBuildDate>
+    <pubDate>Wed, 14 Sep 2016 01:50:49 -0400</pubDate>
+    <lastBuildDate>Wed, 14 Sep 2016 01:50:49 -0400</lastBuildDate>
     <generator>Jekyll v3.1.6</generator>
+    
+      <item>
+        <title>How To Install Python on Windows</title>
+        <description>&lt;p&gt;This tutorial will teach you how to install the Python programming language on Windows. Python is a great
+programming language to learn because it offers many great libraries that can
+help you build the programs you want to easily. It also has a multitude of
+documentation available for you to utilize when programming complex projects.&lt;/p&gt;
+
+&lt;h1 id=&quot;table-of-contents&quot;&gt;Table of Contents&lt;/h1&gt;
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#table-of-contents&quot; id=&quot;markdown-toc-table-of-contents&quot;&gt;Table of Contents&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#finding-the-right-download&quot; id=&quot;markdown-toc-finding-the-right-download&quot;&gt;Finding the Right Download&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#installing-python&quot; id=&quot;markdown-toc-installing-python&quot;&gt;Installing Python&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#conclusion&quot; id=&quot;markdown-toc-conclusion&quot;&gt;Conclusion&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;finding-the-right-download&quot;&gt;Finding the Right Download&lt;/h1&gt;
+
+&lt;p&gt;First, you should go to the &lt;a href=&quot;https://python.org&quot;&gt;Python website&lt;/a&gt;. It should show
+up in your URL bar as something like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/python-installation/python-url.jpg&quot; alt=&quot;Python website url&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Make sure that you see the green lock to the left of the url with the words
+&lt;code&gt;Python Software Foundation&lt;/code&gt; because that signifies that this website is
+officially sanctioned by the organization that develops Python.&lt;/p&gt;
+
+&lt;p&gt;Hover over the downloads link in the navigation bar, and click on the Windows
+link provided.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/python-installation/hover-downloads.jpg&quot; alt=&quot;Python download link&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Once the page has loaded, you should see the following links below:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/python-installation/select-python3-releases.jpg&quot; alt=&quot;Select python3 releases&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Click the link which has the words &lt;code&gt;Latest Python 3 Release&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Click &lt;code&gt;Save File&lt;/code&gt; because you’ll want to run it later to install Python.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/python-installation/download-dialog.jpg&quot; alt=&quot;Download dialog&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;After it has finished downloading, select the download from the dropdown menu in
+your browser to start installing Python.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/python-installation/run-from-downloads.jpg&quot; alt=&quot;Run from downloads&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;installing-python&quot;&gt;Installing Python&lt;/h1&gt;
+
+&lt;p&gt;This screen should come up after running the download:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/python-installation/first-installation-screen.jpg&quot; alt=&quot;First installation screen&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Be sure to have the checkbox titled, &lt;code&gt;Add Python to PATH&lt;/code&gt;, checked:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/python-installation/check-python-path.jpg&quot; alt=&quot;Check python path&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now click &lt;code&gt;Install Now&lt;/code&gt; to start the installation.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/python-installation/select-install-now.jpg&quot; alt=&quot;Install now&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;A window may pop up asking whether you want to allow the installation access to
+your hard drive. Click yes because you want to install Python.&lt;/p&gt;
+
+&lt;p&gt;The Python installer should show its progress like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/python-installation/python-installing-window.jpg&quot; alt=&quot;Python installing window&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Congratulations! If you see a window like the one below, your Python installation is finished!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/python-installation/python-installation-finished.jpg&quot; alt=&quot;Python installation finished&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Click &lt;code&gt;Close&lt;/code&gt; to exit the installer.&lt;/p&gt;
+
+&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
+
+&lt;p&gt;You now have a powerful programming language available to use on your computer.
+It has many libraries that you could use to make games, websites, and
+applications – all within the same easy-to-use language. Let me know in the
+comments what you’re using Python for!&lt;/p&gt;
+
+</description>
+        <pubDate>Wed, 14 Sep 2016 00:00:00 -0400</pubDate>
+        <link>http://tutorialsbynick.com/how-to-install-python-on-windows/</link>
+        <guid isPermaLink="true">http://tutorialsbynick.com/how-to-install-python-on-windows/</guid>
+        
+        
+      </item>
     
       <item>
         <title>Writing an OS: Baby Steps</title>
