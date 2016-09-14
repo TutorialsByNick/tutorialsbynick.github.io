@@ -6,8 +6,8 @@
 </description>
     <link>http://tutorialsbynick.com/</link>
     <atom:link href="http://tutorialsbynick.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 14 Sep 2016 01:50:49 -0400</pubDate>
-    <lastBuildDate>Wed, 14 Sep 2016 01:50:49 -0400</lastBuildDate>
+    <pubDate>Wed, 14 Sep 2016 01:56:12 -0400</pubDate>
+    <lastBuildDate>Wed, 14 Sep 2016 01:56:12 -0400</lastBuildDate>
     <generator>Jekyll v3.1.6</generator>
     
       <item>
@@ -47,9 +47,19 @@ link provided.&lt;/p&gt;
 
 &lt;p&gt;Click the link which has the words &lt;code&gt;Latest Python 3 Release&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;Click &lt;code&gt;Save File&lt;/code&gt; because you’ll want to run it later to install Python.&lt;/p&gt;
+&lt;p&gt;This will take you to a page which has the following table:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/python-installation/download-table.jpg&quot; alt=&quot;Download table&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Select &lt;code&gt;Windows x86-64 executable installer&lt;/code&gt; if you have a 64-bit computer.&lt;/p&gt;
+
+&lt;p&gt;Select &lt;code&gt;Windows x86 executable installer&lt;/code&gt; if you have a 32-bit computer.&lt;/p&gt;
+
+&lt;p&gt;A download dialog should pop up on your screen:&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/python-installation/download-dialog.jpg&quot; alt=&quot;Download dialog&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Click &lt;code&gt;Save File&lt;/code&gt; because you’ll want to run it later to install Python.&lt;/p&gt;
 
 &lt;p&gt;After it has finished downloading, select the download from the dropdown menu in
 your browser to start installing Python.&lt;/p&gt;
