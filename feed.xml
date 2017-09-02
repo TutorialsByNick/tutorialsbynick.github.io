@@ -6,8 +6,8 @@
 </description>
     <link>http://tutorialsbynick.com/</link>
     <atom:link href="http://tutorialsbynick.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 01 Sep 2017 21:01:52 -0400</pubDate>
-    <lastBuildDate>Fri, 01 Sep 2017 21:01:52 -0400</lastBuildDate>
+    <pubDate>Fri, 01 Sep 2017 21:33:28 -0400</pubDate>
+    <lastBuildDate>Fri, 01 Sep 2017 21:33:28 -0400</lastBuildDate>
     <generator>Jekyll v3.5.2</generator>
     
       <item>
@@ -90,9 +90,13 @@
 &lt;span class=&quot;lineno&quot;&gt;8 &lt;/span&gt;    &lt;span class=&quot;k&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;green&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;lineno&quot;&gt;9 &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;On line 1, we can see the selector is the &lt;code&gt;li&lt;/code&gt; html element. This means that for every &lt;code&gt;li&lt;/code&gt; element in our html the color will be red. On line 4, the selector is for css classes. A html element like this &lt;code&gt;&amp;lt;li class=&quot;this-is-a-class-selector another-class&quot;&amp;gt;Hi&amp;lt;/li&amp;gt;&lt;/code&gt; will have the styles from &lt;code&gt;this-is-a-class-selector&lt;/code&gt; and &lt;code&gt;another-class&lt;/code&gt; applied to it. But wait, we already changed a color for all &lt;code&gt;li&lt;/code&gt; elements! What happens when we change the color again with a class? I’m glad you asked dear reader. The later things in your css take precedence over the things before it. So &lt;code&gt;li&lt;/code&gt; elements that don’t have a class will be red, but &lt;code&gt;li&lt;/code&gt; elements with a class will be blue because that style is written later in the css. On line 7, that is an id selector. Only one of those can be applied per element unlike classes. This is how they are applied: &lt;code&gt;&amp;lt;li id=&quot;this-is-an-id-selector&quot;&amp;gt;Hello again&amp;lt;/li&amp;gt;&lt;/code&gt;. Usually you’ll see most web developers using classes everywhere even if there is only one selector needed because it’s easier to add more styles with different classes later.&lt;/p&gt;
+&lt;p&gt;On line 1, we can see the selector is the &lt;code&gt;li&lt;/code&gt; html element. This means that for every &lt;code&gt;li&lt;/code&gt; element in our html the color will be red. On line 4, the selector is for CSS classes.&lt;/p&gt;
 
-&lt;p&gt;Phew, that was a lot of css information. Let’s actually color our todo list now. Inside the head tag we’ll create a style tag where we put our css code.&lt;/p&gt;
+&lt;p&gt;A html element like this &lt;code&gt;&amp;lt;li class=&quot;this-is-a-class-selector another-class&quot;&amp;gt;Hi&amp;lt;/li&amp;gt;&lt;/code&gt; will have the styles from &lt;code&gt;this-is-a-class-selector&lt;/code&gt; and &lt;code&gt;another-class&lt;/code&gt; applied to it. But wait, we already changed a color for all &lt;code&gt;li&lt;/code&gt; elements! What happens when we change the color again with a class? I’m glad you asked, dear reader. The later things in your CSS take precedence over the things before it. So &lt;code&gt;li&lt;/code&gt; elements that don’t have a class will be red, but &lt;code&gt;li&lt;/code&gt; elements with a class will be blue because that style is written later in the CSS.&lt;/p&gt;
+
+&lt;p&gt;On line 7, that is an id selector. Only one of those can be applied per element unlike classes. This is how they are applied: &lt;code&gt;&amp;lt;li id=&quot;this-is-an-id-selector&quot;&amp;gt;Hello again&amp;lt;/li&amp;gt;&lt;/code&gt;. Usually you’ll see most web developers using classes everywhere even if there is only one selector needed because it’s easier to add more styles with different classes later.&lt;/p&gt;
+
+&lt;p&gt;Phew, that was a lot of CSS information. Let’s actually color our todo list now. Inside the head tag we’ll create a style tag where we put our CSS code.&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;lineno&quot;&gt; 1 &lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
 &lt;span class=&quot;lineno&quot;&gt; 2 &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;html&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt;
@@ -123,7 +127,7 @@
 &lt;span class=&quot;lineno&quot;&gt;27 &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt;
 &lt;span class=&quot;lineno&quot;&gt;28 &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;html&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;You did it! You now have a colorized todo list. :) For more cool css styles, just search the web for things that you want to do. e.g. css font size. Here are a few interesting ones to get you started:&lt;/p&gt;
+&lt;p&gt;You did it! You now have a colorized todo list. :) For more cool CSS styles, just search the web for things that you want to do. e.g. css font size. Here are a few interesting ones to get you started:&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;background-color&lt;/li&gt;
   &lt;li&gt;font-family&lt;/li&gt;

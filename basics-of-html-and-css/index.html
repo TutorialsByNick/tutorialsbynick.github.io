@@ -146,9 +146,13 @@ ga('send', 'pageview');
 <span class="lineno">8 </span>    <span class="k">color</span><span class="p">:</span> <span class="kc">green</span><span class="p">;</span>
 <span class="lineno">9 </span><span class="p">}</span></code></pre></figure>
 
-<p>On line 1, we can see the selector is the <code>li</code> html element. This means that for every <code>li</code> element in our html the color will be red. On line 4, the selector is for css classes. A html element like this <code>&lt;li class="this-is-a-class-selector another-class"&gt;Hi&lt;/li&gt;</code> will have the styles from <code>this-is-a-class-selector</code> and <code>another-class</code> applied to it. But wait, we already changed a color for all <code>li</code> elements! What happens when we change the color again with a class? I’m glad you asked dear reader. The later things in your css take precedence over the things before it. So <code>li</code> elements that don’t have a class will be red, but <code>li</code> elements with a class will be blue because that style is written later in the css. On line 7, that is an id selector. Only one of those can be applied per element unlike classes. This is how they are applied: <code>&lt;li id="this-is-an-id-selector"&gt;Hello again&lt;/li&gt;</code>. Usually you’ll see most web developers using classes everywhere even if there is only one selector needed because it’s easier to add more styles with different classes later.</p>
+<p>On line 1, we can see the selector is the <code>li</code> html element. This means that for every <code>li</code> element in our html the color will be red. On line 4, the selector is for CSS classes.</p>
 
-<p>Phew, that was a lot of css information. Let’s actually color our todo list now. Inside the head tag we’ll create a style tag where we put our css code.</p>
+<p>A html element like this <code>&lt;li class="this-is-a-class-selector another-class"&gt;Hi&lt;/li&gt;</code> will have the styles from <code>this-is-a-class-selector</code> and <code>another-class</code> applied to it. But wait, we already changed a color for all <code>li</code> elements! What happens when we change the color again with a class? I’m glad you asked, dear reader. The later things in your CSS take precedence over the things before it. So <code>li</code> elements that don’t have a class will be red, but <code>li</code> elements with a class will be blue because that style is written later in the CSS.</p>
+
+<p>On line 7, that is an id selector. Only one of those can be applied per element unlike classes. This is how they are applied: <code>&lt;li id="this-is-an-id-selector"&gt;Hello again&lt;/li&gt;</code>. Usually you’ll see most web developers using classes everywhere even if there is only one selector needed because it’s easier to add more styles with different classes later.</p>
+
+<p>Phew, that was a lot of CSS information. Let’s actually color our todo list now. Inside the head tag we’ll create a style tag where we put our CSS code.</p>
 
 <figure class="highlight"><pre><code class="language-html" data-lang="html"><span></span><span class="lineno"> 1 </span><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="lineno"> 2 </span><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
@@ -179,7 +183,7 @@ ga('send', 'pageview');
 <span class="lineno">27 </span><span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
 <span class="lineno">28 </span><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span></code></pre></figure>
 
-<p>You did it! You now have a colorized todo list. :) For more cool css styles, just search the web for things that you want to do. e.g. css font size. Here are a few interesting ones to get you started:</p>
+<p>You did it! You now have a colorized todo list. :) For more cool CSS styles, just search the web for things that you want to do. e.g. css font size. Here are a few interesting ones to get you started:</p>
 <ul>
   <li>background-color</li>
   <li>font-family</li>
