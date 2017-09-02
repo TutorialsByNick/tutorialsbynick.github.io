@@ -134,7 +134,7 @@ ga('send', 'pageview');
 
 <figure class="highlight"><pre><code class="language-js" data-lang="js"><span></span><span class="kd">var</span> <span class="nx">context</span> <span class="o">=</span> <span class="nx">myCanvas</span><span class="p">.</span><span class="nx">getContext</span><span class="p">(</span><span class="s1">&#39;2d&#39;</span><span class="p">)</span></code></pre></figure>
 
-<p>To draw a circle, we’ll need 4 functions: <code>context.beginPath()</code>, <code>context.arc()</code>, <code>context.endPath()</code>, and <code>context.fill()</code>. I know this is a lot of functions at once, but they’re not too hard. <code>beginPath()</code> creates the path for drawing. <code>endPath()</code> ends it. <code>arc()</code> draws an arc at some (x, y) pixel coordinate from a certain start angle to a certain end angle with a certain radius. In our case that would be <code>0</code> to <code>2*Math.PI</code> (<code>Math.PI</code> is a variable provided by the browser that approximates pi) because we want to draw all the way around the circle not just a slice of it. <code>fill()</code> draws the path on the canvas and fills it with a color.</p>
+<p>To draw a circle, we’ll need 4 functions: <code>context.beginPath()</code>, <code>context.arc()</code>, <code>context.closePath()</code>, and <code>context.fill()</code>. I know this is a lot of functions at once, but they’re not too hard. <code>beginPath()</code> creates the path for drawing. <code>closePath()</code> ends it. <code>arc()</code> draws an arc at some (x, y) pixel coordinate from a certain start angle to a certain end angle with a certain radius. In our case that would be <code>0</code> to <code>2*Math.PI</code> (<code>Math.PI</code> is a variable provided by the browser that approximates pi) because we want to draw all the way around the circle not just a slice of it. <code>fill()</code> draws the path on the canvas and fills it with a color.</p>
 
 <p>Let’s try and put this all together to draw a circle:</p>
 
@@ -149,7 +149,7 @@ ga('send', 'pageview');
 <span class="c1">// 0 is start angle</span>
 <span class="c1">// 2*Math.PI is end angle</span>
 <span class="nx">context</span><span class="p">.</span><span class="nx">arc</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span><span class="p">)</span>
-<span class="nx">context</span><span class="p">.</span><span class="nx">endPath</span><span class="p">()</span>
+<span class="nx">context</span><span class="p">.</span><span class="nx">closePath</span><span class="p">()</span>
 <span class="nx">context</span><span class="p">.</span><span class="nx">fill</span><span class="p">()</span></code></pre></figure>
 
 <p>I used comments in the code above to tell you what each of the inputs to the function does. These inputs are usually called arguments by other programmers.</p>
@@ -169,7 +169,7 @@ ga('send', 'pageview');
 <figure class="highlight"><pre><code class="language-js" data-lang="js"><span></span><span class="kd">function</span> <span class="nx">draw</span><span class="p">()</span> <span class="p">{</span>
     <span class="nx">context</span><span class="p">.</span><span class="nx">beginPath</span><span class="p">()</span>
     <span class="nx">context</span><span class="p">.</span><span class="nx">arc</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span><span class="p">)</span>
-    <span class="nx">context</span><span class="p">.</span><span class="nx">endPath</span><span class="p">()</span>
+    <span class="nx">context</span><span class="p">.</span><span class="nx">closePath</span><span class="p">()</span>
     <span class="nx">context</span><span class="p">.</span><span class="nx">fill</span><span class="p">()</span>
 <span class="p">}</span>
 
@@ -182,7 +182,7 @@ ga('send', 'pageview');
 <figure class="highlight"><pre><code class="language-js" data-lang="js"><span></span><span class="kd">function</span> <span class="nx">draw</span><span class="p">()</span> <span class="p">{</span>
     <span class="nx">context</span><span class="p">.</span><span class="nx">beginPath</span><span class="p">()</span>
     <span class="nx">context</span><span class="p">.</span><span class="nx">arc</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span><span class="p">)</span>
-    <span class="nx">context</span><span class="p">.</span><span class="nx">endPath</span><span class="p">()</span>
+    <span class="nx">context</span><span class="p">.</span><span class="nx">closePath</span><span class="p">()</span>
     <span class="nx">context</span><span class="p">.</span><span class="nx">fill</span><span class="p">()</span>
     <span class="nx">requestAnimationFrame</span><span class="p">(</span><span class="nx">draw</span><span class="p">)</span>
 <span class="p">}</span></code></pre></figure>
@@ -208,7 +208,7 @@ ga('send', 'pageview');
     <span class="nx">y</span> <span class="o">=</span> <span class="nx">y</span> <span class="o">+</span> <span class="mi">10</span>
     <span class="nx">context</span><span class="p">.</span><span class="nx">beginPath</span><span class="p">()</span>
     <span class="nx">context</span><span class="p">.</span><span class="nx">arc</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span><span class="p">)</span>
-    <span class="nx">context</span><span class="p">.</span><span class="nx">endPath</span><span class="p">()</span>
+    <span class="nx">context</span><span class="p">.</span><span class="nx">closePath</span><span class="p">()</span>
     <span class="nx">context</span><span class="p">.</span><span class="nx">fill</span><span class="p">()</span>
     <span class="nx">requestAnimationFrame</span><span class="p">(</span><span class="nx">draw</span><span class="p">)</span>
 <span class="p">}</span>
@@ -226,7 +226,7 @@ ga('send', 'pageview');
     <span class="nx">y</span> <span class="o">=</span> <span class="nx">y</span> <span class="o">+</span> <span class="mi">10</span>
     <span class="nx">context</span><span class="p">.</span><span class="nx">beginPath</span><span class="p">()</span>
     <span class="nx">context</span><span class="p">.</span><span class="nx">arc</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span><span class="p">)</span>
-    <span class="nx">context</span><span class="p">.</span><span class="nx">endPath</span><span class="p">()</span>
+    <span class="nx">context</span><span class="p">.</span><span class="nx">closePath</span><span class="p">()</span>
     <span class="nx">context</span><span class="p">.</span><span class="nx">fill</span><span class="p">()</span>
     <span class="nx">requestAnimationFrame</span><span class="p">(</span><span class="nx">draw</span><span class="p">)</span>
 <span class="p">}</span>
