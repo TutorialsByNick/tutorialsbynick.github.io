@@ -107,7 +107,7 @@ using <a href="http://tutorialsbynick.com/writing-an-os-baby-steps/#comment-2728
 
 <p>You’ll need <code>nasm</code>, <code>build-essential</code>, and <code>qemu</code>.</p>
 
-<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">$</span> sudo apt-get install nasm build-essential qemu</code></pre></figure>
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span></span><span class="gp">$</span> sudo apt-get install nasm build-essential qemu</code></pre></figure>
 
 <ul>
   <li><code>nasm</code> is an assembler, which translates assembly code into binary code that the
@@ -143,16 +143,16 @@ For our purposes, Real Mode is fine because it’s the only mode which allows us
 
 <p>Type this snippet into your favorite text editor as <code>boot.asm</code>:</p>
 
-<figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><span class="lineno"> 1</span> <span class="c1">; boot.asm</span>
-<span class="lineno"> 2</span> <span class="nl">hang:</span>
-<span class="lineno"> 3</span>     <span class="nf">jmp</span> <span class="nv">hang</span>
-<span class="lineno"> 4</span> 
-<span class="lineno"> 5</span>     <span class="kd">times</span> <span class="mi">510</span><span class="o">-</span><span class="p">(</span><span class="kc">$</span><span class="o">-</span><span class="kc">$$</span><span class="p">)</span> <span class="nv">db</span> <span class="mi">0</span>
-<span class="lineno"> 6</span> 
-<span class="lineno"> 7</span> 	<span class="c1">; This is a comment</span>
-<span class="lineno"> 8</span> 
-<span class="lineno"> 9</span>     <span class="kd">db</span> <span class="mh">0x55</span>
-<span class="lineno">10</span>     <span class="kd">db</span> <span class="mh">0xAA</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><span></span><span class="lineno"> 1 </span><span class="c1">; boot.asm</span>
+<span class="lineno"> 2 </span><span class="nl">hang:</span>
+<span class="lineno"> 3 </span>    <span class="nf">jmp</span> <span class="nv">hang</span>
+<span class="lineno"> 4 </span>
+<span class="lineno"> 5 </span>    <span class="kd">times</span> <span class="mi">510</span><span class="o">-</span><span class="p">(</span><span class="kc">$</span><span class="o">-</span><span class="kc">$$</span><span class="p">)</span> <span class="nv">db</span> <span class="mi">0</span>
+<span class="lineno"> 6 </span>
+<span class="lineno"> 7 </span>	<span class="c1">; This is a comment</span>
+<span class="lineno"> 8 </span>
+<span class="lineno"> 9 </span>    <span class="kd">db</span> <span class="mh">0x55</span>
+<span class="lineno">10 </span>    <span class="kd">db</span> <span class="mh">0xAA</span></code></pre></figure>
 
 <ul>
   <li><code>hang:</code> is just a named marker in the code</li>
@@ -178,7 +178,7 @@ when assembling the source code file</li>
 
 <p>Enter this into the command line to assemble the file into a binary file that the computer can actually execute:</p>
 
-<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">$</span> nasm -f bin boot.asm -o boot.bin</code></pre></figure>
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span></span><span class="gp">$</span> nasm -f bin boot.asm -o boot.bin</code></pre></figure>
 
 <ul>
   <li><code>-f bin</code> ensures that nasm assembles it into the binary format instead of something like elf which is used for general purpose programs in Linux</li>
@@ -188,7 +188,7 @@ when assembling the source code file</li>
 
 <p>Then we start qemu with this file:</p>
 
-<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">$</span> qemu-system-x86_64 boot.bin</code></pre></figure>
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span></span><span class="gp">$</span> qemu-system-x86_64 boot.bin</code></pre></figure>
 
 <ul>
   <li><code>qemu-system-x86_64</code> is used because we want to use the version of qemu that provides a 64-bit computer</li>
@@ -209,14 +209,14 @@ when assembling the source code file</li>
 
 <p>First, let’s make a file named <code>Makefile</code> and put this into it:</p>
 
-<figure class="highlight"><pre><code class="language-make" data-lang="make"><span class="lineno">1</span> <span class="nf">boot.bin</span><span class="o">:</span> <span class="n">boot</span>.<span class="n">asm</span>
-<span class="lineno">2</span> 	nasm -f bin boot.asm -o boot.bin
-<span class="lineno">3</span> 
-<span class="lineno">4</span> <span class="nf">qemu</span><span class="o">:</span> <span class="n">boot</span>.<span class="n">bin</span>
-<span class="lineno">5</span> 	qemu-system-x86_64 boot.bin
-<span class="lineno">6</span> 
-<span class="lineno">7</span> <span class="nf">clean</span><span class="o">:</span>
-<span class="lineno">8</span> 	rm *.bin</code></pre></figure>
+<figure class="highlight"><pre><code class="language-make" data-lang="make"><span></span><span class="lineno">1 </span><span class="nf">boot.bin</span><span class="o">:</span> <span class="n">boot</span>.<span class="n">asm</span>
+<span class="lineno">2 </span>	nasm -f bin boot.asm -o boot.bin
+<span class="lineno">3 </span>
+<span class="lineno">4 </span><span class="nf">qemu</span><span class="o">:</span> <span class="n">boot</span>.<span class="n">bin</span>
+<span class="lineno">5 </span>	qemu-system-x86_64 boot.bin
+<span class="lineno">6 </span>
+<span class="lineno">7 </span><span class="nf">clean</span><span class="o">:</span>
+<span class="lineno">8 </span>	rm *.bin</code></pre></figure>
 
 <p>The values before the colons are names for the list of commands that come afterwards. This way you can type <code>make clean</code> and <code>make</code> will execute <code>rm *.bin</code> for you, which removes all of the assembled files.</p>
 
@@ -226,37 +226,37 @@ when assembling the source code file</li>
 
 <p>Change your <code>boot.asm</code> assembly file, so that it looks like this:</p>
 
-<figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><span class="lineno"> 1</span> <span class="c1">; boot.asm</span>
-<span class="lineno"> 2</span> <span class="nf">mov</span> <span class="nb">ax</span><span class="p">,</span> <span class="mh">0x07c0</span>
-<span class="lineno"> 3</span> <span class="nf">mov</span> <span class="nb">ds</span><span class="p">,</span> <span class="nb">ax</span>
-<span class="lineno"> 4</span> 
-<span class="lineno"> 5</span> <span class="nf">mov</span> <span class="nb">ah</span><span class="p">,</span> <span class="mh">0x0</span>
-<span class="lineno"> 6</span> <span class="nf">mov</span> <span class="nb">al</span><span class="p">,</span> <span class="mh">0x3</span>
-<span class="lineno"> 7</span> <span class="nf">int</span> <span class="mh">0x10</span>
-<span class="lineno"> 8</span> 
-<span class="lineno"> 9</span> <span class="nf">mov</span> <span class="nb">si</span><span class="p">,</span> <span class="nv">msg</span>
-<span class="lineno">10</span> <span class="nf">mov</span> <span class="nb">ah</span><span class="p">,</span> <span class="mh">0x0E</span>
-<span class="lineno">11</span> 
-<span class="lineno">12</span> <span class="nl">print_character_loop:</span>
-<span class="lineno">13</span>     <span class="nf">lodsb</span>
-<span class="lineno">14</span> 
-<span class="lineno">15</span>     <span class="nf">or</span> <span class="nb">al</span><span class="p">,</span> <span class="nb">al</span>
-<span class="lineno">16</span>     <span class="nf">jz</span> <span class="nv">hang</span>
-<span class="lineno">17</span> 
-<span class="lineno">18</span>     <span class="nf">int</span> <span class="mh">0x10</span>
-<span class="lineno">19</span> 
-<span class="lineno">20</span>     <span class="nf">jmp</span> <span class="nv">print_character_loop</span>
-<span class="lineno">21</span> 
-<span class="lineno">22</span> <span class="nl">msg:</span>
-<span class="lineno">23</span>     <span class="kd">db</span> <span class="s">&#39;Hello, World!&#39;</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span>
-<span class="lineno">24</span> 
-<span class="lineno">25</span> <span class="nl">hang:</span>
-<span class="lineno">26</span>     <span class="nf">jmp</span> <span class="nv">hang</span>
-<span class="lineno">27</span> 
-<span class="lineno">28</span>     <span class="kd">times</span> <span class="mi">510</span><span class="o">-</span><span class="p">(</span><span class="kc">$</span><span class="o">-</span><span class="kc">$$</span><span class="p">)</span> <span class="nv">db</span> <span class="mi">0</span>
-<span class="lineno">29</span> 
-<span class="lineno">30</span>     <span class="kd">db</span> <span class="mh">0x55</span>
-<span class="lineno">31</span>     <span class="kd">db</span> <span class="mh">0xAA</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><span></span><span class="lineno"> 1 </span><span class="c1">; boot.asm</span>
+<span class="lineno"> 2 </span><span class="nf">mov</span> <span class="nb">ax</span><span class="p">,</span> <span class="mh">0x07c0</span>
+<span class="lineno"> 3 </span><span class="nf">mov</span> <span class="nb">ds</span><span class="p">,</span> <span class="nb">ax</span>
+<span class="lineno"> 4 </span>
+<span class="lineno"> 5 </span><span class="nf">mov</span> <span class="nb">ah</span><span class="p">,</span> <span class="mh">0x0</span>
+<span class="lineno"> 6 </span><span class="nf">mov</span> <span class="nb">al</span><span class="p">,</span> <span class="mh">0x3</span>
+<span class="lineno"> 7 </span><span class="nf">int</span> <span class="mh">0x10</span>
+<span class="lineno"> 8 </span>
+<span class="lineno"> 9 </span><span class="nf">mov</span> <span class="nb">si</span><span class="p">,</span> <span class="nv">msg</span>
+<span class="lineno">10 </span><span class="nf">mov</span> <span class="nb">ah</span><span class="p">,</span> <span class="mh">0x0E</span>
+<span class="lineno">11 </span>
+<span class="lineno">12 </span><span class="nl">print_character_loop:</span>
+<span class="lineno">13 </span>    <span class="nf">lodsb</span>
+<span class="lineno">14 </span>
+<span class="lineno">15 </span>    <span class="nf">or</span> <span class="nb">al</span><span class="p">,</span> <span class="nb">al</span>
+<span class="lineno">16 </span>    <span class="nf">jz</span> <span class="nv">hang</span>
+<span class="lineno">17 </span>
+<span class="lineno">18 </span>    <span class="nf">int</span> <span class="mh">0x10</span>
+<span class="lineno">19 </span>
+<span class="lineno">20 </span>    <span class="nf">jmp</span> <span class="nv">print_character_loop</span>
+<span class="lineno">21 </span>
+<span class="lineno">22 </span><span class="nl">msg:</span>
+<span class="lineno">23 </span>    <span class="kd">db</span> <span class="s">&#39;Hello, World!&#39;</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span>
+<span class="lineno">24 </span>
+<span class="lineno">25 </span><span class="nl">hang:</span>
+<span class="lineno">26 </span>    <span class="nf">jmp</span> <span class="nv">hang</span>
+<span class="lineno">27 </span>
+<span class="lineno">28 </span>    <span class="kd">times</span> <span class="mi">510</span><span class="o">-</span><span class="p">(</span><span class="kc">$</span><span class="o">-</span><span class="kc">$$</span><span class="p">)</span> <span class="nv">db</span> <span class="mi">0</span>
+<span class="lineno">29 </span>
+<span class="lineno">30 </span>    <span class="kd">db</span> <span class="mh">0x55</span>
+<span class="lineno">31 </span>    <span class="kd">db</span> <span class="mh">0xAA</span></code></pre></figure>
 
 <p>Now use <code>make clean</code> and <code>make qemu</code> to clean, assemble, and run your operating
 system.</p>
@@ -274,8 +274,8 @@ that we can figure out how the operating system goes about printing to the scree
 
 <p>Let’s use this knowledge to figure out our first chunk:</p>
 
-<figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><span class="lineno">1</span> <span class="nf">mov</span> <span class="nb">ax</span><span class="p">,</span> <span class="mh">0x07c0</span>
-<span class="lineno">2</span> <span class="nf">mov</span> <span class="nb">ds</span><span class="p">,</span> <span class="nb">ax</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><span></span><span class="lineno">1 </span><span class="nf">mov</span> <span class="nb">ax</span><span class="p">,</span> <span class="mh">0x07c0</span>
+<span class="lineno">2 </span><span class="nf">mov</span> <span class="nb">ds</span><span class="p">,</span> <span class="nb">ax</span></code></pre></figure>
 
 <p>In the first line, we move the value <code>0x07c0</code> into the register <code>ax</code>. <code>0x07c0</code> is
 a hex value, which is a different number format and more convenient for assembly programmers to use than
@@ -310,8 +310,8 @@ So, when the offset is added to the segment, the address can change those four z
 
 <h1 id="back-to-our-code">Back to Our Code</h1>
 
-<figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><span class="lineno">1</span> <span class="nf">mov</span> <span class="nb">ax</span><span class="p">,</span> <span class="mh">0x07c0</span>
-<span class="lineno">2</span> <span class="nf">mov</span> <span class="nb">ds</span><span class="p">,</span> <span class="nb">ax</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><span></span><span class="lineno">1 </span><span class="nf">mov</span> <span class="nb">ax</span><span class="p">,</span> <span class="mh">0x07c0</span>
+<span class="lineno">2 </span><span class="nf">mov</span> <span class="nb">ds</span><span class="p">,</span> <span class="nb">ax</span></code></pre></figure>
 
 <p>Now you should see that this chunk of code loads <code>0x07c0</code> into register
 <code>ds</code>, or data segment, for segment addressing. But, why would we need this?
@@ -319,9 +319,9 @@ Some BIOS functions require the location of the code stored into the <code>ds</c
 
 <p>Here’s another chunk:</p>
 
-<figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><span class="lineno">1</span> <span class="nf">mov</span> <span class="nb">ah</span><span class="p">,</span> <span class="mh">0x0</span>
-<span class="lineno">2</span> <span class="nf">mov</span> <span class="nb">al</span><span class="p">,</span> <span class="mh">0x3</span>
-<span class="lineno">3</span> <span class="nf">int</span> <span class="mh">0x10</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><span></span><span class="lineno">1 </span><span class="nf">mov</span> <span class="nb">ah</span><span class="p">,</span> <span class="mh">0x0</span>
+<span class="lineno">2 </span><span class="nf">mov</span> <span class="nb">al</span><span class="p">,</span> <span class="mh">0x3</span>
+<span class="lineno">3 </span><span class="nf">int</span> <span class="mh">0x10</span></code></pre></figure>
 
 <p>Here we encounter <code>int</code>, another new instruction. It stands for interrupt
 and it interrupts the CPU and calls a certain piece of
@@ -345,8 +345,8 @@ characters.</li>
 
 <p>These lines get us set up for the character printing loop:</p>
 
-<figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><span class="lineno">1</span> <span class="nf">mov</span> <span class="nb">si</span><span class="p">,</span> <span class="nv">msg</span>
-<span class="lineno">2</span> <span class="nf">mov</span> <span class="nb">ah</span><span class="p">,</span> <span class="mh">0x0E</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><span></span><span class="lineno">1 </span><span class="nf">mov</span> <span class="nb">si</span><span class="p">,</span> <span class="nv">msg</span>
+<span class="lineno">2 </span><span class="nf">mov</span> <span class="nb">ah</span><span class="p">,</span> <span class="mh">0x0E</span></code></pre></figure>
 
 <p>In the first line, we move the pointer to the address of our message we want to print into the
 <code>si</code> register. We use <code>si</code> because the <code>lodsb</code> instruction uses the
@@ -361,15 +361,15 @@ operates, but able to send the text to a computer or printer.</p>
 <p>Finally, we’re at the part where we actually print
 characters to the screen:</p>
 
-<figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><span class="lineno">1</span> <span class="nl">print_character_loop:</span>
-<span class="lineno">2</span>     <span class="nf">lodsb</span>
-<span class="lineno">3</span> 
-<span class="lineno">4</span>     <span class="nf">or</span> <span class="nb">al</span><span class="p">,</span> <span class="nb">al</span>
-<span class="lineno">5</span>     <span class="nf">jz</span> <span class="nv">hang</span>
-<span class="lineno">6</span> 
-<span class="lineno">7</span>     <span class="nf">int</span> <span class="mh">0x10</span>
-<span class="lineno">8</span> 
-<span class="lineno">9</span>     <span class="nf">jmp</span> <span class="nv">print_character_loop</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><span></span><span class="lineno">1 </span><span class="nl">print_character_loop:</span>
+<span class="lineno">2 </span>    <span class="nf">lodsb</span>
+<span class="lineno">3 </span>
+<span class="lineno">4 </span>    <span class="nf">or</span> <span class="nb">al</span><span class="p">,</span> <span class="nb">al</span>
+<span class="lineno">5 </span>    <span class="nf">jz</span> <span class="nv">hang</span>
+<span class="lineno">6 </span>
+<span class="lineno">7 </span>    <span class="nf">int</span> <span class="mh">0x10</span>
+<span class="lineno">8 </span>
+<span class="lineno">9 </span>    <span class="nf">jmp</span> <span class="nv">print_character_loop</span></code></pre></figure>
 
 <p>The <code>lodsb</code> instruction loads a byte into register <code>al</code> from the segmented address <code>ds:si</code> and moves the <code>si</code>
 register onto the next byte. We want to load bytes from the <code>msg:</code>
@@ -405,8 +405,8 @@ with the <code>or</code> instruction. This works because when bits the bits bein
 are the same, the result that is stored in the first operand is also the same.
 So <code>or al, al</code> is equivalent to just setting the zero flag if the byte in the <code>al</code> register is zero.</p>
 
-<figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><span class="lineno">1</span>     <span class="nf">or</span> <span class="nb">al</span><span class="p">,</span> <span class="nb">al</span>
-<span class="lineno">2</span>     <span class="nf">jz</span> <span class="nv">hang</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><span></span><span class="lineno">1 </span>    <span class="nf">or</span> <span class="nb">al</span><span class="p">,</span> <span class="nb">al</span>
+<span class="lineno">2 </span>    <span class="nf">jz</span> <span class="nv">hang</span></code></pre></figure>
 
 <p>So, why are these two instructions together?</p>
 
@@ -419,9 +419,9 @@ aren’t there in the string.</p>
 
 <p>Now, we’re finally at the last parts of the loop:</p>
 
-<figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><span class="lineno">1</span>      <span class="nf">int</span> <span class="mh">0x10</span>
-<span class="lineno">2</span>  
-<span class="lineno">3</span>      <span class="nf">jmp</span> <span class="nv">print_character_loop</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><span></span><span class="lineno">1 </span>     <span class="nf">int</span> <span class="mh">0x10</span>
+<span class="lineno">2 </span> 
+<span class="lineno">3 </span>     <span class="nf">jmp</span> <span class="nv">print_character_loop</span></code></pre></figure>
 
 <p>If you remember from earlier, <code>0x0E</code> is in the <code>ah</code> register. This means that we
 can use <code>int 0x10</code> for printing characters to the screen that are stored in
@@ -444,8 +444,8 @@ character if the string has not ended</li>
 
 <p>We’ve just got the final chunk left:</p>
 
-<figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><span class="lineno">1</span> <span class="nl">msg:</span>
-<span class="lineno">2</span>     <span class="kd">db</span> <span class="s">&#39;Hello, World!&#39;</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><span></span><span class="lineno">1 </span><span class="nl">msg:</span>
+<span class="lineno">2 </span>    <span class="kd">db</span> <span class="s">&#39;Hello, World!&#39;</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span></code></pre></figure>
 
 <p>The <code>db</code> command says store these values at the <code>msg:</code> address. What the comma
 means is also store these decimal numbers as bytes too.</p>
