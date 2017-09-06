@@ -6,8 +6,8 @@
 </description>
     <link>http://tutorialsbynick.com/</link>
     <atom:link href="http://tutorialsbynick.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 05 Sep 2017 22:51:03 -0400</pubDate>
-    <lastBuildDate>Tue, 05 Sep 2017 22:51:03 -0400</lastBuildDate>
+    <pubDate>Tue, 05 Sep 2017 23:10:37 -0400</pubDate>
+    <lastBuildDate>Tue, 05 Sep 2017 23:10:37 -0400</lastBuildDate>
     <generator>Jekyll v3.5.2</generator>
     
       <item>
@@ -43,7 +43,9 @@
 
 &lt;h1 id=&quot;creating-your-first-opmode&quot;&gt;Creating your first OpMode&lt;/h1&gt;
 
-&lt;p&gt;On the left in Android Studio there is a list of the files inside of the SDK. The OpModes you’ll write go inside of &lt;code&gt;TeamCode -&amp;gt; java -&amp;gt; org.firstinspires.ftc.teamcode&lt;/code&gt;. To create a new OpMode right click on the &lt;code&gt;org.firstinspires.ftc.teamcode&lt;/code&gt; folder and select &lt;code&gt;new -&amp;gt; Java Class&lt;/code&gt;. A window should pop up, but all you’ll need to enter is the name of your OpMode. I chose &lt;code&gt;MyFirstOpMode&lt;/code&gt;. A file with something similar to the following code should show up:&lt;/p&gt;
+&lt;p&gt;The SDK FIRST developed is a library of code that you can use to control your robot. Basically it’s just a folder with many files that have code inside of them.&lt;/p&gt;
+
+&lt;p&gt;On the left in Android Studio there is a list of the files inside of the SDK. It’s similar to a file manager, but specifically for Android code. The OpModes you’ll write go inside of &lt;code&gt;TeamCode -&amp;gt; java -&amp;gt; org.firstinspires.ftc.teamcode&lt;/code&gt;. To create a new OpMode right click on the &lt;code&gt;org.firstinspires.ftc.teamcode&lt;/code&gt; folder and select &lt;code&gt;new -&amp;gt; Java Class&lt;/code&gt;. A window should pop up, but all you’ll need to enter is the name of your OpMode. I chose &lt;code&gt;MyFirstOpMode&lt;/code&gt;. A file with something similar to the following code should show up:&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.firstinspires.ftc.teamcode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
 
