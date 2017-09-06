@@ -6,9 +6,188 @@
 </description>
     <link>http://tutorialsbynick.com/</link>
     <atom:link href="http://tutorialsbynick.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 02 Sep 2017 09:56:16 -0400</pubDate>
-    <lastBuildDate>Sat, 02 Sep 2017 09:56:16 -0400</lastBuildDate>
+    <pubDate>Tue, 05 Sep 2017 22:51:03 -0400</pubDate>
+    <lastBuildDate>Tue, 05 Sep 2017 22:51:03 -0400</lastBuildDate>
     <generator>Jekyll v3.5.2</generator>
+    
+      <item>
+        <title>FTC Basic Teleop</title>
+        <description>&lt;p&gt;FTC programming contains lots of concepts that are very specific to robotics and not regular programming. In this tutorial I plan to cover some of those concepts and basics. This tutorial will show how to create basic OpModes for Teleop. I’ll assume you have some basic knowledge of the FTC hardware.&lt;/p&gt;
+
+&lt;h1 id=&quot;table-of-contents&quot;&gt;Table of Contents&lt;/h1&gt;
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#table-of-contents&quot; id=&quot;markdown-toc-table-of-contents&quot;&gt;Table of Contents&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#getting-set-up&quot; id=&quot;markdown-toc-getting-set-up&quot;&gt;Getting Set Up&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#creating-your-first-opmode&quot; id=&quot;markdown-toc-creating-your-first-opmode&quot;&gt;Creating your first OpMode&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#actually-doing-stuff-with-teleop&quot; id=&quot;markdown-toc-actually-doing-stuff-with-teleop&quot;&gt;Actually Doing Stuff with Teleop&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#joysticks&quot; id=&quot;markdown-toc-joysticks&quot;&gt;Joysticks&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;getting-set-up&quot;&gt;Getting Set Up&lt;/h1&gt;
+
+&lt;p&gt;You should have Android Studio and the FTC SDK downloaded. &lt;a href=&quot;https://ftc-tricks.com/android-studio-setup/&quot;&gt;Here&lt;/a&gt; is a good tutorial on how to do that. Open up the SDK inside Android Studio, You may see a notification like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/ftc-code-overview/update-gradle.png&quot; alt=&quot;Update Gradle&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Click &lt;code&gt;Update&lt;/code&gt; to make sure you’re on the latest version. Another error may pop up like below. You should click the links for &lt;em&gt;Update Build Tools.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/ftc-code-overview/update-build-tools.png&quot; alt=&quot;Update Build Tools&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;A status bar like below shows the status of your program compiling or uploading to the phone.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/ftc-code-overview/status-bar.png&quot; alt=&quot;Android Studio Status Bar&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Next you should disable &lt;em&gt;Instant Run&lt;/em&gt; in Android Studio because sometimes it stops new OpModes from showing up on the phones, and occasionally stop OpModes from updating with new code. Go to File-&amp;gt;Settings in the toolbar and search for instant run and make sure it’s unchecked.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/ftc-code-overview/instant-run.png&quot; alt=&quot;Android Studio Instant Run&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;creating-your-first-opmode&quot;&gt;Creating your first OpMode&lt;/h1&gt;
+
+&lt;p&gt;On the left in Android Studio there is a list of the files inside of the SDK. The OpModes you’ll write go inside of &lt;code&gt;TeamCode -&amp;gt; java -&amp;gt; org.firstinspires.ftc.teamcode&lt;/code&gt;. To create a new OpMode right click on the &lt;code&gt;org.firstinspires.ftc.teamcode&lt;/code&gt; folder and select &lt;code&gt;new -&amp;gt; Java Class&lt;/code&gt;. A window should pop up, but all you’ll need to enter is the name of your OpMode. I chose &lt;code&gt;MyFirstOpMode&lt;/code&gt;. A file with something similar to the following code should show up:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.firstinspires.ftc.teamcode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;cm&quot;&gt;/**&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt; * Created by nicholas on 9/5/17.&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt; */&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MyFirstOpMode&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Within the SDK, FIRST made a class called OpMode. Classes are blueprints, and objects are new things created from those blueprint templates. Inside of the OpMode class are functions and variables that you can use to run your code on the robot. To use these functions and variables FIRST made, we &lt;code&gt;extend&lt;/code&gt; from FIRST’s OpMode class. This means that our &lt;code&gt;MyFirstOpMode&lt;/code&gt; class has all of the stuff FIRST’s OpMode has, and our new stuff. An important thing to know is that the stuff in our class won’t modify the stuff in FIRST’s blueprint. &lt;code&gt;extend&lt;/code&gt; copies the stuff from FIRST’s class blueprint into our blueprint. We use &lt;code&gt;extend&lt;/code&gt; like this:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MyFirstOpMode&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;OpMode&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;A red line like a grammar error should show up under the &lt;code&gt;public class&lt;/code&gt;… line. This means that Android Studio has found an error in our program. Android Studio doesn’t catch all errors, but only ones that stop the program from running in the first place. It doesn’t catch errors in programmer logic :(&lt;/p&gt;
+
+&lt;p&gt;If you hover over red lines, you should see the error. In this case, the error is &lt;code&gt;Class 'MyFirstOpMode' must either be declared abstract or abstract method 'loop()' in 'OpMode'&lt;/code&gt;. Don’t worry! Errors are hard to read, but you’ll learn how. Basically it’s saying that your class needs to &lt;code&gt;implement&lt;/code&gt; the &lt;code&gt;loop()&lt;/code&gt; method for this to work. Let’s implement that:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MyFirstOpMode&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;OpMode&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;loop&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Now there should be a new error, but this time it mentions &lt;code&gt;implement&lt;/code&gt; and &lt;code&gt;init()&lt;/code&gt;. We know what that means!&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MyFirstOpMode&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;OpMode&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;loop&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Now no red underlines should show up. Great job reader! :)&lt;/p&gt;
+
+&lt;h1 id=&quot;actually-doing-stuff-with-teleop&quot;&gt;Actually Doing Stuff with Teleop&lt;/h1&gt;
+
+&lt;p&gt;How do we actually do things Nick? I want to control my robot… So, let’s work on Teleop first. To tell the SDK that this OpMode is a Teleop OpMode and not an Autonomous OpMode, we put &lt;code&gt;@TeleOp&lt;/code&gt; above the class like so:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@TeleOp&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MyFirstOpMode&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;OpMode&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;loop&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;The way OpMode works is that first the code inside &lt;code&gt;init()&lt;/code&gt; is run. Then, the code inside of &lt;code&gt;loop()&lt;/code&gt; is run over and over endlessly until you press stop on the Driver Station or the autonomous period ends.&lt;/p&gt;
+
+&lt;p&gt;Let’s write our Teleop for a tank drive robot with one motor on each side. In the code, we’ll name them &lt;code&gt;left&lt;/code&gt; and &lt;code&gt;right&lt;/code&gt;. We create two variables with the type &lt;code&gt;DcMotor&lt;/code&gt; inside the &lt;code&gt;MyFirstOpMode&lt;/code&gt; class, but inside of any functions. You put them inside of the class rather than the functions because when a variable is created inside of the function it is removed when the code inside of the function stops running, and it can’t be accessed by other code outside of the function. Variables inside of the class can be accessed inside of any function and will be removed when the OpMode finishes. As you already know, we want to create the variables &lt;code&gt;left&lt;/code&gt; and &lt;code&gt;right&lt;/code&gt; inside of the class so that any code inside of the OpMode can access the motors.&lt;/p&gt;
+
+&lt;p&gt;The type of a variable is what the variable is. For instance there is an &lt;code&gt;int&lt;/code&gt; type for integers, a &lt;code&gt;double&lt;/code&gt; type for decimal numbers, a &lt;code&gt;Money&lt;/code&gt; type for monetary values, etc.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@TeleOp&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MyFirstOpMode&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;OpMode&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;DcMotor&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;DcMotor&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;right&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;loop&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Inside of &lt;code&gt;init()&lt;/code&gt;, we want to tell the program that this motor variable corresponds to that motor configured on the robot, and this other motor variable corresponds to that other motor configured on the robot. We do this by setting the variables equal to &lt;code&gt;hardwareMap.dcMotor.get(&quot;Name of motor configured on phones&quot;);&lt;/code&gt;.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@TeleOp&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MyFirstOpMode&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;OpMode&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;DcMotor&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;DcMotor&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;right&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;left&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hardwareMap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;dcMotor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;left&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;right&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hardwareMap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;dcMotor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;right&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;loop&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Now we get to the fun stuff. :) Actually moving the robot. Variables with the type &lt;code&gt;DcMotor&lt;/code&gt; are objects created from the &lt;code&gt;DcMotor&lt;/code&gt; class that have functions that can operate the motors. We will use &lt;code&gt;motorname.setPower()&lt;/code&gt; to change the power of the motors. &lt;code&gt;motorname.setPower()&lt;/code&gt; takes an input from -1 to 1. -1 is full speed in reverse, 1 is full speed forward, .5 is half speed forward, -.25 is quarter speed backwards, etc. An important thing to know is that motors keep going at the same speed you last told them to go at. So what we can do is inside of &lt;code&gt;loop()&lt;/code&gt; set the motor powers over and over at different speeds to control the robot.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@TeleOp&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MyFirstOpMode&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;OpMode&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;DcMotor&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;DcMotor&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;right&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;left&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hardwareMap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;dcMotor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;left&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;right&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hardwareMap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;dcMotor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;right&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;loop&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;right&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setPower&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setPower&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;We set the &lt;code&gt;left&lt;/code&gt; motor to -1 because it is flipped over when compared to the &lt;code&gt;right&lt;/code&gt; motor, so going reverse on the &lt;code&gt;left&lt;/code&gt; actually moves the robot forward. If you run this code, your robot should go forward, but we can’t control it. :( For this we need joysticks.&lt;/p&gt;
+
+&lt;h1 id=&quot;joysticks&quot;&gt;Joysticks&lt;/h1&gt;
+
+&lt;p&gt;In FTC, you can use two gamepads connected to the Driver Station. Inside of your OpMode, those gamepads are variables named &lt;code&gt;gamepad1&lt;/code&gt; and &lt;code&gt;gamepad2&lt;/code&gt; with the type of the &lt;code&gt;Gamepad&lt;/code&gt; class. The &lt;code&gt;Gamepad&lt;/code&gt; class has variables on it which correspond to whether a button is pressed and the joysticks. The &lt;code&gt;Gamepad&lt;/code&gt; joystick variables are &lt;code&gt;gamepad1.left_stick_x&lt;/code&gt;, &lt;code&gt;gamepad1.left_stick_y&lt;/code&gt;, &lt;code&gt;gamepad.right_stick_x&lt;/code&gt;, and &lt;code&gt;gamepad.right_stick_y&lt;/code&gt;. Those variables are also on the second gamepad. They are decimal numbers (&lt;code&gt;doubles&lt;/code&gt;) which range from -1 to 1 and correspond to either the x axis or the y axis of the joystick movement.&lt;/p&gt;
+
+&lt;p&gt;For a basic tank drive, we will have the y axis on the left and right sticks of &lt;code&gt;gamepad1&lt;/code&gt; directly control the speed of the motors since &lt;code&gt;motor.setPower()&lt;/code&gt; takes an input from -1 to 1 and the gamepads output values from -1 to 1.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@TeleOp&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MyFirstOpMode&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;OpMode&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;DcMotor&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;DcMotor&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;right&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;left&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hardwareMap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;dcMotor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;left&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;right&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hardwareMap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;dcMotor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;right&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;loop&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;right&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setPower&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gamepad1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;right_stick_y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setPower&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gamepad1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;left_stick_y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;We can apply the negative sign to the value from &lt;code&gt;gamepad1.left_stick_y&lt;/code&gt; to reverse its direction and ensure the left motor moves the robot in the same direction as the right motor like mentioned earlier.&lt;/p&gt;
+
+&lt;p&gt;That’s it! You should be able to press the green play button in the toolbar and upload code to your Robot Controller and run this code on your tank drive. You will need to configure what motor port corresponds to what name on the phones when you hook up the hardware. You will also need to turn on USB Debugging on the phone and allow the computer to connect to the phone first.&lt;/p&gt;
+
+</description>
+        <pubDate>Tue, 05 Sep 2017 00:00:00 -0400</pubDate>
+        <link>http://tutorialsbynick.com/ftc-basic-teleop/</link>
+        <guid isPermaLink="true">http://tutorialsbynick.com/ftc-basic-teleop/</guid>
+        
+        
+      </item>
     
       <item>
         <title>Javascript Animation Basics</title>

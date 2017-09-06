@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>FTC Basic Teleop</title>
+  <meta name="description" content="FTC programming contains lots of concepts that are very specific to robotics and not regular programming. In this tutorial I plan to cover some of those conc...">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://tutorialsbynick.com/ftc-basic-teleop/">
+  <link rel="alternate" type="application/rss+xml" title="Tutorials By Nick" href="http://tutorialsbynick.com/feed.xml">
+<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet"> 
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-79125896-1', 'auto');
+ga('send', 'pageview');
+</script>
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">Tutorials By Nick</a>
+
+    <nav class="site-nav">
+      <div class="trigger">
+        
+          
+          <a class="page-link" href="/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          <a class="page-link" href="/articles">Articles</a>
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">FTC Basic Teleop</h1>
+    <p class="post-meta post-line">
+        By <a class="author" href="/about"><span itemprop="author" itemscope
+        itemtype="http://schema.org/Person"><span itemprop="name">Nicholas Day</span></span></a>
+        &nbsp;|&nbsp;&nbsp;<time datetime="2017-09-05T00:00:00-04:00" itemprop="datePublished">Sep 5, 2017</time>
+    </p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>FTC programming contains lots of concepts that are very specific to robotics and not regular programming. In this tutorial I plan to cover some of those concepts and basics. This tutorial will show how to create basic OpModes for Teleop. I’ll assume you have some basic knowledge of the FTC hardware.</p>
+
+<h1 id="table-of-contents">Table of Contents</h1>
+<ul id="markdown-toc">
+  <li><a href="#table-of-contents" id="markdown-toc-table-of-contents">Table of Contents</a></li>
+  <li><a href="#getting-set-up" id="markdown-toc-getting-set-up">Getting Set Up</a></li>
+  <li><a href="#creating-your-first-opmode" id="markdown-toc-creating-your-first-opmode">Creating your first OpMode</a></li>
+  <li><a href="#actually-doing-stuff-with-teleop" id="markdown-toc-actually-doing-stuff-with-teleop">Actually Doing Stuff with Teleop</a></li>
+  <li><a href="#joysticks" id="markdown-toc-joysticks">Joysticks</a></li>
+</ul>
+
+<h1 id="getting-set-up">Getting Set Up</h1>
+
+<p>You should have Android Studio and the FTC SDK downloaded. <a href="https://ftc-tricks.com/android-studio-setup/">Here</a> is a good tutorial on how to do that. Open up the SDK inside Android Studio, You may see a notification like this:</p>
+
+<p><img src="http://tutorialsbynick.com/images/ftc-code-overview/update-gradle.png" alt="Update Gradle" /></p>
+
+<p>Click <code>Update</code> to make sure you’re on the latest version. Another error may pop up like below. You should click the links for <em>Update Build Tools.</em></p>
+
+<p><img src="http://tutorialsbynick.com/images/ftc-code-overview/update-build-tools.png" alt="Update Build Tools" /></p>
+
+<p>A status bar like below shows the status of your program compiling or uploading to the phone.</p>
+
+<p><img src="http://tutorialsbynick.com/images/ftc-code-overview/status-bar.png" alt="Android Studio Status Bar" /></p>
+
+<p>Next you should disable <em>Instant Run</em> in Android Studio because sometimes it stops new OpModes from showing up on the phones, and occasionally stop OpModes from updating with new code. Go to File-&gt;Settings in the toolbar and search for instant run and make sure it’s unchecked.</p>
+
+<p><img src="http://tutorialsbynick.com/images/ftc-code-overview/instant-run.png" alt="Android Studio Instant Run" /></p>
+
+<h1 id="creating-your-first-opmode">Creating your first OpMode</h1>
+
+<p>On the left in Android Studio there is a list of the files inside of the SDK. The OpModes you’ll write go inside of <code>TeamCode -&gt; java -&gt; org.firstinspires.ftc.teamcode</code>. To create a new OpMode right click on the <code>org.firstinspires.ftc.teamcode</code> folder and select <code>new -&gt; Java Class</code>. A window should pop up, but all you’ll need to enter is the name of your OpMode. I chose <code>MyFirstOpMode</code>. A file with something similar to the following code should show up:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kn">package</span> <span class="nn">org.firstinspires.ftc.teamcode</span><span class="o">;</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Created by nicholas on 9/5/17.</span>
+<span class="cm"> */</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyFirstOpMode</span> <span class="o">{</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>Within the SDK, FIRST made a class called OpMode. Classes are blueprints, and objects are new things created from those blueprint templates. Inside of the OpMode class are functions and variables that you can use to run your code on the robot. To use these functions and variables FIRST made, we <code>extend</code> from FIRST’s OpMode class. This means that our <code>MyFirstOpMode</code> class has all of the stuff FIRST’s OpMode has, and our new stuff. An important thing to know is that the stuff in our class won’t modify the stuff in FIRST’s blueprint. <code>extend</code> copies the stuff from FIRST’s class blueprint into our blueprint. We use <code>extend</code> like this:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyFirstOpMode</span> <span class="kd">extends</span> <span class="n">OpMode</span> <span class="o">{</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>A red line like a grammar error should show up under the <code>public class</code>… line. This means that Android Studio has found an error in our program. Android Studio doesn’t catch all errors, but only ones that stop the program from running in the first place. It doesn’t catch errors in programmer logic :(</p>
+
+<p>If you hover over red lines, you should see the error. In this case, the error is <code>Class 'MyFirstOpMode' must either be declared abstract or abstract method 'loop()' in 'OpMode'</code>. Don’t worry! Errors are hard to read, but you’ll learn how. Basically it’s saying that your class needs to <code>implement</code> the <code>loop()</code> method for this to work. Let’s implement that:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyFirstOpMode</span> <span class="kd">extends</span> <span class="n">OpMode</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">loop</span><span class="o">()</span> <span class="o">{</span>
+
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>Now there should be a new error, but this time it mentions <code>implement</code> and <code>init()</code>. We know what that means!</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyFirstOpMode</span> <span class="kd">extends</span> <span class="n">OpMode</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">()</span> <span class="o">{</span>
+
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">loop</span><span class="o">()</span> <span class="o">{</span>
+
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>Now no red underlines should show up. Great job reader! :)</p>
+
+<h1 id="actually-doing-stuff-with-teleop">Actually Doing Stuff with Teleop</h1>
+
+<p>How do we actually do things Nick? I want to control my robot… So, let’s work on Teleop first. To tell the SDK that this OpMode is a Teleop OpMode and not an Autonomous OpMode, we put <code>@TeleOp</code> above the class like so:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="nd">@TeleOp</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyFirstOpMode</span> <span class="kd">extends</span> <span class="n">OpMode</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">()</span> <span class="o">{</span>
+
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">loop</span><span class="o">()</span> <span class="o">{</span>
+
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>The way OpMode works is that first the code inside <code>init()</code> is run. Then, the code inside of <code>loop()</code> is run over and over endlessly until you press stop on the Driver Station or the autonomous period ends.</p>
+
+<p>Let’s write our Teleop for a tank drive robot with one motor on each side. In the code, we’ll name them <code>left</code> and <code>right</code>. We create two variables with the type <code>DcMotor</code> inside the <code>MyFirstOpMode</code> class, but inside of any functions. You put them inside of the class rather than the functions because when a variable is created inside of the function it is removed when the code inside of the function stops running, and it can’t be accessed by other code outside of the function. Variables inside of the class can be accessed inside of any function and will be removed when the OpMode finishes. As you already know, we want to create the variables <code>left</code> and <code>right</code> inside of the class so that any code inside of the OpMode can access the motors.</p>
+
+<p>The type of a variable is what the variable is. For instance there is an <code>int</code> type for integers, a <code>double</code> type for decimal numbers, a <code>Money</code> type for monetary values, etc.</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="nd">@TeleOp</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyFirstOpMode</span> <span class="kd">extends</span> <span class="n">OpMode</span> <span class="o">{</span>
+    <span class="n">DcMotor</span> <span class="n">left</span><span class="o">;</span>
+    <span class="n">DcMotor</span> <span class="n">right</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">()</span> <span class="o">{</span>
+
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">loop</span><span class="o">()</span> <span class="o">{</span>
+
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>Inside of <code>init()</code>, we want to tell the program that this motor variable corresponds to that motor configured on the robot, and this other motor variable corresponds to that other motor configured on the robot. We do this by setting the variables equal to <code>hardwareMap.dcMotor.get("Name of motor configured on phones");</code>.</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="nd">@TeleOp</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyFirstOpMode</span> <span class="kd">extends</span> <span class="n">OpMode</span> <span class="o">{</span>
+    <span class="n">DcMotor</span> <span class="n">left</span><span class="o">;</span>
+    <span class="n">DcMotor</span> <span class="n">right</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">left</span> <span class="o">=</span> <span class="n">hardwareMap</span><span class="o">.</span><span class="na">dcMotor</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&quot;left&quot;</span><span class="o">);</span>
+        <span class="n">right</span> <span class="o">=</span> <span class="n">hardwareMap</span><span class="o">.</span><span class="na">dcMotor</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&quot;right&quot;</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">loop</span><span class="o">()</span> <span class="o">{</span>
+
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>Now we get to the fun stuff. :) Actually moving the robot. Variables with the type <code>DcMotor</code> are objects created from the <code>DcMotor</code> class that have functions that can operate the motors. We will use <code>motorname.setPower()</code> to change the power of the motors. <code>motorname.setPower()</code> takes an input from -1 to 1. -1 is full speed in reverse, 1 is full speed forward, .5 is half speed forward, -.25 is quarter speed backwards, etc. An important thing to know is that motors keep going at the same speed you last told them to go at. So what we can do is inside of <code>loop()</code> set the motor powers over and over at different speeds to control the robot.</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="nd">@TeleOp</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyFirstOpMode</span> <span class="kd">extends</span> <span class="n">OpMode</span> <span class="o">{</span>
+    <span class="n">DcMotor</span> <span class="n">left</span><span class="o">;</span>
+    <span class="n">DcMotor</span> <span class="n">right</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">left</span> <span class="o">=</span> <span class="n">hardwareMap</span><span class="o">.</span><span class="na">dcMotor</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&quot;left&quot;</span><span class="o">);</span>
+        <span class="n">right</span> <span class="o">=</span> <span class="n">hardwareMap</span><span class="o">.</span><span class="na">dcMotor</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&quot;right&quot;</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">loop</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">right</span><span class="o">.</span><span class="na">setPower</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+        <span class="n">left</span><span class="o">.</span><span class="na">setPower</span><span class="o">(-</span><span class="mi">1</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>We set the <code>left</code> motor to -1 because it is flipped over when compared to the <code>right</code> motor, so going reverse on the <code>left</code> actually moves the robot forward. If you run this code, your robot should go forward, but we can’t control it. :( For this we need joysticks.</p>
+
+<h1 id="joysticks">Joysticks</h1>
+
+<p>In FTC, you can use two gamepads connected to the Driver Station. Inside of your OpMode, those gamepads are variables named <code>gamepad1</code> and <code>gamepad2</code> with the type of the <code>Gamepad</code> class. The <code>Gamepad</code> class has variables on it which correspond to whether a button is pressed and the joysticks. The <code>Gamepad</code> joystick variables are <code>gamepad1.left_stick_x</code>, <code>gamepad1.left_stick_y</code>, <code>gamepad.right_stick_x</code>, and <code>gamepad.right_stick_y</code>. Those variables are also on the second gamepad. They are decimal numbers (<code>doubles</code>) which range from -1 to 1 and correspond to either the x axis or the y axis of the joystick movement.</p>
+
+<p>For a basic tank drive, we will have the y axis on the left and right sticks of <code>gamepad1</code> directly control the speed of the motors since <code>motor.setPower()</code> takes an input from -1 to 1 and the gamepads output values from -1 to 1.</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="nd">@TeleOp</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyFirstOpMode</span> <span class="kd">extends</span> <span class="n">OpMode</span> <span class="o">{</span>
+    <span class="n">DcMotor</span> <span class="n">left</span><span class="o">;</span>
+    <span class="n">DcMotor</span> <span class="n">right</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">left</span> <span class="o">=</span> <span class="n">hardwareMap</span><span class="o">.</span><span class="na">dcMotor</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&quot;left&quot;</span><span class="o">);</span>
+        <span class="n">right</span> <span class="o">=</span> <span class="n">hardwareMap</span><span class="o">.</span><span class="na">dcMotor</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&quot;right&quot;</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">loop</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">right</span><span class="o">.</span><span class="na">setPower</span><span class="o">(</span><span class="n">gamepad1</span><span class="o">.</span><span class="na">right_stick_y</span><span class="o">);</span>
+        <span class="n">left</span><span class="o">.</span><span class="na">setPower</span><span class="o">(-</span><span class="n">gamepad1</span><span class="o">.</span><span class="na">left_stick_y</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>We can apply the negative sign to the value from <code>gamepad1.left_stick_y</code> to reverse its direction and ensure the left motor moves the robot in the same direction as the right motor like mentioned earlier.</p>
+
+<p>That’s it! You should be able to press the green play button in the toolbar and upload code to your Robot Controller and run this code on your tank drive. You will need to configure what motor port corresponds to what name on the phones when you hook up the hardware. You will also need to turn on USB Debugging on the phone and allow the computer to connect to the phone first.</p>
+
+
+
+
+<div class="center intro-above"><h1>Join me in learning about how computers work</h1></div>
+
+<p>Just enter your email into the box below. You'll also receive my free 12 page
+guide, <i>Getting Started with Operating System Development</i>, straight to your
+inbox just for subscribing.</p>
+
+<div class="intro-above intro">
+<div class="float-left">
+<img class="guide-image" alt="Getting Started with Operating System Development Ebook"
+     src="/images/osdev-book-cover.jpg" />
+</div>
+
+<div class="float-left">
+<!-- Begin MailChimp Signup Form -->
+<div id="mc_embed_signup">
+<form action="//tutorialsbynick.us13.list-manage.com/subscribe/post?u=99cb9d82916998aa9e5915fa3&amp;id=65aafcd362" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	<h3>Where do I send your free guide to?</h3>
+<div class="mc-field-group">
+	<input type="email" value="" placeholder="Email Address" name="EMAIL" class="required email" id="mce-EMAIL">
+</div>
+	<div id="mce-responses" class="clear">
+		<div class="response" id="mce-error-response" style="display:none"></div>
+		<div class="response" id="mce-success-response" style="display:none"></div>
+	</div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_99cb9d82916998aa9e5915fa3_65aafcd362" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" style="margin-top: 10px;" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+</div>
+</div>
+<div class="clear"></div>
+
+
+  </div>
+
+
+  
+  <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+        this.page.url = "http://tutorialsbynick.com/ftc-basic-teleop/";
+        this.page.identifier = "FTC Basic Teleop";
+    };
+(function() {
+        var d = document, s = d.createElement('script');
+        
+        s.src = '//tutorialsbynick.disqus.com/embed.js';
+        
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+  
+
+</article>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Tutorials By Nick</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>Tutorials By Nick</li>
+          <li><a href="mailto:nick@tutorialsbynick.com">nick@tutorialsbynick.com</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/nicholasday"><span class="icon icon--github"><svg viewBox="0 0 16 16"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">nicholasday</span></a>
+
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/nicholasbday"><span class="icon icon--twitter"><svg viewBox="0 0 16 16"><path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/></svg>
+</span><span class="username">nicholasbday</span></a>
+
+          </li>
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p>I like to learn how computers work and share my knowledge in my newsletter.
+</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>
