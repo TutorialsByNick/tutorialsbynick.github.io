@@ -6,9 +6,117 @@
 </description>
     <link>http://tutorialsbynick.com/</link>
     <atom:link href="http://tutorialsbynick.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 05 Sep 2017 23:10:37 -0400</pubDate>
-    <lastBuildDate>Tue, 05 Sep 2017 23:10:37 -0400</lastBuildDate>
+    <pubDate>Thu, 07 Sep 2017 22:47:03 -0400</pubDate>
+    <lastBuildDate>Thu, 07 Sep 2017 22:47:03 -0400</lastBuildDate>
     <generator>Jekyll v3.5.2</generator>
+    
+      <item>
+        <title>Using Github Pages</title>
+        <description>&lt;p&gt;&lt;a href=&quot;https://pages.github.com/&quot;&gt;Github Pages&lt;/a&gt; is a service Github offers where they will host their websites for you. Your website will be located at &lt;em&gt;username.github.io/your-repository-name&lt;/em&gt;. What we will be doing in this tutorial is putting our simple ball animation from &lt;a href=&quot;/javascript-animation-basics/&quot;&gt;the Javascript Animation Basics tutorial&lt;/a&gt; on &lt;em&gt;username.github.io/app-club&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/using-github-pages/&quot; alt=&quot;Github Desktop First Screen&quot; /&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Thu, 07 Sep 2017 00:00:00 -0400</pubDate>
+        <link>http://tutorialsbynick.com/using-github-pages/</link>
+        <guid isPermaLink="true">http://tutorialsbynick.com/using-github-pages/</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Github Basics</title>
+        <description>&lt;p&gt;Github is a place where many people put their code. Github hosts git servers for you, git servers serve git repositories. Git repositories are basically folders that you put code in, but they have some special features. They let you share them on sites like Github or Bitbucket and store the complete history of the files you put in there and the changes you’ve made to them. It does this by looking for the differences between your original files and your new changes everytime you make a commit (referred to as diffing). Diffing also allows other people to collaborate on your code easier than before because every person sees the changes everyone makes. Commits save your changes into git and do this diffing process. When you &lt;em&gt;push&lt;/em&gt; your code you’re uploading to a git server, and when you &lt;em&gt;pull&lt;/em&gt; you’re download from a git server. That was a lot of jargon so let’s see it in action.&lt;/p&gt;
+
+&lt;h1 id=&quot;table-of-contents&quot;&gt;Table of Contents&lt;/h1&gt;
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#table-of-contents&quot; id=&quot;markdown-toc-table-of-contents&quot;&gt;Table of Contents&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#setting-up-github-for-desktop&quot; id=&quot;markdown-toc-setting-up-github-for-desktop&quot;&gt;Setting up Github for Desktop&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#creating-your-first-repository&quot; id=&quot;markdown-toc-creating-your-first-repository&quot;&gt;Creating your first repository&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#making-your-first-commit&quot; id=&quot;markdown-toc-making-your-first-commit&quot;&gt;Making your first commit&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#publishing-your-repository&quot; id=&quot;markdown-toc-publishing-your-repository&quot;&gt;Publishing your Repository&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#pushing-and-pulling&quot; id=&quot;markdown-toc-pushing-and-pulling&quot;&gt;Pushing and Pulling&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#your-history&quot; id=&quot;markdown-toc-your-history&quot;&gt;Your History&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#the-end&quot; id=&quot;markdown-toc-the-end&quot;&gt;The End&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;setting-up-github-for-desktop&quot;&gt;Setting up Github for Desktop&lt;/h1&gt;
+
+&lt;p&gt;Github Desktop is an easy interface to the git program and Github itself, so we’ll use it.&lt;/p&gt;
+
+&lt;p&gt;First, download &lt;a href=&quot;https://desktop.github.com/&quot;&gt;Github for Desktop&lt;/a&gt;. Once you install it, the following window should pop up:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/github-basics/first-window.png&quot; alt=&quot;Github Desktop First Screen&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Click &lt;em&gt;Sign into Github&lt;/em&gt; or &lt;em&gt;Create your free account&lt;/em&gt; if you don’t have one.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/github-basics/registration.png&quot; alt=&quot;Github Registration&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;creating-your-first-repository&quot;&gt;Creating your first repository&lt;/h1&gt;
+
+&lt;p&gt;Once you’re signed in a screen like below should show up. This name and email will show up when you contribute to a project.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/github-basics/configure-git.png&quot; alt=&quot;Github Desktop Configure Git&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now Github Desktop should look like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/github-basics/logged-in.png&quot; alt=&quot;Github Desktop Logged In&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You’re ready to create your first repository! Click on &lt;em&gt;Create new repository&lt;/em&gt; and then select a folder to put your repository in. Usually the default option is fine, but you’ll have to remember where it’s stored so you can edit your code inside of your repository folder. In my case, the repository is located at &lt;code&gt;/home/nicholas/downloads/Github/my-first-app&lt;/code&gt;. When you clone a project that means download for the first time onto this computer.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/github-basics/repo-creation.png&quot; alt=&quot;Github Desktop Repository Creation&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You can switch repositories by clicking on the dropdown at the top.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/github-basics/repo-list.png&quot; alt=&quot;Github Desktop Repository List&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;making-your-first-commit&quot;&gt;Making your first commit&lt;/h1&gt;
+
+&lt;p&gt;A commit is a change saved into the git repository’s history. Add a code file you’d like to put in the repository by copying and pasting that file into your code repository folder. You can also just edit a new file in that folder.&lt;/p&gt;
+
+&lt;p&gt;Inside of Github Desktop, you should see the changes you just made. You can select what changes will be committed and what will be left out of the commit to be changed later. At the bottom you can provide a summary and description of the changes you made. When you click &lt;code&gt;Commit to Master&lt;/code&gt;, your change is saved in the &lt;code&gt;master&lt;/code&gt; branch. Branches are like branches on trees. They all stem from the master ‘tree’ and can diverge from it. So you can make changes in a &lt;code&gt;fixallthebugs&lt;/code&gt; branch that won’t affect the &lt;code&gt;master&lt;/code&gt; branch and then later you can merge &lt;code&gt;fixallthebugs&lt;/code&gt; into master once the bugs are all fixed. For most projects though, just using the &lt;code&gt;master&lt;/code&gt; branch is good enough.&lt;/p&gt;
+
+&lt;p&gt;On the right is a ‘diff’. This shows a line by line summary of the changes that you’ve made to the selected file.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/github-basics/first-commit.png&quot; alt=&quot;Github Desktop First Commit&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;publishing-your-repository&quot;&gt;Publishing your Repository&lt;/h1&gt;
+
+&lt;p&gt;Before we do anything, let’s publish our repository to Github. Click the &lt;em&gt;Publish repository&lt;/em&gt; button, and make sure to uncheck &lt;em&gt;keep this code private&lt;/em&gt; unless you want to pay Github for a private repository (public repositories are free by default). If you’re a student with an edu email, you can sign up for the &lt;a href=&quot;https://education.github.com/pack&quot;&gt;Github Student Developer Pack&lt;/a&gt; which has free private repos, and some free server hosting credits.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/github-basics/publish-button.png&quot; alt=&quot;Github Desktop Publish Button&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/github-basics/publish-repo.png&quot; alt=&quot;Github Desktop Publish Repo&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;pushing-and-pulling&quot;&gt;Pushing and Pulling&lt;/h1&gt;
+
+&lt;p&gt;If you want to share your changes or back them up, you can push to origin. Origin is the main server that you’ll use for git, but there can be other servers that you can push to. Like if you wanted to push to another server and it would put your code onto a website and deploy it. Github Desktop has a handy button for that at the top.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/github-basics/push-button.png&quot; alt=&quot;Github Desktop Push Button&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Pulling and fetching download code from the server onto your computer and can merge the code from the server with your code. This is handy if you want to backup your code, move computers, or collaborate with other people.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/github-basics/fetch-button.png&quot; alt=&quot;Github Desktop Fetch Button&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;your-history&quot;&gt;Your History&lt;/h1&gt;
+
+&lt;p&gt;Next to the &lt;em&gt;History&lt;/em&gt; tab, there is a tab for the history of your repository. When you click on it, you should be able to see a log of all the the commits you have made and their diffs.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/github-basics/history.png&quot; alt=&quot;Github Desktop History&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You can also right click on a commit and revert it. This will undo your changes in the commit. Its a very handy feature for when you make a mistake and want to undo it, even a few commits later. Its important to commit small working changes for this purpose.&lt;/p&gt;
+
+&lt;h1 id=&quot;the-end&quot;&gt;The End&lt;/h1&gt;
+
+&lt;p&gt;There is a lot more to git and Github than I went over here, but this should be enough to get you started. Git is a very advanced tool and there are lots of gotchas and ways to use it, but you should only add complex features when you actually need them. Not when you think it is cool, but when you have a need for it.&lt;/p&gt;
+
+</description>
+        <pubDate>Thu, 07 Sep 2017 00:00:00 -0400</pubDate>
+        <link>http://tutorialsbynick.com/github-basics/</link>
+        <guid isPermaLink="true">http://tutorialsbynick.com/github-basics/</guid>
+        
+        
+      </item>
     
       <item>
         <title>FTC Basic Teleop</title>
