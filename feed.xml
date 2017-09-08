@@ -6,23 +6,9 @@
 </description>
     <link>http://tutorialsbynick.com/</link>
     <atom:link href="http://tutorialsbynick.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 07 Sep 2017 22:47:03 -0400</pubDate>
-    <lastBuildDate>Thu, 07 Sep 2017 22:47:03 -0400</lastBuildDate>
+    <pubDate>Thu, 07 Sep 2017 22:50:14 -0400</pubDate>
+    <lastBuildDate>Thu, 07 Sep 2017 22:50:14 -0400</lastBuildDate>
     <generator>Jekyll v3.5.2</generator>
-    
-      <item>
-        <title>Using Github Pages</title>
-        <description>&lt;p&gt;&lt;a href=&quot;https://pages.github.com/&quot;&gt;Github Pages&lt;/a&gt; is a service Github offers where they will host their websites for you. Your website will be located at &lt;em&gt;username.github.io/your-repository-name&lt;/em&gt;. What we will be doing in this tutorial is putting our simple ball animation from &lt;a href=&quot;/javascript-animation-basics/&quot;&gt;the Javascript Animation Basics tutorial&lt;/a&gt; on &lt;em&gt;username.github.io/app-club&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/using-github-pages/&quot; alt=&quot;Github Desktop First Screen&quot; /&gt;&lt;/p&gt;
-
-</description>
-        <pubDate>Thu, 07 Sep 2017 00:00:00 -0400</pubDate>
-        <link>http://tutorialsbynick.com/using-github-pages/</link>
-        <guid isPermaLink="true">http://tutorialsbynick.com/using-github-pages/</guid>
-        
-        
-      </item>
     
       <item>
         <title>Github Basics</title>
