@@ -6,9 +6,71 @@
 </description>
     <link>http://tutorialsbynick.com/</link>
     <atom:link href="http://tutorialsbynick.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 07 Sep 2017 22:50:14 -0400</pubDate>
-    <lastBuildDate>Thu, 07 Sep 2017 22:50:14 -0400</lastBuildDate>
+    <pubDate>Thu, 14 Sep 2017 18:17:48 -0400</pubDate>
+    <lastBuildDate>Thu, 14 Sep 2017 18:17:48 -0400</lastBuildDate>
     <generator>Jekyll v3.5.2</generator>
+    
+      <item>
+        <title>Using Github Pages</title>
+        <description>&lt;p&gt;&lt;a href=&quot;https://pages.github.com/&quot;&gt;Github Pages&lt;/a&gt; is a service that Github offers which hosts websites for you. There is an option for either generated websites (like this one) using &lt;a href=&quot;https://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt;, a website generator. Generated websites are websites where there is for example a blog post template and you just write your post in a text box and then the generator makes the static webpages. There is also an option for hosting non-generated static webpages like in &lt;a href=&quot;/basics-of-html-and-css/&quot;&gt;my HTML and CSS Basics tutorial&lt;/a&gt;. In this tutorial, we will learn how to host non-generated static webpages using Github Pages. You should have already read my tutorial on &lt;a href=&quot;/github-basics/&quot;&gt;Github Basics&lt;/a&gt; and have Visual Studio Code installed.&lt;/p&gt;
+
+&lt;p&gt;First you create a repository on Github Desktop like in my &lt;a href=&quot;/github-basics/&quot;&gt;Github Basics&lt;/a&gt; tutorial. Then, open the repository folder from the repository you created earlier:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/using-github-pages/open-folder.png&quot; alt=&quot;VSCode Open Folder&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In my case, the repository folder name is &lt;code&gt;my-first-app&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;If you hover over the folder name, some icons should pop up like below.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/using-github-pages/hover-folder.png&quot; alt=&quot;VSCode Hover Folder&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Click the first icon, which creates a new file, and make a file named &lt;code&gt;.nojekyll&lt;/code&gt;. This tells Github Pages that your repository is a simple static page one and not a Jekyll one. Press &lt;code&gt;Enter&lt;/code&gt; to save the file.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/using-github-pages/nojekyll.png&quot; alt=&quot;VSCode Create .nojekyll&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now in Github Desktop, we can commit the files to git and push them to the server:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/using-github-pages/commit.png&quot; alt=&quot;Github Desktop commit&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now go to your Github repository on the Github website. My repository name is &lt;code&gt;my-first-app&lt;/code&gt; and my username is &lt;code&gt;nicholasday&lt;/code&gt;, so the url for me would be &lt;a href=&quot;https://github.com/nicholasday/my-first-app&quot;&gt;github.com/nicholasday/my-first-app&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/using-github-pages/repo-online.png&quot; alt=&quot;Github repo online&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Click on the &lt;em&gt;Settings&lt;/em&gt; link, and scroll down until you see &lt;em&gt;Github Pages Settings&lt;/em&gt; header.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/using-github-pages/github-pages-settings.png&quot; alt=&quot;Github Pages Settings&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Click on &lt;em&gt;None&lt;/em&gt; and select the &lt;em&gt;master branch&lt;/em&gt; option. What this does is build your Github Pages website from your master branch rather than a different branch that you have created.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/using-github-pages/select-master.png&quot; alt=&quot;Github Pages Select Master&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Don’t forget to save your selection!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/using-github-pages/save-master.png&quot; alt=&quot;Github Pages Save Master&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The page should reload and if you scroll back down to &lt;em&gt;Github Pages Settings&lt;/em&gt; there should be a website link. For me it’s https://nicholasday.github.io/my-first-app/.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/using-github-pages/website-link.png&quot; alt=&quot;Website Link&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Previously, in my &lt;a href=&quot;/github-basics/&quot;&gt;Github Basics&lt;/a&gt; tutorial we created a file called &lt;code&gt;test.txt&lt;/code&gt;. So we go to the url they showed us earlier, and add &lt;code&gt;/test.txt&lt;/code&gt;. The url would then be https://nicholasday.github.io/my-first-app/test.txt. As you can see VSCode and the website both have the same page!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/using-github-pages/vscode-test-file.png&quot; alt=&quot;VSCode Test File&quot; /&gt;
+&lt;img src=&quot;http://tutorialsbynick.com/images/using-github-pages/website-test-file.png&quot; alt=&quot;Website Test File&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;If you want something to show up when you just go to a folder, place an &lt;code&gt;index.html&lt;/code&gt; file in that folder. So if we want something to show up when we go to https://nicholasday.github.io/my-first-app/, we create an &lt;code&gt;index.html&lt;/code&gt; in the base repository folder. Then, all you have to do is commit it to Github and push it to their servers. It should show up almost immediately on your website.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/using-github-pages/create-index.png&quot; alt=&quot;Create Index&quot; /&gt;
+&lt;img src=&quot;http://tutorialsbynick.com/images/using-github-pages/index-website.png&quot; alt=&quot;Index Website&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Feels good, right? You can now show people your work by sending them a nice link!&lt;/p&gt;
+
+</description>
+        <pubDate>Thu, 14 Sep 2017 00:00:00 -0400</pubDate>
+        <link>http://tutorialsbynick.com/using-github-pages/</link>
+        <guid isPermaLink="true">http://tutorialsbynick.com/using-github-pages/</guid>
+        
+        
+      </item>
     
       <item>
         <title>Github Basics</title>
