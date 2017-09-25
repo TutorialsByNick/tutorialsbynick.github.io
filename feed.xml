@@ -6,12 +6,12 @@
 </description>
     <link>http://tutorialsbynick.com/</link>
     <atom:link href="http://tutorialsbynick.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 19 Sep 2017 19:10:43 -0400</pubDate>
-    <lastBuildDate>Tue, 19 Sep 2017 19:10:43 -0400</lastBuildDate>
+    <pubDate>Sun, 24 Sep 2017 22:32:31 -0400</pubDate>
+    <lastBuildDate>Sun, 24 Sep 2017 22:32:31 -0400</lastBuildDate>
     <generator>Jekyll v3.5.2</generator>
     
       <item>
-        <title>Android Studio Tools FTC</title>
+        <title>Android Studio FTC Tools: Making common tasks easier and faster</title>
         <description>&lt;p&gt;In Android Studio, there is a feature called &lt;em&gt;External Tools&lt;/em&gt;. This adds links under the &lt;code&gt;Tools-&amp;gt;External Tools&lt;/code&gt; header that runs command line programs. Why is this useful for FTC? We can add commands that let us easily connect to the robot over wireless, upload code wirelessly and update the Driver Station’s app quickly.&lt;/p&gt;
 
 &lt;h1 id=&quot;table-of-contents&quot;&gt;Table of Contents&lt;/h1&gt;
