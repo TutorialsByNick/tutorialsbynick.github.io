@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>How To Install Python on Windows</title>
-  <meta name="description" content="This tutorial will teach you how to install the Python programming language on Windows. Python is a greatprogramming language to learn because it offers many...">
+  <title>Building a Robot</title>
+  <meta name="description" content="">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://tutorialsbynick.com/how-to-install-python-on-windows/">
+  <link rel="canonical" href="http://tutorialsbynick.com/buying-robot-parts/">
   <link rel="alternate" type="application/rss+xml" title="Tutorials By Nick" href="http://tutorialsbynick.com/feed.xml">
 <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet"> 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-79125896-1"></script>
@@ -60,103 +60,54 @@
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">How To Install Python on Windows</h1>
+    <h1 class="post-title" itemprop="name headline">Building a Robot</h1>
     <p class="post-meta post-line">
         By <a class="author" href="/about"><span itemprop="author" itemscope
         itemtype="http://schema.org/Person"><span itemprop="name">Nicholas Day</span></span></a>
-        &nbsp;|&nbsp;&nbsp;<time datetime="2016-09-14T00:00:00-04:00" itemprop="datePublished">Sep 14, 2016</time>
+        &nbsp;|&nbsp;&nbsp;<time datetime="2018-06-27T00:00:00-04:00" itemprop="datePublished">Jun 27, 2018</time>
     </p>
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <p>This tutorial will teach you how to install the Python programming language on Windows. Python is a great
-programming language to learn because it offers many great libraries that can
-help you build the programs you want to easily. It also has a multitude of
-documentation available for you to utilize when programming complex projects.</p>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/kZHaTGiakZM?start=8" frameborder="0" allow="autoplay; encrypted-media" style="display: block; margin: 0 auto; margin-bottom: 20px;" allowfullscreen=""></iframe>
 
-<h1 id="table-of-contents">Table of Contents</h1>
-<ul id="markdown-toc">
-  <li><a href="#table-of-contents" id="markdown-toc-table-of-contents">Table of Contents</a></li>
-  <li><a href="#finding-the-right-download" id="markdown-toc-finding-the-right-download">Finding the Right Download</a></li>
-  <li><a href="#installing-python" id="markdown-toc-installing-python">Installing Python</a></li>
-  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+<p>Swerve drive is a fantastic omni-directional drive train. It can go in any direction at any time with full speed. Go ahead and watch the video above. I’ll wait.</p>
+
+<p>Wasn’t that amazing? A swerve drivetrain has 4 independent swerve modules that change the direction the wheel faces and the speed of the wheel at the same time. This allows for complex maneuvers like you saw in the video. I want to build a swerve drive so that I can understand how it works, and what code is required. I’ll post a build log of my efforts in a semi-tutorial fashion. This is quite a daunting undertaking. The following major skills seem to be required:</p>
+<ul>
+  <li>CAD
+    <ul>
+      <li>Computer aided design software which lets the user model their design or <em>robot</em> without having to draw lots of 3d models on paper</li>
+    </ul>
+  </li>
+  <li>Embedded programming
+    <ul>
+      <li>You may be familiar with traditional programming which focuses on things inside a computer, but embedded programming is used when programming a smaller computer called a microcontroller which is slower and less powerful, but has real time access to input and output to the real world like LEDs or switches or motors.</li>
+    </ul>
+  </li>
 </ul>
 
-<h1 id="finding-the-right-download">Finding the Right Download</h1>
+<p>I have <em>some</em> experience with robotics programming and how robots work due to my time in FTC (First Tech Challenge, a high school robotics sport), but this will integrate a lot deeper with many different subjects than I had learned before. In FTC, we used Java and didn’t really have to know how the motors worked, or implement anything low level that messes with the electronics directly, so this will be fun. :)</p>
 
-<p>First, you should go to the <a href="https://python.org">Python website</a>. It should show
-up in your URL bar as something like this:</p>
+<p>I was on FTC Team 731, and was the lead programmer. Last year’s challenge was to place these foam blocks in a vertical grid. There was an operator-controlled portion (Teleop, for 2 minutes), and an autonomous part (30 seconds). Here is a video of our robot. I ended up spending a lot of time trying to work through issues with how the control system worked and the lag at which some commands were sent. This made it hard to achieve more accurate positioning. It’s also part of the reason why I’m so inspired to do this project, so that I get some “real world” experience and a chance to apply some of the skills I learned.</p>
 
-<p><img src="http://tutorialsbynick.com/images/python-installation/python-url.jpg" alt="Python website url" /></p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/2zds6AWhhSI" frameborder="0" allow="autoplay; encrypted-media" style="display: block; margin: 0 auto; margin-bottom: 20px;" allowfullscreen=""></iframe>
 
-<p>Make sure that you see the green lock to the left of the url with the words
-<code>Python Software Foundation</code> because that signifies that this website is
-officially sanctioned by the organization that develops Python.</p>
+<p>Because swerve drive is a really challenging drivetrain to make from a mechanical and programming standpoint, I figured I would get my feet wet by starting with a mostly built robot robot kit, and learning a few things along the way. On a Pololu sale, I found this gem:</p>
 
-<p>Hover over the downloads link in the navigation bar, and click on the Windows
-link provided.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/bSA3A0wpirA" frameborder="0" allow="autoplay; encrypted-media" style="display: block; margin: 0 auto; margin-bottom: 20px;" allowfullscreen=""></iframe>
 
-<p><img src="http://tutorialsbynick.com/images/python-installation/hover-downloads.jpg" alt="Python download link" /></p>
+<p>It’s a robot kit with software already made to control most of it and a <a href="https://www.pololu.com/blog/577/building-a-raspberry-pi-robot-with-the-a-star-32u4-robot-controller">tutorial</a> on how to build it. I liked the idea of using a Raspberry Pi as a high level controller that could handle regular computer programs and processing. It could host a web server and use a webcam with computer vision techniques to recognize items in the real world and send movement commands to the robot. It also would allow for any device with a web browser to control the robot like shown in the video. The microcontroller is a Atmega 32u4 8 bit microcontroller, which is like a regular computer processor but it’s slower and more focused on the electronics control side.</p>
 
-<p>Once the page has loaded, you should see the following links below:</p>
+<p>I decided to get <a href="https://www.pololu.com/product/3076">these motors</a> instead because they had a shaft on the end of the motor that you could install one of <a href="https://www.pololu.com/product/3081">these encoders</a> on. Encoders measure the rotations of the shaft when it moves forward and backward. If you know the wheel circumference, you can determine the distance that the robot has traveled with it’s measured rotations. You can also determine the speed of the robot by using the rate of rotation of the motor. Encoders make a lot of sense for my project because I want to accurately control the speed of motors and the autonomous functionality of the robot.</p>
 
-<p><img src="http://tutorialsbynick.com/images/python-installation/select-python3-releases.jpg" alt="Select python3 releases" /></p>
+<p>I decided to get the newer Raspberry Pi 3 instead because it would offer more processing power for computer vision tasks if I needed it.</p>
 
-<p>Click the link which has the words <code>Latest Python 3 Release</code>.</p>
+<p>My eventual vision for this project involves a Raspberry Pi and camera for sensing objects which communicates with the internet and controls the microcontrollers, multiple microcontrollers for controlling the motors and providing a high level motion control interface to the Pi. Oh, and the drivetrain would be swerve drive of course. :)</p>
 
-<p>This will take you to a page which has the following table:</p>
+<p>The Pi would say to the microcontroller, “I have an object move to these x, y coordinates.” The microcontroller will determine how the motor speeds should ramp up, slow down, and stay at speed as it approaches the target, along with turning if necessary. There will be a gyro sensor and feedback from the motors’ encoders to see if we are actually on target, and correct if necessary.</p>
 
-<p><img src="http://tutorialsbynick.com/images/python-installation/download-table.jpg" alt="Download table" /></p>
-
-<p>Select <code>Windows x86-64 executable installer</code> if you have a 64-bit computer.</p>
-
-<p>Select <code>Windows x86 executable installer</code> if you have a 32-bit computer.</p>
-
-<p>A download dialog should pop up on your screen:</p>
-
-<p><img src="http://tutorialsbynick.com/images/python-installation/download-dialog.jpg" alt="Download dialog" /></p>
-
-<p>Click <code>Save File</code> because you’ll want to run it later to install Python.</p>
-
-<p>After it has finished downloading, select the download from the dropdown menu in
-your browser to start installing Python.</p>
-
-<p><img src="http://tutorialsbynick.com/images/python-installation/run-from-downloads.jpg" alt="Run from downloads" /></p>
-
-<h1 id="installing-python">Installing Python</h1>
-
-<p>This screen should come up after running the download:</p>
-
-<p><img src="http://tutorialsbynick.com/images/python-installation/first-installation-screen.jpg" alt="First installation screen" /></p>
-
-<p>Be sure to have the checkbox titled, <code>Add Python to PATH</code>, checked:</p>
-
-<p><img src="http://tutorialsbynick.com/images/python-installation/check-python-path.jpg" alt="Check python path" /></p>
-
-<p>Now click <code>Install Now</code> to start the installation.</p>
-
-<p><img src="http://tutorialsbynick.com/images/python-installation/select-install-now.jpg" alt="Install now" /></p>
-
-<p>A window may pop up asking whether you want to allow the installation access to
-your hard drive. Click yes because you want to install Python.</p>
-
-<p>The Python installer should show its progress like this:</p>
-
-<p><img src="http://tutorialsbynick.com/images/python-installation/python-installing-window.jpg" alt="Python installing window" /></p>
-
-<p>Congratulations! If you see a window like the one below, your Python installation is finished!</p>
-
-<p><img src="http://tutorialsbynick.com/images/python-installation/python-installation-finished.jpg" alt="Python installation finished" /></p>
-
-<p>Click <code>Close</code> to exit the installer.</p>
-
-<h1 id="conclusion">Conclusion</h1>
-
-<p>You now have a powerful programming language available to use on your computer.
-It has many libraries that you could use to make games, websites, and
-applications – all within the same easy-to-use language. Let me know in the
-comments what you’re using Python for!</p>
-
+<p>Stay tuned as I write up more on how to build a robot!</p>
 
 
 
@@ -204,8 +155,8 @@ inbox just for subscribing.</p>
   <div id="disqus_thread"></div>
 <script>
     var disqus_config = function () {
-        this.page.url = "http://tutorialsbynick.com/how-to-install-python-on-windows/";
-        this.page.identifier = "How To Install Python on Windows";
+        this.page.url = "http://tutorialsbynick.com/buying-robot-parts/";
+        this.page.identifier = "Building a Robot";
     };
 (function() {
         var d = document, s = d.createElement('script');

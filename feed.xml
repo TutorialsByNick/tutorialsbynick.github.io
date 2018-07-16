@@ -6,15 +6,65 @@
 </description>
     <link>http://tutorialsbynick.com/</link>
     <atom:link href="http://tutorialsbynick.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 14 Nov 2017 15:51:50 -0500</pubDate>
-    <lastBuildDate>Tue, 14 Nov 2017 15:51:50 -0500</lastBuildDate>
-    <generator>Jekyll v3.5.2</generator>
+    <pubDate>Mon, 16 Jul 2018 18:20:19 -0400</pubDate>
+    <lastBuildDate>Mon, 16 Jul 2018 18:20:19 -0400</lastBuildDate>
+    <generator>Jekyll v3.8.3</generator>
+    
+      <item>
+        <title>Building a Robot</title>
+        <description>&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/kZHaTGiakZM?start=8&quot; frameborder=&quot;0&quot; allow=&quot;autoplay; encrypted-media&quot; style=&quot;display: block; margin: 0 auto; margin-bottom: 20px;&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+
+&lt;p&gt;Swerve drive is a fantastic omni-directional drive train. It can go in any direction at any time with full speed. Go ahead and watch the video above. I’ll wait.&lt;/p&gt;
+
+&lt;p&gt;Wasn’t that amazing? A swerve drivetrain has 4 independent swerve modules that change the direction the wheel faces and the speed of the wheel at the same time. This allows for complex maneuvers like you saw in the video. I want to build a swerve drive so that I can understand how it works, and what code is required. I’ll post a build log of my efforts in a semi-tutorial fashion. This is quite a daunting undertaking. The following major skills seem to be required:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;CAD
+    &lt;ul&gt;
+      &lt;li&gt;Computer aided design software which lets the user model their design or &lt;em&gt;robot&lt;/em&gt; without having to draw lots of 3d models on paper&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Embedded programming
+    &lt;ul&gt;
+      &lt;li&gt;You may be familiar with traditional programming which focuses on things inside a computer, but embedded programming is used when programming a smaller computer called a microcontroller which is slower and less powerful, but has real time access to input and output to the real world like LEDs or switches or motors.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I have &lt;em&gt;some&lt;/em&gt; experience with robotics programming and how robots work due to my time in FTC (First Tech Challenge, a high school robotics sport), but this will integrate a lot deeper with many different subjects than I had learned before. In FTC, we used Java and didn’t really have to know how the motors worked, or implement anything low level that messes with the electronics directly, so this will be fun. :)&lt;/p&gt;
+
+&lt;p&gt;I was on FTC Team 731, and was the lead programmer. Last year’s challenge was to place these foam blocks in a vertical grid. There was an operator-controlled portion (Teleop, for 2 minutes), and an autonomous part (30 seconds). Here is a video of our robot. I ended up spending a lot of time trying to work through issues with how the control system worked and the lag at which some commands were sent. This made it hard to achieve more accurate positioning. It’s also part of the reason why I’m so inspired to do this project, so that I get some “real world” experience and a chance to apply some of the skills I learned.&lt;/p&gt;
+
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/2zds6AWhhSI&quot; frameborder=&quot;0&quot; allow=&quot;autoplay; encrypted-media&quot; style=&quot;display: block; margin: 0 auto; margin-bottom: 20px;&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+
+&lt;p&gt;Because swerve drive is a really challenging drivetrain to make from a mechanical and programming standpoint, I figured I would get my feet wet by starting with a mostly built robot robot kit, and learning a few things along the way. On a Pololu sale, I found this gem:&lt;/p&gt;
+
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/bSA3A0wpirA&quot; frameborder=&quot;0&quot; allow=&quot;autoplay; encrypted-media&quot; style=&quot;display: block; margin: 0 auto; margin-bottom: 20px;&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+
+&lt;p&gt;It’s a robot kit with software already made to control most of it and a &lt;a href=&quot;https://www.pololu.com/blog/577/building-a-raspberry-pi-robot-with-the-a-star-32u4-robot-controller&quot;&gt;tutorial&lt;/a&gt; on how to build it. I liked the idea of using a Raspberry Pi as a high level controller that could handle regular computer programs and processing. It could host a web server and use a webcam with computer vision techniques to recognize items in the real world and send movement commands to the robot. It also would allow for any device with a web browser to control the robot like shown in the video. The microcontroller is a Atmega 32u4 8 bit microcontroller, which is like a regular computer processor but it’s slower and more focused on the electronics control side.&lt;/p&gt;
+
+&lt;p&gt;I decided to get &lt;a href=&quot;https://www.pololu.com/product/3076&quot;&gt;these motors&lt;/a&gt; instead because they had a shaft on the end of the motor that you could install one of &lt;a href=&quot;https://www.pololu.com/product/3081&quot;&gt;these encoders&lt;/a&gt; on. Encoders measure the rotations of the shaft when it moves forward and backward. If you know the wheel circumference, you can determine the distance that the robot has traveled with it’s measured rotations. You can also determine the speed of the robot by using the rate of rotation of the motor. Encoders make a lot of sense for my project because I want to accurately control the speed of motors and the autonomous functionality of the robot.&lt;/p&gt;
+
+&lt;p&gt;I decided to get the newer Raspberry Pi 3 instead because it would offer more processing power for computer vision tasks if I needed it.&lt;/p&gt;
+
+&lt;p&gt;My eventual vision for this project involves a Raspberry Pi and camera for sensing objects which communicates with the internet and controls the microcontrollers, multiple microcontrollers for controlling the motors and providing a high level motion control interface to the Pi. Oh, and the drivetrain would be swerve drive of course. :)&lt;/p&gt;
+
+&lt;p&gt;The Pi would say to the microcontroller, “I have an object move to these x, y coordinates.” The microcontroller will determine how the motor speeds should ramp up, slow down, and stay at speed as it approaches the target, along with turning if necessary. There will be a gyro sensor and feedback from the motors’ encoders to see if we are actually on target, and correct if necessary.&lt;/p&gt;
+
+&lt;p&gt;Stay tuned as I write up more on how to build a robot!&lt;/p&gt;
+</description>
+        <pubDate>Wed, 27 Jun 2018 00:00:00 -0400</pubDate>
+        <link>http://tutorialsbynick.com/buying-robot-parts/</link>
+        <guid isPermaLink="true">http://tutorialsbynick.com/buying-robot-parts/</guid>
+        
+        
+      </item>
     
       <item>
         <title>Android Studio FTC Tools: Making common tasks easier and faster</title>
         <description>&lt;p&gt;In Android Studio, there is a feature called &lt;em&gt;External Tools&lt;/em&gt;. This adds links under the &lt;code&gt;Tools-&amp;gt;External Tools&lt;/code&gt; header that runs command line programs. Why is this useful for FTC? We can add commands that let us easily connect to the robot over wireless, upload code wirelessly and update the Driver Station’s app quickly.&lt;/p&gt;
 
 &lt;h1 id=&quot;table-of-contents&quot;&gt;Table of Contents&lt;/h1&gt;
+
 &lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#table-of-contents&quot; id=&quot;markdown-toc-table-of-contents&quot;&gt;Table of Contents&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#restarting-adb-tool&quot; id=&quot;markdown-toc-restarting-adb-tool&quot;&gt;Restarting ADB Tool&lt;/a&gt;&lt;/li&gt;
@@ -38,6 +88,7 @@
 &lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/android-studio-tools-ftc/restart-adb.png&quot; alt=&quot;Restart ADB Tool&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;So there are a lot of fields here, but the most important ones are&lt;/p&gt;
+
 &lt;ul&gt;
   &lt;li&gt;&lt;code&gt;Name&lt;/code&gt;
     &lt;ul&gt;
@@ -64,6 +115,7 @@
 &lt;/ul&gt;
 
 &lt;p&gt;There are also some weird &lt;code&gt;$&lt;/code&gt;’s inside of the program:&lt;/p&gt;
+
 &lt;ul&gt;
   &lt;li&gt;&lt;code&gt;$ModuleSdkPath$&lt;/code&gt;
     &lt;ul&gt;
@@ -98,6 +150,7 @@
 &lt;h1 id=&quot;actually-installing-the-driver-station&quot;&gt;Actually installing the Driver Station&lt;/h1&gt;
 
 &lt;p&gt;Now to update the Driver Station, all you have to do is&lt;/p&gt;
+
 &lt;ul&gt;
   &lt;li&gt;Uninstall the current version of the Driver Station app from the phone&lt;/li&gt;
   &lt;li&gt;Connect the Driver Station phone to the computer&lt;/li&gt;
@@ -1606,212 +1659,6 @@ This is a good theory tutorial on how bootloaders work&lt;/li&gt;
         <pubDate>Wed, 08 Jun 2016 00:00:00 -0400</pubDate>
         <link>http://tutorialsbynick.com/writing-an-os-baby-steps/</link>
         <guid isPermaLink="true">http://tutorialsbynick.com/writing-an-os-baby-steps/</guid>
-        
-        
-      </item>
-    
-      <item>
-        <title>How To Install Ubuntu in a Virtual Machine on Windows</title>
-        <description>&lt;p&gt;This tutorial will teach you how to install Ubuntu Linux in a virtual machine on Windows. This is a good way to start setting up a programming development environment because many developer tools and programs are hard to install on Windows or only run on a Linux like Ubuntu. VirtualBox is a program that emulates a computer, so that you can install different operating systems onto the virtual computer. Ubuntu is a Linux distribution that is easy to use and configure which makes it ideal for a beginner to use. When you combine these two technologies together, you get an accessible way to develop programs on Windows without the hassle of downloading and installing Linux on your real non-virtualized computer.&lt;/p&gt;
-
-&lt;h1 id=&quot;table-of-contents&quot;&gt;Table of Contents&lt;/h1&gt;
-&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#table-of-contents&quot; id=&quot;markdown-toc-table-of-contents&quot;&gt;Table of Contents&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#downloading-virtualbox&quot; id=&quot;markdown-toc-downloading-virtualbox&quot;&gt;Downloading VirtualBox&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#installing-virtualbox&quot; id=&quot;markdown-toc-installing-virtualbox&quot;&gt;Installing VirtualBox&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#downloading-ubuntu&quot; id=&quot;markdown-toc-downloading-ubuntu&quot;&gt;Downloading Ubuntu&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#running-virtualbox&quot; id=&quot;markdown-toc-running-virtualbox&quot;&gt;Running Virtualbox&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#installing-ubuntu&quot; id=&quot;markdown-toc-installing-ubuntu&quot;&gt;Installing Ubuntu&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#setting-up-the-virtual-machine-to-handle-server-capabilities&quot; id=&quot;markdown-toc-setting-up-the-virtual-machine-to-handle-server-capabilities&quot;&gt;Setting up the virtual machine to handle server capabilities&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#conclusion&quot; id=&quot;markdown-toc-conclusion&quot;&gt;Conclusion&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;downloading-virtualbox&quot;&gt;Downloading VirtualBox&lt;/h1&gt;
-
-&lt;p&gt;Go to &lt;a href=&quot;https://www.virtualbox.org/wiki/Downloads&quot;&gt;Downloads - Oracle VM VirtualBox&lt;/a&gt; to download the virtualization program.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/virtualbox-download-page.jpg&quot; alt=&quot;VirtualBox Download Page&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Select the download link for Windows hosts because the computer that is “hosting” the emulation is a Windows machine.&lt;/p&gt;
-
-&lt;h1 id=&quot;installing-virtualbox&quot;&gt;Installing VirtualBox&lt;/h1&gt;
-
-&lt;p&gt;Just click &lt;code&gt;Next&lt;/code&gt; and go through the installation with the default options.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/virtualbox-installation-first-step.jpg&quot; alt=&quot;VirtualBox Installation First Step&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;A &lt;code&gt;Warning: Network Interfaces&lt;/code&gt; dialogue may appear, but don’t worry – just proceed with the installation. All this means is that VirtualBox is going to install drivers, so that the virtual computer can access the internet by connecting to the your real non-virtualized computer’s internet.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/virtualbox-network-interfaces-warning.jpg&quot; alt=&quot;VirtualBox Network Interfaces Warning&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Another dialogue may pop up titled “Windows Security” asking whether or not you would like to install this device software. Proceed with the installation because this is also part of the driver installation process.&lt;/p&gt;
-
-&lt;h1 id=&quot;downloading-ubuntu&quot;&gt;Downloading Ubuntu&lt;/h1&gt;
-
-&lt;p&gt;Go to &lt;a href=&quot;http://www.ubuntu.com/download/desktop&quot;&gt;Download Ubuntu Desktop&lt;/a&gt; and click the &lt;code&gt;Download&lt;/code&gt; button on the right to download the desktop version of Ubuntu (There are other versions to accommodate use cases like servers and phones).&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/download-ubuntu-page.jpg&quot; alt=&quot;Ubuntu Download Page&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Unless you would like to donate, you can skip the donation&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/skip-donation.jpg&quot; alt=&quot;Skip Donation&quot; /&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;running-virtualbox&quot;&gt;Running Virtualbox&lt;/h1&gt;
-
-&lt;p&gt;Open VirtualBox and select the &lt;code&gt;New&lt;/code&gt; button.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/after-virtualbox-install.jpg&quot; alt=&quot;VirtualBox Program&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Choose these values and title the virtual machine what you want.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/virtualbox-ubuntu-naming.jpg&quot; alt=&quot;VirtualBox Naming&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Depending on how much ram your computer has, you want to select as much as possible for the virtual machine, but not more than half the available ram. I have 8GB of ram on my computer, so I don’t have to worry that much about how much ram I select. A user with 2GB of ram might want to select 512MB in order to keep their physical computer running fairly smoothly while operating the virtual machine.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/virtualbox-ram-size.jpg&quot; alt=&quot;VirtualBox Ram Size&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;I would keep the default values for this, but maybe increase the hard drive size if possible. VirtualBox creates a virtual hard drive for the virtual machine to keep the files separated from each other. The virtual machine can’t see your personal files with this setup.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/virtualbox-hard-drive-size.jpg&quot; alt=&quot;VirtualBox Hard Drive Size&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Keep the default option here and click &lt;code&gt;Next&lt;/code&gt; – these are just different virtual hard drive formats to choose from.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/virtualbox-hard-drive-type.jpg&quot; alt=&quot;VirtualBox Hard Drive Type&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;I generally prefer the default option because it allows me to save space on my physical hard drive, but you can choose the other option if you’d like the virtual hard drive to stay a fixed size.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/virtualbox-hard-drive-allocation.JPG&quot; alt=&quot;VirtualBox Hard Drive Allocation&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;You can change the location and size here if you want, but I like to keep it default.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/virtualbox-hard-drive-location.jpg&quot; alt=&quot;VirtualBox Hard Drive Location&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Congratulations! You now have a virtual machine set up for Ubuntu!&lt;/p&gt;
-
-&lt;h1 id=&quot;installing-ubuntu&quot;&gt;Installing Ubuntu&lt;/h1&gt;
-
-&lt;p&gt;Click Start to power on the machine.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/virtualbox-main-window-with-ubuntu.jpg&quot; alt=&quot;VirtualBox Main Window with Ubuntu&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;This window should pop up. Click on the folder icon to select the Ubuntu .iso file you downloaded earlier.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/virtualbox-startup-disk.jpg&quot; alt=&quot;VirtualBox Startup Disk&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/select-ubuntu-download.jpg&quot; alt=&quot;Select Ubuntu Download&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;When this screen comes up, it means that the virtual machine is booting successfully.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/virtualbox-machine-starting.jpg&quot; alt=&quot;VirtualBox Machine Starting&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;This screen means that Ubuntu has booted up successfully.&lt;/p&gt;
-
-&lt;p&gt;If you want to just try Ubuntu, you can choose the try option. However, this guide will go over the installation of Ubuntu, so choose that option if you would like to continue and have Ubuntu persist when you reboot it.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/virtualbox-ubuntu-started.jpg&quot; alt=&quot;Ubuntu Started&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Select these options if you want. Downloading updates now means that it takes longer to install, but you don’t have to update later. Third-party software isn’t necessarily open source (meaning all of the programming code is available for you to view and edit yourself), and can be poorly made. But, it is usually required for many drivers that are essential for using the computer.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/ubuntu-first-step.png&quot; alt=&quot;Ubuntu First Step&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Even though this window says that the first option will erase the whole disk, it means the &lt;em&gt;virtual&lt;/em&gt; disk. So, you don’t need to worry about wiping all of your personal files. Select the first option unless you’d like to use another method yourself.&lt;/p&gt;
-
-&lt;p&gt;Select Install &lt;code&gt;Now&lt;/code&gt; to start the process.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/ubuntu-disk-options.png&quot; alt=&quot;Ubuntu Disk Options&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Click &lt;code&gt;Continue&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/ubuntu-disk-verification.png&quot; alt=&quot;Ubuntu Disk Verification&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Select your location so that Ubuntu can accurately set the system clock.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/ubuntu-timezone.png&quot; alt=&quot;Ubuntu Timezone&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Select your keyboard preference and language.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/ubuntu-keyboard.png&quot; alt=&quot;Ubuntu Keyboard&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Set your account details to protect your virtual machine and give it a user account. Write this information down because you’ll need it later to log in after it reboots.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/ubuntu-login.png&quot; alt=&quot;Ubuntu Login&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;You should see this screen as Ubuntu installs and downloads files to your virtual machine’s hard drive.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/ubuntu-installing.png&quot; alt=&quot;Ubuntu Installing&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Click &lt;code&gt;Restart&lt;/code&gt; to finish installing Ubuntu.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/ubuntu-restart.png&quot; alt=&quot;Ubuntu Restart&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;If this image comes up, you’ll have to reset the virtual machine manually.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/ubuntu-hang.png&quot; alt=&quot;Ubuntu Hang&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Click &lt;code&gt;Machine&lt;/code&gt;, then &lt;code&gt;Reset&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/virtualbox-reset.jpg&quot; alt=&quot;VirtualBox Reset&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Confirm you want to reset.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/virtualbox-reset-confirm.jpg&quot; alt=&quot;VirtualBox Reset Confirm&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Now your Ubuntu machine should be up and running!&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/ubuntu-installed.png&quot; alt=&quot;Ubuntu Installed&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;If your screen isn’t scaling right (see the scrollbars at the right and bottom), follow these steps. Otherwise, you’re ready to go!&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/virtualbox-ubuntu-screen-scale.jpg&quot; alt=&quot;VirtualBox Screen Scale&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Open up a terminal.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/ubuntu-terminal.png&quot; alt=&quot;Ubuntu Terminal&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Type in &lt;code&gt;sudo apt-get install virtualbox-guest-dkms&lt;/code&gt; and hit &lt;code&gt;Enter&lt;/code&gt;. Then type in the password you made for your account earlier and it &lt;code&gt;Enter&lt;/code&gt;.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code&gt;sudo&lt;/code&gt; gives you root (administrator) privileges to install packages.&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;apt-get&lt;/code&gt; installs programs from Ubuntu’s repositories.&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;virtualbox-guest-dkms&lt;/code&gt; is the name of the program that gives your Ubuntu virtual machine the right methods to change the display.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/ubuntu-virtualbox-guest-dkms.png&quot; alt=&quot;Ubuntu VirtualBox Guest DKMS&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Press &lt;code&gt;y&lt;/code&gt; and &lt;code&gt;Enter&lt;/code&gt; to confirm installation.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/ubuntu-virtualbox-guest-dkms-y.png&quot; alt=&quot;Ubuntu VirtualBox Guest DKMS Y&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;After this has finished installing, this will show up with a blinking cursor (with the settings you used for your user account).&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/ubuntu-dkms-installed.jpg&quot; alt=&quot;Ubuntu DKMS Finished&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Reboot to finish the changes.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/ubuntu-reboot.png&quot; alt=&quot;Ubuntu Reboot&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/ubuntu-reboot-confirm.png&quot; alt=&quot;Ubuntu Reboot Confirm&quot; /&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;setting-up-the-virtual-machine-to-handle-server-capabilities&quot;&gt;Setting up the virtual machine to handle server capabilities&lt;/h1&gt;
-
-&lt;p&gt;If you want to use your virtual machine as a server or to develop web applications and server programs, you have to switch the virtual machine’s networking to bridged.&lt;/p&gt;
-
-&lt;p&gt;First, go to the settings in VirtualBox&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/virtualbox-settings.jpg&quot; alt=&quot;VirtualBox Settings&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Then, select the &lt;code&gt;Network&lt;/code&gt; option on the side and select &lt;code&gt;Bridged Adapter&lt;/code&gt; from the &lt;code&gt;Attached to:&lt;/code&gt; dropdown in the center.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/virtualbox-network-bridged.jpg&quot; alt=&quot;VirtualBox Networking&quot; /&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
-
-&lt;p&gt;Now you have a capable Linux virtual machine installed. You could learn how to program on it, run open source software, or learn how to do security testing. Those are just a few options of what you can do in this Ubuntu installation.&lt;/p&gt;
-
-</description>
-        <pubDate>Wed, 25 May 2016 00:00:00 -0400</pubDate>
-        <link>http://tutorialsbynick.com/how-to-install-ubuntu-in-a-virtual-machine-on-windows/</link>
-        <guid isPermaLink="true">http://tutorialsbynick.com/how-to-install-ubuntu-in-a-virtual-machine-on-windows/</guid>
         
         
       </item>
