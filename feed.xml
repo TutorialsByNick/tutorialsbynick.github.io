@@ -6,8 +6,8 @@
 </description>
     <link>http://tutorialsbynick.com/</link>
     <atom:link href="http://tutorialsbynick.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 16 Jul 2018 18:20:19 -0400</pubDate>
-    <lastBuildDate>Mon, 16 Jul 2018 18:20:19 -0400</lastBuildDate>
+    <pubDate>Mon, 16 Jul 2018 22:31:34 -0400</pubDate>
+    <lastBuildDate>Mon, 16 Jul 2018 22:31:34 -0400</lastBuildDate>
     <generator>Jekyll v3.8.3</generator>
     
       <item>
@@ -16,7 +16,9 @@
 
 &lt;p&gt;Swerve drive is a fantastic omni-directional drive train. It can go in any direction at any time with full speed. Go ahead and watch the video above. I’ll wait.&lt;/p&gt;
 
-&lt;p&gt;Wasn’t that amazing? A swerve drivetrain has 4 independent swerve modules that change the direction the wheel faces and the speed of the wheel at the same time. This allows for complex maneuvers like you saw in the video. I want to build a swerve drive so that I can understand how it works, and what code is required. I’ll post a build log of my efforts in a semi-tutorial fashion. This is quite a daunting undertaking. The following major skills seem to be required:&lt;/p&gt;
+&lt;p&gt;Wasn’t that amazing? A swerve drivetrain has 4 independent swerve modules that change the direction the wheel faces and the speed of the wheel at the same time. It allows for complex maneuvers like you saw in the video. I want to build a swerve drive so that I can understand how it works, what code is required, and because I’ve always wanted to build one.&lt;/p&gt;
+
+&lt;p&gt;Honestly, making a artisan, hand-crafted swerve drive made from scratch is quite a daunting undertaking. The following major skills seem to be required:&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;CAD
     &lt;ul&gt;
@@ -30,11 +32,11 @@
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;I have &lt;em&gt;some&lt;/em&gt; experience with robotics programming and how robots work due to my time in FTC (First Tech Challenge, a high school robotics sport), but this will integrate a lot deeper with many different subjects than I had learned before. In FTC, we used Java and didn’t really have to know how the motors worked, or implement anything low level that messes with the electronics directly, so this will be fun. :)&lt;/p&gt;
-
-&lt;p&gt;I was on FTC Team 731, and was the lead programmer. Last year’s challenge was to place these foam blocks in a vertical grid. There was an operator-controlled portion (Teleop, for 2 minutes), and an autonomous part (30 seconds). Here is a video of our robot. I ended up spending a lot of time trying to work through issues with how the control system worked and the lag at which some commands were sent. This made it hard to achieve more accurate positioning. It’s also part of the reason why I’m so inspired to do this project, so that I get some “real world” experience and a chance to apply some of the skills I learned.&lt;/p&gt;
+&lt;p&gt;Last year, I was on FTC Team 731 as the lead programmer. FTC, or First Tech Challenge, is a high school robotics sport that lasts for the latter half of the school year. Our robot had to be able to place these foam blocks in a vertical grid within an operator-controlled (called Telop, for 2 minutes) and autonomous portion (30 seconds, not very long at all!) of the match. I linked a video of our robot below.&lt;/p&gt;
 
 &lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/2zds6AWhhSI&quot; frameborder=&quot;0&quot; allow=&quot;autoplay; encrypted-media&quot; style=&quot;display: block; margin: 0 auto; margin-bottom: 20px;&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+
+&lt;p&gt;During the competition, I spent most of my time trying to work through issues surrounding the control system and the lag that occurred when sending commands to the robot. This made it hard to achieve more accurate positioning. It was frustrating, but it’s also part of the reason why I’m so inspired to take on this project so that I get some “real world” experience and a chance to apply some of the skills I learned.&lt;/p&gt;
 
 &lt;p&gt;Because swerve drive is a really challenging drivetrain to make from a mechanical and programming standpoint, I figured I would get my feet wet by starting with a mostly built robot robot kit, and learning a few things along the way. On a Pololu sale, I found this gem:&lt;/p&gt;
 
@@ -42,15 +44,13 @@
 
 &lt;p&gt;It’s a robot kit with software already made to control most of it and a &lt;a href=&quot;https://www.pololu.com/blog/577/building-a-raspberry-pi-robot-with-the-a-star-32u4-robot-controller&quot;&gt;tutorial&lt;/a&gt; on how to build it. I liked the idea of using a Raspberry Pi as a high level controller that could handle regular computer programs and processing. It could host a web server and use a webcam with computer vision techniques to recognize items in the real world and send movement commands to the robot. It also would allow for any device with a web browser to control the robot like shown in the video. The microcontroller is a Atmega 32u4 8 bit microcontroller, which is like a regular computer processor but it’s slower and more focused on the electronics control side.&lt;/p&gt;
 
-&lt;p&gt;I decided to get &lt;a href=&quot;https://www.pololu.com/product/3076&quot;&gt;these motors&lt;/a&gt; instead because they had a shaft on the end of the motor that you could install one of &lt;a href=&quot;https://www.pololu.com/product/3081&quot;&gt;these encoders&lt;/a&gt; on. Encoders measure the rotations of the shaft when it moves forward and backward. If you know the wheel circumference, you can determine the distance that the robot has traveled with it’s measured rotations. You can also determine the speed of the robot by using the rate of rotation of the motor. Encoders make a lot of sense for my project because I want to accurately control the speed of motors and the autonomous functionality of the robot.&lt;/p&gt;
+&lt;p&gt;I decided to get &lt;a href=&quot;https://www.pololu.com/product/3076&quot;&gt;these motors&lt;/a&gt; instead because they had a shaft on the end of the motor. That way I can install &lt;a href=&quot;https://www.pololu.com/product/3081&quot;&gt;this encoder&lt;/a&gt; on the back of the motor. Encoders measure the rotations of the shaft when it moves forward and backward. If you know the wheel circumference, you can determine the distance that the robot has traveled with it’s measured rotations. You can also determine the speed of the robot by using the rate of rotation of the motor. Encoders make a lot of sense for my project because I want to accurately control the speed of motors and the autonomous functionality of the robot.&lt;/p&gt;
 
-&lt;p&gt;I decided to get the newer Raspberry Pi 3 instead because it would offer more processing power for computer vision tasks if I needed it.&lt;/p&gt;
+&lt;p&gt;For the Raspberry Pi, I chose to get the latest version (Raspberry Pi 3) instead because it would offer more processing power for computer vision tasks and machine learning if I need it.&lt;/p&gt;
 
 &lt;p&gt;My eventual vision for this project involves a Raspberry Pi and camera for sensing objects which communicates with the internet and controls the microcontrollers, multiple microcontrollers for controlling the motors and providing a high level motion control interface to the Pi. Oh, and the drivetrain would be swerve drive of course. :)&lt;/p&gt;
 
-&lt;p&gt;The Pi would say to the microcontroller, “I have an object move to these x, y coordinates.” The microcontroller will determine how the motor speeds should ramp up, slow down, and stay at speed as it approaches the target, along with turning if necessary. There will be a gyro sensor and feedback from the motors’ encoders to see if we are actually on target, and correct if necessary.&lt;/p&gt;
-
-&lt;p&gt;Stay tuned as I write up more on how to build a robot!&lt;/p&gt;
+&lt;p&gt;I’ll try to post a build log of my efforts in a semi-tutorial fashion. Stay tuned as I write up more on how to build a robot!&lt;/p&gt;
 </description>
         <pubDate>Wed, 27 Jun 2018 00:00:00 -0400</pubDate>
         <link>http://tutorialsbynick.com/buying-robot-parts/</link>
