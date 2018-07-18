@@ -6,8 +6,8 @@
 </description>
     <link>https://tutorialsbynick.com/</link>
     <atom:link href="https://tutorialsbynick.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 17 Jul 2018 21:21:40 -0400</pubDate>
-    <lastBuildDate>Tue, 17 Jul 2018 21:21:40 -0400</lastBuildDate>
+    <pubDate>Tue, 17 Jul 2018 23:07:54 -0400</pubDate>
+    <lastBuildDate>Tue, 17 Jul 2018 23:07:54 -0400</lastBuildDate>
     <generator>Jekyll v3.8.3</generator>
     
       <item>
@@ -45,10 +45,12 @@ I figured my first order of business was figuring out what pins were available t
         <guid isPermaLink="true">https://tutorialsbynick.com/adding-encoders/</guid>
         
         
+        <category>Building a Robot</category>
+        
       </item>
     
       <item>
-        <title>Building a Robot</title>
+        <title>Buying Robot Parts</title>
         <description>&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/kZHaTGiakZM?start=8&quot; frameborder=&quot;0&quot; allow=&quot;autoplay; encrypted-media&quot; style=&quot;display: block; margin: 0 auto; margin-bottom: 20px;&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 
 &lt;p&gt;Swerve drive is a fantastic omni-directional drive train. It can go in any direction at any time with full speed. Go ahead and watch the video above. I’ll wait.&lt;/p&gt;
@@ -93,6 +95,8 @@ I figured my first order of business was figuring out what pins were available t
         <link>https://tutorialsbynick.com/buying-robot-parts/</link>
         <guid isPermaLink="true">https://tutorialsbynick.com/buying-robot-parts/</guid>
         
+        
+        <category>Building a Robot</category>
         
       </item>
     
@@ -205,6 +209,8 @@ I figured my first order of business was figuring out what pins were available t
         <link>https://tutorialsbynick.com/android-studio-tools-ftc/</link>
         <guid isPermaLink="true">https://tutorialsbynick.com/android-studio-tools-ftc/</guid>
         
+        
+        <category>FTC Basics</category>
         
       </item>
     
@@ -535,6 +541,8 @@ I figured my first order of business was figuring out what pins were available t
         <guid isPermaLink="true">https://tutorialsbynick.com/canvas-physics-and-keyboard/</guid>
         
         
+        <category>Web Development Basics</category>
+        
       </item>
     
       <item>
@@ -810,6 +818,8 @@ I figured my first order of business was figuring out what pins were available t
         <guid isPermaLink="true">https://tutorialsbynick.com/ftc-basic-teleop/</guid>
         
         
+        <category>FTC Basics</category>
+        
       </item>
     
       <item>
@@ -991,6 +1001,8 @@ I figured my first order of business was figuring out what pins were available t
         <guid isPermaLink="true">https://tutorialsbynick.com/javascript-animation-basics/</guid>
         
         
+        <category>Web Development Basics</category>
+        
       </item>
     
       <item>
@@ -1121,6 +1133,8 @@ I figured my first order of business was figuring out what pins were available t
         <link>https://tutorialsbynick.com/basics-of-html-and-css/</link>
         <guid isPermaLink="true">https://tutorialsbynick.com/basics-of-html-and-css/</guid>
         
+        
+        <category>Web Development Basics</category>
         
       </item>
     
