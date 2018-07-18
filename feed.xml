@@ -6,9 +6,46 @@
 </description>
     <link>http://tutorialsbynick.com/</link>
     <atom:link href="http://tutorialsbynick.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 16 Jul 2018 22:31:34 -0400</pubDate>
-    <lastBuildDate>Mon, 16 Jul 2018 22:31:34 -0400</lastBuildDate>
+    <pubDate>Tue, 17 Jul 2018 21:18:56 -0400</pubDate>
+    <lastBuildDate>Tue, 17 Jul 2018 21:18:56 -0400</lastBuildDate>
     <generator>Jekyll v3.8.3</generator>
+    
+      <item>
+        <title>Adding Encoders</title>
+        <description>&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/adding-encoders/robot.jpg&quot; alt=&quot;Picture of my robot&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Hello again! Today, I added &lt;a href=&quot;https://www.pololu.com/product/3081&quot;&gt;these encoders&lt;/a&gt; onto my motors. The holes for soldering the data wires are really small, so I suggest using a magnifying glass if you have one.&lt;/p&gt;
+
+&lt;p&gt;With the electrical stuff done, I focused on connecting the wires to the A-Star Robot Controller. 
+I figured my first order of business was figuring out what pins were available to use on the microcontroller to read the input from my encoder, and what sort of format the encoder uses to convey the position of the motor shaft.&lt;/p&gt;
+
+&lt;p&gt;After researching some in Google, I found this &lt;a href=&quot;https://makeatronics.blogspot.com/2013/02/efficiently-reading-quadrature-with.html&quot;&gt;link&lt;/a&gt; describing how encoders work and how to write code to read them. I won’t go into too much detail here because that article does a good job of explaining, but I have an incremental encoder. It uses 2 wires to communicate whether the motor’s shaft has shifted clockwise or counter-clockwise one “tick”. A tick is some division of the shaft like degrees in a circle.&lt;/p&gt;
+
+&lt;p&gt;Depending on the encoder, it could be a thousand ticks to rotate one full revolution. So, if your robot is traveling fast, the microcontroller may have to read pins the encoder wires are attached to thousands of times a second. Because the microcontroller is busy doing other work you need to “interrupt” it, so that any time one of those two wires changes, it’s ready to decode the signal and increment or decrement the motor’s position.&lt;/p&gt;
+
+&lt;p&gt;Luckily, Pololu has this handy &lt;a href=&quot;https://www.pololu.com/docs/0J66&quot;&gt;User’s Guide&lt;/a&gt; where they document what resources are used on the microcontroller, the pinout, and other helpful information. They had the following graphic on their site:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/adding-encoders/pololu-pinout.jpg&quot; alt=&quot;Pololu A-Star Pinout&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;So, I’m looking for 4 pins for the 2 encoders on the microcontroller that are interrupts (INT). Pins 0-3 are available, but 2 and 3 are used for Raspberry Pi communication. 0 and 1 are used for UART communication, and the gyro sensor I bought for measuring the angle can use either UART or I2C to transfer data. Pins 7-11 are interrupts, but 9-11 are taken up for UART and motor control. The only interrupt pins left are 14-17, and they’re right next to each other! Even though those pins also serve as SPI communication protocol pins, I don’t have a use for SPI, so I’ll use those pins for the encoders.&lt;/p&gt;
+
+&lt;p&gt;After writing the code for the encoders based on the tutorial I linked, I modified Pololu’s example to send the encoder data over the I2C link to the Raspberry Pi to display on the website. A good check to see if the encoders work is to calculate how many encoder ticks are in one full wheel revolution and see empirically if the measured encoder counts match.&lt;/p&gt;
+
+&lt;p&gt;The encoder’s &lt;a href=&quot;https://www.pololu.com/product/3081&quot;&gt;page&lt;/a&gt; states that the encoder has 12 CPR (counts per revolution) or 12 ticks per revolution. The motor I bought has a extended shaft on the back that turns at the speed before the gearbox reduces it. With a 150:1 gearbox ratio, every turn of a wheel attached to the motor results in the encoder turning 150 times. This means that every wheel revolution is equivalent to 150 * 12 ticks or 1800 ticks because of the gearbox.&lt;/p&gt;
+
+&lt;p&gt;Good news! Turning the wheel one full revolution results in approximately 1800 ticks. :)&lt;/p&gt;
+
+&lt;p&gt;Another experiment worth doing is testing how many ticks results in a certain distance traveled. I bought 90 mm diameter wheels, which have a circumference of 11.12 in. There are 1800 ticks in a complete wheel revolution and the wheel should travel 11.12 in. 1800 ticks / 11.12 in is about 162 ticks / in. When I tested this movement, I got closer to 158-160 ticks / inch. This could be due to the wheel’s grip, or the weight of the robot, or just the encoders being off. Most likely, this small discrepency is due to the user’s error with measurements. :)&lt;/p&gt;
+
+&lt;p&gt;Next post will focus on actually getting our robot to do things with state machines!&lt;/p&gt;
+
+</description>
+        <pubDate>Tue, 17 Jul 2018 00:00:00 -0400</pubDate>
+        <link>http://tutorialsbynick.com/adding-encoders/</link>
+        <guid isPermaLink="true">http://tutorialsbynick.com/adding-encoders/</guid>
+        
+        
+      </item>
     
       <item>
         <title>Building a Robot</title>
@@ -1181,484 +1218,6 @@ comments what you’re using Python for!&lt;/p&gt;
         <pubDate>Wed, 14 Sep 2016 00:00:00 -0400</pubDate>
         <link>http://tutorialsbynick.com/how-to-install-python-on-windows/</link>
         <guid isPermaLink="true">http://tutorialsbynick.com/how-to-install-python-on-windows/</guid>
-        
-        
-      </item>
-    
-      <item>
-        <title>Writing an OS: Baby Steps</title>
-        <description>&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/babysteps/book.jpg&quot; alt=&quot;Baby Steps&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;(Taken from the excellent movie, &lt;a href=&quot;http://www.imdb.com/title/tt0103241/&quot;&gt;What About Bob?&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;This tutorial is intended to walk you through writing your own &lt;em&gt;very&lt;/em&gt; simple
-operating system in assembly. I originally found the basis of this tutorial on the &lt;a href=&quot;http://wiki.osdev.org/Babystep1&quot;&gt;OSDev wiki&lt;/a&gt;, but it didn’t have any explanation to what was going on or why, so I decided to make this tutorial. We’ll go over the basics of the booting process
-and what tools you’ll need to operate.&lt;/p&gt;
-
-&lt;p&gt;Most popular operating systems like OSX, Linux, or Windows contain drivers and provide interfaces to the hardware, ensure a certain level of safety and security, keep the processes from fighting each other, and provide essential libraries for programs to use the computer. However, ours won’t be nearly as complicated. :) By the end of this tutorial, you should have an operating system that prints a message to the screen!&lt;/p&gt;
-
-&lt;p&gt;I attempted to explain everything as simple as possible, but if I made any errors
-or you’d like to suggest changes to my article, feel free to &lt;a href=&quot;https://github.com/TutorialsByNick/tutorialsbynick/issues/new&quot;&gt;make an issue&lt;/a&gt; on
-Github or email me.&lt;/p&gt;
-
-&lt;p&gt;The source code is also available in this &lt;a href=&quot;https://github.com/TutorialsByNick/blog-operating-system&quot;&gt;Github
-repository&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h1 id=&quot;table-of-contents&quot;&gt;Table of Contents&lt;/h1&gt;
-&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#table-of-contents&quot; id=&quot;markdown-toc-table-of-contents&quot;&gt;Table of Contents&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#requirements&quot; id=&quot;markdown-toc-requirements&quot;&gt;Requirements&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#the-booting-process&quot; id=&quot;markdown-toc-the-booting-process&quot;&gt;The Booting Process&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#finally-some-code&quot; id=&quot;markdown-toc-finally-some-code&quot;&gt;Finally, Some Code&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#shortening-the-build-process&quot; id=&quot;markdown-toc-shortening-the-build-process&quot;&gt;Shortening the Build Process&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#printing-to-the-screen&quot; id=&quot;markdown-toc-printing-to-the-screen&quot;&gt;Printing to the Screen&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#what-is-a-segment&quot; id=&quot;markdown-toc-what-is-a-segment&quot;&gt;What is a segment?&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#back-to-our-code&quot; id=&quot;markdown-toc-back-to-our-code&quot;&gt;Back to Our Code&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#exercises&quot; id=&quot;markdown-toc-exercises&quot;&gt;Exercises&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#further-reading&quot; id=&quot;markdown-toc-further-reading&quot;&gt;Further Reading&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;requirements&quot;&gt;Requirements&lt;/h1&gt;
-
-&lt;p&gt;This tutorial assumes that you already have a Debian-based Linux installation. However, the main part that shouldn’t change much between other Linux distributions except for the method of installing. If you don’t
-you can still follow along by &lt;a href=&quot;/how-to-install-ubuntu-in-a-virtual-machine-on-windows/&quot;&gt;installing Ubuntu in a virtual machine&lt;/a&gt; or by
-using &lt;a href=&quot;http://tutorialsbynick.com/writing-an-os-baby-steps/#comment-2728097897&quot;&gt;Michali Sarris’s comment&lt;/a&gt; to use Docker Toolbox.&lt;/p&gt;
-
-&lt;p&gt;You’ll need &lt;code&gt;nasm&lt;/code&gt;, &lt;code&gt;build-essential&lt;/code&gt;, and &lt;code&gt;qemu&lt;/code&gt;.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-console&quot; data-lang=&quot;console&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt; sudo apt-get install nasm build-essential qemu&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code&gt;nasm&lt;/code&gt; is an assembler, which translates assembly code into binary code that the
-computer can directly execute&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;build-essential&lt;/code&gt; installs many programs and compilers required for building other
-programs. We will use &lt;code&gt;make&lt;/code&gt; mostly to automate building the operating system
-and running it&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;qemu&lt;/code&gt; is an easy to use virtual machine that emulates a computer, so that we
-don’t have to accidentally screw up our computer or reboot constantly to
-develop our operating system. We can test the code out directly on the virtual
-machine that the qemu software provides&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;the-booting-process&quot;&gt;The Booting Process&lt;/h1&gt;
-
-&lt;p&gt;When a computer is first powered on, it starts up in a processor mode called Real Mode. This mode is a legacy left over from when we used 16-bit computers and forces the processor to use 16-bits while it’s in that mode.
-A byte is 8 bits, which are numbers that can be either 1 or 0 and are encoded as binary numbers. For example: 10010101 is a byte. Computers use bits and bytes to deal with instructions and data because that format is analogous to off and on. A computer is basically an incredibly dense electronics circuit, so using binary to program it works out well to map most directly to the hardware.
-This mode can’t access much RAM memory because the smaller amount of bits means a
-smaller amount of available numbers for addresses to use when accessing the ram.
-Most computers today which are 32-bit or 64-bit can access at least 4GB of RAM memory, while most 16-bit
-computers accessed 1MB worth of RAM.
-For our purposes, Real Mode is fine because it’s the only mode which allows us to use BIOS functions and we’re going to use relatively simple code.&lt;/p&gt;
-
-&lt;p&gt;After the computer powers on, it loads the BIOS (Basic Input Output System) from a special permanent flash memory chip on the motherboard in Real Mode. the BIOS functions as a rudimentary library that can access and modify hardware on the computer. The BIOS also performs a POST (Power On Self Test) check to make sure that all systems are running fine. It then locates the MBR (Master Boot Record, also known as boot sector) which is 512 bytes long and always found at the very start of the bootable media like a hard drive, floppy, dvd, or usb drive. After finding it, the BIOS executes the code in the MBR in Real Mode.&lt;/p&gt;
-
-&lt;p&gt;The MBR has many functions located inside it. It can hold the locations and information of different partitions for the hard drive and it also holds the code that the computer executes. Because the MBR is only 512 bytes and most operating systems don’t fit into that size (Linux and Windows contain millions of lines of code), many operating systems use a bootloader that can load the operating system kernal code from different filesystems and execute it, while finishing the set up of the computer.&lt;/p&gt;
-
-&lt;p&gt;Our little operating system kernel, however, will fit inside the 512 bytes, so it doesn’t need a bootloader to load more code from the disk.&lt;/p&gt;
-
-&lt;p&gt;What I’ll do is show you some code and we’ll deconstruct it bit by bit. Don’t worry if you don’t understand everything; this is meant to just give you some knowledge about how computers work. I’ll also provide the commands and information so that you can follow along on your own computer.&lt;/p&gt;
-
-&lt;h1 id=&quot;finally-some-code&quot;&gt;Finally, Some Code&lt;/h1&gt;
-
-&lt;p&gt;Type this snippet into your favorite text editor as &lt;code&gt;boot.asm&lt;/code&gt;:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-nasm&quot; data-lang=&quot;nasm&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;lineno&quot;&gt; 1 &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;; boot.asm&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 2 &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;hang:&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 3 &lt;/span&gt;    &lt;span class=&quot;nf&quot;&gt;jmp&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;hang&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 4 &lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 5 &lt;/span&gt;    &lt;span class=&quot;kd&quot;&gt;times&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;510&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;$$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;db&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 6 &lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 7 &lt;/span&gt;	&lt;span class=&quot;c1&quot;&gt;; This is a comment&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 8 &lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 9 &lt;/span&gt;    &lt;span class=&quot;kd&quot;&gt;db&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x55&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;10 &lt;/span&gt;    &lt;span class=&quot;kd&quot;&gt;db&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0xAA&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code&gt;hang:&lt;/code&gt; is just a named marker in the code&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;jmp hang&lt;/code&gt; means jump to the hang marker
-    &lt;ul&gt;
-      &lt;li&gt;This makes an infinte loop&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;times 510-($-$$) db 0&lt;/code&gt; is NASM syntax for fill the rest of the remaining bytes up with zeroes
-    &lt;ul&gt;
-      &lt;li&gt;&lt;code&gt;$&lt;/code&gt; means start of the current line&lt;/li&gt;
-      &lt;li&gt;&lt;code&gt;$$&lt;/code&gt; references the start of the file/section&lt;/li&gt;
-      &lt;li&gt;&lt;code&gt;($-$$)&lt;/code&gt; means subtract the current location from the beginning of the file&lt;/li&gt;
-      &lt;li&gt;We don’t use &lt;code&gt;512&lt;/code&gt; to fill up the rest of the MBR’s 512 bytes because the two &lt;code&gt;db&lt;/code&gt; commands afterward store two bytes at the end&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Anything that follows a &lt;code&gt;;&lt;/code&gt; is a comment and is disregarded by the assembler
-when assembling the source code file&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;0x55&lt;/code&gt; and &lt;code&gt;0xAA&lt;/code&gt; are ‘magic bytes’ that tell the BIOS, “Yes, this is a executable MBR”&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;As you can see, the assembly code is generally executed sequentially except for parts where instructions jump to other pieces of code.&lt;/p&gt;
-
-&lt;p&gt;Enter this into the command line to assemble the file into a binary file that the computer can actually execute:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-console&quot; data-lang=&quot;console&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt; nasm -f bin boot.asm -o boot.bin&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code&gt;-f bin&lt;/code&gt; ensures that nasm assembles it into the binary format instead of something like elf which is used for general purpose programs in Linux&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;boot.asm&lt;/code&gt; is the source code assembly file that nasm is trying to assemble&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;boot.bin&lt;/code&gt; is the output file name&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Then we start qemu with this file:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-console&quot; data-lang=&quot;console&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt; qemu-system-x86_64 boot.bin&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code&gt;qemu-system-x86_64&lt;/code&gt; is used because we want to use the version of qemu that provides a 64-bit computer&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;boot.bin&lt;/code&gt; tells qemu to use boot.bin as bootable media&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;You should see this screen when qemu starts up, if your program was successful.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/babysteps/qemu-step-one.png&quot; alt=&quot;Qemu Step One&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;So, what this program does is make the computer go into an infinite loop and hang. Not too bad, right?&lt;/p&gt;
-
-&lt;h1 id=&quot;shortening-the-build-process&quot;&gt;Shortening the Build Process&lt;/h1&gt;
-
-&lt;p&gt;That was a lot of commands you typed in the command line earlier just to get your operating system to run. Let’s make it shorter.&lt;/p&gt;
-
-&lt;p&gt;We’ll do this with &lt;code&gt;make&lt;/code&gt;, a program that is for setting up build toolchains for almost anytype of compilation.&lt;/p&gt;
-
-&lt;p&gt;First, let’s make a file named &lt;code&gt;Makefile&lt;/code&gt; and put this into it:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-make&quot; data-lang=&quot;make&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;lineno&quot;&gt;1 &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;boot.bin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;boot&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;asm&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;2 &lt;/span&gt;	nasm -f bin boot.asm -o boot.bin
-&lt;span class=&quot;lineno&quot;&gt;3 &lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;4 &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;qemu&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;boot&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;bin&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;5 &lt;/span&gt;	qemu-system-x86_64 boot.bin
-&lt;span class=&quot;lineno&quot;&gt;6 &lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;7 &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;clean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;8 &lt;/span&gt;	rm *.bin&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;The values before the colons are names for the list of commands that come afterwards. This way you can type &lt;code&gt;make clean&lt;/code&gt; and &lt;code&gt;make&lt;/code&gt; will execute &lt;code&gt;rm *.bin&lt;/code&gt; for you, which removes all of the assembled files.&lt;/p&gt;
-
-&lt;p&gt;The values that come after the colon are dependencies. So when you type &lt;code&gt;make qemu&lt;/code&gt;, &lt;code&gt;make&lt;/code&gt; will execute &lt;code&gt;boot.bin&lt;/code&gt;’s commands (&lt;code&gt;nasm -f bin boot.asm -o boot.bin&lt;/code&gt;) before it executes &lt;code&gt;qemu-system-x86_64 boot.bin&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h1 id=&quot;printing-to-the-screen&quot;&gt;Printing to the Screen&lt;/h1&gt;
-
-&lt;p&gt;Change your &lt;code&gt;boot.asm&lt;/code&gt; assembly file, so that it looks like this:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-nasm&quot; data-lang=&quot;nasm&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;lineno&quot;&gt; 1 &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;; boot.asm&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 2 &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;mov&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;ax&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x07c0&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 3 &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;mov&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;ds&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;ax&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 4 &lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 5 &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;mov&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;ah&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x0&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 6 &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;mov&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;al&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x3&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 7 &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x10&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 8 &lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 9 &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;mov&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;si&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;msg&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;10 &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;mov&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;ah&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x0E&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;11 &lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;12 &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;print_character_loop:&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;13 &lt;/span&gt;    &lt;span class=&quot;nf&quot;&gt;lodsb&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;14 &lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;15 &lt;/span&gt;    &lt;span class=&quot;nf&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;al&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;al&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;16 &lt;/span&gt;    &lt;span class=&quot;nf&quot;&gt;jz&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;hang&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;17 &lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;18 &lt;/span&gt;    &lt;span class=&quot;nf&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x10&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;19 &lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;20 &lt;/span&gt;    &lt;span class=&quot;nf&quot;&gt;jmp&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;print_character_loop&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;21 &lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;22 &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;msg:&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;23 &lt;/span&gt;    &lt;span class=&quot;kd&quot;&gt;db&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;Hello, World!&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;13&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;24 &lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;25 &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;hang:&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;26 &lt;/span&gt;    &lt;span class=&quot;nf&quot;&gt;jmp&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;hang&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;27 &lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;28 &lt;/span&gt;    &lt;span class=&quot;kd&quot;&gt;times&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;510&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;$$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;db&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;29 &lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;30 &lt;/span&gt;    &lt;span class=&quot;kd&quot;&gt;db&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x55&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;31 &lt;/span&gt;    &lt;span class=&quot;kd&quot;&gt;db&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0xAA&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Now use &lt;code&gt;make clean&lt;/code&gt; and &lt;code&gt;make qemu&lt;/code&gt; to clean, assemble, and run your operating
-system.&lt;/p&gt;
-
-&lt;p&gt;I know this looks daunting! We’ll go through it line by line though.&lt;/p&gt;
-
-&lt;p&gt;I’ve separated the code by chunks that correspond with the surrounding
-instructions. We’ll go over each chunk and the instructions used, so
-that we can figure out how the operating system goes about printing to the screen.&lt;/p&gt;
-
-&lt;p&gt;If you look at some of these instructions, they have certain pieces information behind them. These are called operands. In NASM syntax, the right operand is the source operand and the left one is the destination operand. The letter operands refer to registers in the CPU, which are special places that hold bits of information the computer can operate on.&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;mov&lt;/code&gt; is an instruction that moves data around. It can move bytes from
-  register to register and from locations in the code to registers.&lt;/p&gt;
-
-&lt;p&gt;Let’s use this knowledge to figure out our first chunk:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-nasm&quot; data-lang=&quot;nasm&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;lineno&quot;&gt;1 &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;mov&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;ax&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x07c0&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;2 &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;mov&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;ds&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;ax&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;In the first line, we move the value &lt;code&gt;0x07c0&lt;/code&gt; into the register &lt;code&gt;ax&lt;/code&gt;. &lt;code&gt;0x07c0&lt;/code&gt; is
-a hex value, which is a different number format and more convenient for assembly programmers to use than
-raw binary numbers of &lt;code&gt;1&lt;/code&gt;s and &lt;code&gt;0&lt;/code&gt;s.&lt;/p&gt;
-
-&lt;p&gt;Then we copy the value from register &lt;code&gt;ax&lt;/code&gt; to register &lt;code&gt;ds&lt;/code&gt;. You might ask,
-“Nick, why don’t you just copy &lt;code&gt;0x07c0&lt;/code&gt; directly into register &lt;code&gt;ds&lt;/code&gt;?” Well,
-&lt;code&gt;ds&lt;/code&gt; is a very special register. It stands for data segment, and for some
-reason known only to Intel developers, it can only have values transfered to it
-from other general purpose registers.&lt;/p&gt;
-
-&lt;h1 id=&quot;what-is-a-segment&quot;&gt;What is a segment?&lt;/h1&gt;
-
-&lt;p&gt;Segmentation is a special feature of Real Mode, which Intel made to keep their
-16-bit processor, and allow users to be able to access more memory. Traditionally when a computer is 16-bit, only 16-bits are used in the addressing
-lines, which call data storage devices with an addresses (in binary) to get certain values stored
-at the address in the storage device. Because computers use binary, a 16-bit addressing scheme would mean that there are only 2^16 available slots in which to store a byte. This equates to 64KB of RAM memory. Those crafty Intel developers
-implemented segementation to allow the computer to access 20 bits worth of
-addressing space which is 2^20 addresses or 1MB worth of memory.&lt;/p&gt;
-
-&lt;p&gt;However, this comes at a cost of using the segmentation
-feature. To keep 16-bit compatibility, the processor has to use two registers to
-store the &lt;em&gt;segment&lt;/em&gt; and the &lt;em&gt;offset&lt;/em&gt;. The register that holds the segment is
-multiplied by &lt;code&gt;0x10&lt;/code&gt; (16 in the decimal format, which is what we use to count), to add another zero to the end of the hex number. Multiplying by &lt;code&gt;0x10&lt;/code&gt; translates to adding four zeros to the end of the number in binary. This means that the 16 bit number is now 20 bits!
-The offset is then added to the segment address to get the actual location.
-So, when the offset is added to the segment, the address can change those four zero bits at the end to any number to access all the addresses in a 20-bit address space.&lt;/p&gt;
-
-&lt;p&gt;A helpful way to visualize this by dividing 1MB or 1024KB by 16. This gives us 64KB and shows us that with segements, we can set the segement to any address in the processor to access the RAM in 64KB blocks with the offset being able to access any address inside those blocks of 64KB.&lt;/p&gt;
-
-&lt;p&gt;A segmented address is generally referred to in this format
-&lt;code&gt;segment:offset&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h1 id=&quot;back-to-our-code&quot;&gt;Back to Our Code&lt;/h1&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-nasm&quot; data-lang=&quot;nasm&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;lineno&quot;&gt;1 &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;mov&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;ax&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x07c0&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;2 &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;mov&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;ds&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;ax&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Now you should see that this chunk of code loads &lt;code&gt;0x07c0&lt;/code&gt; into register
-&lt;code&gt;ds&lt;/code&gt;, or data segment, for segment addressing. But, why would we need this?
-Some BIOS functions require the location of the code stored into the &lt;code&gt;ds&lt;/code&gt; register to access it later. The code is located at &lt;code&gt;0x07c0:0x0000&lt;/code&gt; always because that’s where the BIOS loads the MBR every time.&lt;/p&gt;
-
-&lt;p&gt;Here’s another chunk:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-nasm&quot; data-lang=&quot;nasm&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;lineno&quot;&gt;1 &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;mov&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;ah&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x0&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;2 &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;mov&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;al&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x3&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;3 &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x10&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Here we encounter &lt;code&gt;int&lt;/code&gt;, another new instruction. It stands for interrupt
-and it interrupts the CPU and calls a certain piece of
-code referred to as an interrupt handler. Usually that interrupt handler uses pieces of code in registers to do 
-operations like taking the character in a register and printing it to the screen. In our case, the interrupts are already mapped to functions that the BIOS
-has setup for us earlier.&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;int&lt;/code&gt; instructions only take one operand and that refers to the interrupt
-number. &lt;code&gt;0x10&lt;/code&gt; is the BIOS interrupt that manages video services like writing
-characters to the screen, clearing it, setting the video mode and size, among
-other functions depending on the value stored in &lt;code&gt;ah&lt;/code&gt;. The numbers that affect
-operation of the BIOS functions are usually
-just chosen without rhyme or reason, so don’t be afraid to look up information
-about the BIOS interrupt you’re using online.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code&gt;0x0&lt;/code&gt; in register &lt;code&gt;ah&lt;/code&gt; refers to setting the video mode and size.&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;0x3&lt;/code&gt; in register &lt;code&gt;al&lt;/code&gt; tells &lt;code&gt;int 0x10&lt;/code&gt; that the video size should be 80 characters by 25
-characters.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;These lines get us set up for the character printing loop:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-nasm&quot; data-lang=&quot;nasm&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;lineno&quot;&gt;1 &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;mov&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;si&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;msg&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;2 &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;mov&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;ah&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x0E&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;In the first line, we move the pointer to the address of our message we want to print into the
-&lt;code&gt;si&lt;/code&gt; register. We use &lt;code&gt;si&lt;/code&gt; because the &lt;code&gt;lodsb&lt;/code&gt; instruction uses the
-segemented address &lt;code&gt;ds:si&lt;/code&gt; to load a byte from that location.&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;mov ah, 0x0E&lt;/code&gt; uses the &lt;code&gt;ah&lt;/code&gt; register again. &lt;code&gt;0x0E&lt;/code&gt; in the register &lt;code&gt;ah&lt;/code&gt; lets us
-use the &lt;code&gt;0x10&lt;/code&gt; interrupt for printing characters to the screen.
-This is referred to as teletype output because it emulates the
-functionality of a teletypewriter, which is similar to how a typewriter
-operates, but able to send the text to a computer or printer.&lt;/p&gt;
-
-&lt;p&gt;Finally, we’re at the part where we actually print
-characters to the screen:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-nasm&quot; data-lang=&quot;nasm&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;lineno&quot;&gt;1 &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;print_character_loop:&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;2 &lt;/span&gt;    &lt;span class=&quot;nf&quot;&gt;lodsb&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;3 &lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;4 &lt;/span&gt;    &lt;span class=&quot;nf&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;al&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;al&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;5 &lt;/span&gt;    &lt;span class=&quot;nf&quot;&gt;jz&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;hang&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;6 &lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;7 &lt;/span&gt;    &lt;span class=&quot;nf&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x10&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;8 &lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;9 &lt;/span&gt;    &lt;span class=&quot;nf&quot;&gt;jmp&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;print_character_loop&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;The &lt;code&gt;lodsb&lt;/code&gt; instruction loads a byte into register &lt;code&gt;al&lt;/code&gt; from the segmented address &lt;code&gt;ds:si&lt;/code&gt; and moves the &lt;code&gt;si&lt;/code&gt;
-register onto the next byte. We want to load bytes from the &lt;code&gt;msg:&lt;/code&gt;
-location because that’s where our characters for the message we want to
-print are stored. Conveniently
-enough, the ASCII standard (American Standard Code for Information Interchange), gives us a standardized list of numbers that correspond English letters and punctuation.&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;or al, al&lt;/code&gt; performs an &lt;code&gt;or&lt;/code&gt; of the &lt;code&gt;al&lt;/code&gt; register against itself. An OR
-instruction compares each bit of the first operand against the
-corresponding bit of the other operand. Then if either of the bits are 1, the
-destination operand’s bit in that location is changed to 1.&lt;/p&gt;
-
-&lt;p&gt;So if we were comparing &lt;code&gt;101&lt;/code&gt; and &lt;code&gt;010&lt;/code&gt;, we would look at the first bits &lt;code&gt;1&lt;/code&gt; and &lt;code&gt;0&lt;/code&gt;.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Since one of the bits is one, The first bit is kept as 1 in the destination
-operand.&lt;/li&gt;
-  &lt;li&gt;Then we look at the second bits, &lt;code&gt;0&lt;/code&gt; and &lt;code&gt;1&lt;/code&gt;. There’s another 1, so
-we change the second bit of the destination operand to &lt;code&gt;1&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;Finally, we
-compare &lt;code&gt;1&lt;/code&gt; and &lt;code&gt;0&lt;/code&gt; from the third bits and see that there is a one, so we
-change the third bit also to &lt;code&gt;1&lt;/code&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Our final destination operand is &lt;code&gt;111&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;The string terminates with a NULL character, which is a zero byte in binary
-under the ASCII standard. A &lt;code&gt;0&lt;/code&gt; compared against a &lt;code&gt;0&lt;/code&gt; would be a zero.
-So we use the &lt;code&gt;or&lt;/code&gt; instruction to check if the string has ended.&lt;/p&gt;
-
-&lt;p&gt;You may have noticed that we use the &lt;code&gt;al&lt;/code&gt; register even after we “modified” it
-with the &lt;code&gt;or&lt;/code&gt; instruction. This works because when bits the bits being &lt;code&gt;or&lt;/code&gt;‘d
-are the same, the result that is stored in the first operand is also the same.
-So &lt;code&gt;or al, al&lt;/code&gt; is equivalent to just setting the zero flag if the byte in the &lt;code&gt;al&lt;/code&gt; register is zero.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-nasm&quot; data-lang=&quot;nasm&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;lineno&quot;&gt;1 &lt;/span&gt;    &lt;span class=&quot;nf&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;al&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;al&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;2 &lt;/span&gt;    &lt;span class=&quot;nf&quot;&gt;jz&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;hang&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;So, why are these two instructions together?&lt;/p&gt;
-
-&lt;p&gt;Well, there’s a neat thing that the processor does. If the return value from
-an operation is &lt;code&gt;0&lt;/code&gt;, the processor will set the zero flag. And, if the zero
-flag is set, the &lt;code&gt;jz&lt;/code&gt; instruction executes. &lt;code&gt;jz&lt;/code&gt; stands for jump if zero. So if
-the string has ended, the processor will jump to the operand, which is &lt;code&gt;hang:&lt;/code&gt;’s
-location to hang the processor instead of looking for more characters that
-aren’t there in the string.&lt;/p&gt;
-
-&lt;p&gt;Now, we’re finally at the last parts of the loop:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-nasm&quot; data-lang=&quot;nasm&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;lineno&quot;&gt;1 &lt;/span&gt;     &lt;span class=&quot;nf&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x10&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;2 &lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt;3 &lt;/span&gt;     &lt;span class=&quot;nf&quot;&gt;jmp&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;print_character_loop&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;If you remember from earlier, &lt;code&gt;0x0E&lt;/code&gt; is in the &lt;code&gt;ah&lt;/code&gt; register. This means that we
-can use &lt;code&gt;int 0x10&lt;/code&gt; for printing characters to the screen that are stored in
-&lt;code&gt;al&lt;/code&gt;.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code&gt;int 0x10&lt;/code&gt; prints the character to the screen&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;jmp print_character_loop&lt;/code&gt; jumps to the start of the loop to print another
-character if the string has not ended&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;In summary, the loop:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Loads a character and moves the address to the next character&lt;/li&gt;
-  &lt;li&gt;Checks if the character is zero and if it is, makes the processor hang&lt;/li&gt;
-  &lt;li&gt;If the character isn’t zero, it prints the character&lt;/li&gt;
-  &lt;li&gt;And goes to the start of the loop&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;We’ve just got the final chunk left:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-nasm&quot; data-lang=&quot;nasm&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;lineno&quot;&gt;1 &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;msg:&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;2 &lt;/span&gt;    &lt;span class=&quot;kd&quot;&gt;db&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;Hello, World!&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;13&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;The &lt;code&gt;db&lt;/code&gt; command says store these values at the &lt;code&gt;msg:&lt;/code&gt; address. What the comma
-means is also store these decimal numbers as bytes too.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code&gt;13&lt;/code&gt; translates to carriage return or &lt;code&gt;\r&lt;/code&gt; in ASCII. This moves our cursor to the
-start of the line&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;10&lt;/code&gt; translates to line feed or &lt;code&gt;\n&lt;/code&gt; in ASCII. This moves our cursor to
-the next line&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;0&lt;/code&gt; tells our program that this is the end of the string&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;em&gt;(Thanks @beernuts in the comments for the correction!)&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;Both &lt;code&gt;\n&lt;/code&gt; and &lt;code&gt;\r&lt;/code&gt; are legacy values left over from teletypewriters that we
-still use today.&lt;/p&gt;
-
-&lt;p&gt;This operating system we made wasn’t &lt;em&gt;that&lt;/em&gt; terrible when we broke it up, right?
-Programming an OS is not something to be taken lightly (we haven’t even gotten
-to the hard parts yet :D) as you can see. Eventually we’d be able to use a higher level language like C or Rust, but that’s for another tutorial. I’ll leave some exercies and readings for you if
-you’d like to learn more.&lt;/p&gt;
-
-&lt;h1 id=&quot;exercises&quot;&gt;Exercises&lt;/h1&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;Print something else to the screen&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Add two numbers together&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Sum up the numbers from 1-100 and print the solution to the screen&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Print the contents of some memory address&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Try and read something from the disk using the BIOS&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Get keypresses from the BIOS&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h1 id=&quot;further-reading&quot;&gt;Further Reading&lt;/h1&gt;
-
-&lt;p&gt;&lt;em&gt;Useful Information for Extending Our Operating System&lt;/em&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.tutorialspoint.com/assembly_programming/assembly_registers.htm&quot;&gt;Assembly
-Registers&lt;/a&gt; - A useful and easy tutorial for learning more about registers used in the processor&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.cs.virginia.edu/~evans/cs216/guides/x86.html&quot;&gt;Guide to x86
-Assembly&lt;/a&gt; - More essential information for continuing this operating system in assembly&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://wiki.osdev.org/Bare_Bones&quot;&gt;Bare Bones - OSDev Wiki&lt;/a&gt; - This goes over
-using C or C++ to make your operating system kernel and boot it under an
-already made bootloader like GRUB, but like the article title says, this is not a hand-holding tutorial&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://wiki.osdev.org/Category:Babystep&quot;&gt;Category:Babystep - OSDev Wiki&lt;/a&gt; -
-The first two steps along with many other tutorials are what I based this
-tutorial on&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://mrbook.org/blog/tutorials/make/&quot;&gt;Makefiles - Mrbook’s Stuff&lt;/a&gt; is a
-great example tutorial on how to use &lt;code&gt;Makefiles&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/BIOS_interrupt_call&quot;&gt;BIOS interrupt call -
-Wikipedia&lt;/a&gt; - A relatively good list on BIOS interrupts you can use&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;em&gt;Different Operating Systems&lt;/em&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://os.phil-opp.com/multiboot-kernel.html&quot;&gt;A minimal x86 kernel - Writing an OS in
-Rust&lt;/a&gt; - These tutorials are excellent and very high quality, but in my opinion assume you have a certain amount of knowledge&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://mikeos.sourceforge.net/&quot;&gt;MikeOS - simple x86 assembly langauge operating
-system&lt;/a&gt; - “MikeOS is an operating system for x86 PCs, written in assembly language. It is a learning tool to show how simple 16-bit, real-mode OSes work, with well-commented code and extensive documentation.”&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;em&gt;More OS Theory&lt;/em&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://duartes.org/gustavo/blog/post/memory-translation-and-segmentation/&quot;&gt;Memory Translation and Segmentation - Gustavo
-Duarte&lt;/a&gt; - Goes into greater depth about segementation&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://duartes.org/gustavo/blog/post/kernel-boot-process/&quot;&gt;The Kernel Boot Process - Gustavo
-Duarte&lt;/a&gt; - If you want to look a little into how the Linux kernel boots, or any operating system kernel, really, this is for you&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://duartes.org/gustavo/blog/post/how-computers-boot-up/&quot;&gt;How Computers Boot Up - Gustavo
-Duarte&lt;/a&gt; - More indepth information about how computer boot&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.dewassoc.com/kbase/hard_drives/master_boot_record.htm&quot;&gt;The Master Boot Record (MBR) and What it Does&lt;/a&gt; - This tutorial goes into greater depth on the MBR and what the computer does with it&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://en.wikibooks.org/wiki/X86_Assembly/Bootloaders&quot;&gt;X86
-Assembly/Bootloaders&lt;/a&gt; -
-This is a good theory tutorial on how bootloaders work&lt;/li&gt;
-&lt;/ul&gt;
-
-</description>
-        <pubDate>Wed, 08 Jun 2016 00:00:00 -0400</pubDate>
-        <link>http://tutorialsbynick.com/writing-an-os-baby-steps/</link>
-        <guid isPermaLink="true">http://tutorialsbynick.com/writing-an-os-baby-steps/</guid>
         
         
       </item>
