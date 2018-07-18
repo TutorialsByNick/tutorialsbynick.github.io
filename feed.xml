@@ -4,15 +4,15 @@
     <title>Tutorials By Nick</title>
     <description>I like to learn how computers work and share my knowledge in my newsletter.
 </description>
-    <link>http://tutorialsbynick.com/</link>
-    <atom:link href="http://tutorialsbynick.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 17 Jul 2018 21:18:56 -0400</pubDate>
-    <lastBuildDate>Tue, 17 Jul 2018 21:18:56 -0400</lastBuildDate>
+    <link>https://tutorialsbynick.com/</link>
+    <atom:link href="https://tutorialsbynick.com/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Tue, 17 Jul 2018 21:21:40 -0400</pubDate>
+    <lastBuildDate>Tue, 17 Jul 2018 21:21:40 -0400</lastBuildDate>
     <generator>Jekyll v3.8.3</generator>
     
       <item>
         <title>Adding Encoders</title>
-        <description>&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/adding-encoders/robot.jpg&quot; alt=&quot;Picture of my robot&quot; /&gt;&lt;/p&gt;
+        <description>&lt;p&gt;&lt;img src=&quot;https://tutorialsbynick.com/images/adding-encoders/robot.jpg&quot; alt=&quot;Picture of my robot&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Hello again! Today, I added &lt;a href=&quot;https://www.pololu.com/product/3081&quot;&gt;these encoders&lt;/a&gt; onto my motors. The holes for soldering the data wires are really small, so I suggest using a magnifying glass if you have one.&lt;/p&gt;
 
@@ -25,7 +25,7 @@ I figured my first order of business was figuring out what pins were available t
 
 &lt;p&gt;Luckily, Pololu has this handy &lt;a href=&quot;https://www.pololu.com/docs/0J66&quot;&gt;User’s Guide&lt;/a&gt; where they document what resources are used on the microcontroller, the pinout, and other helpful information. They had the following graphic on their site:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/adding-encoders/pololu-pinout.jpg&quot; alt=&quot;Pololu A-Star Pinout&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://tutorialsbynick.com/images/adding-encoders/pololu-pinout.jpg&quot; alt=&quot;Pololu A-Star Pinout&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;So, I’m looking for 4 pins for the 2 encoders on the microcontroller that are interrupts (INT). Pins 0-3 are available, but 2 and 3 are used for Raspberry Pi communication. 0 and 1 are used for UART communication, and the gyro sensor I bought for measuring the angle can use either UART or I2C to transfer data. Pins 7-11 are interrupts, but 9-11 are taken up for UART and motor control. The only interrupt pins left are 14-17, and they’re right next to each other! Even though those pins also serve as SPI communication protocol pins, I don’t have a use for SPI, so I’ll use those pins for the encoders.&lt;/p&gt;
 
@@ -41,8 +41,8 @@ I figured my first order of business was figuring out what pins were available t
 
 </description>
         <pubDate>Tue, 17 Jul 2018 00:00:00 -0400</pubDate>
-        <link>http://tutorialsbynick.com/adding-encoders/</link>
-        <guid isPermaLink="true">http://tutorialsbynick.com/adding-encoders/</guid>
+        <link>https://tutorialsbynick.com/adding-encoders/</link>
+        <guid isPermaLink="true">https://tutorialsbynick.com/adding-encoders/</guid>
         
         
       </item>
@@ -90,8 +90,8 @@ I figured my first order of business was figuring out what pins were available t
 &lt;p&gt;I’ll try to post a build log of my efforts in a semi-tutorial fashion. Stay tuned as I write up more on how to build a robot!&lt;/p&gt;
 </description>
         <pubDate>Wed, 27 Jun 2018 00:00:00 -0400</pubDate>
-        <link>http://tutorialsbynick.com/buying-robot-parts/</link>
-        <guid isPermaLink="true">http://tutorialsbynick.com/buying-robot-parts/</guid>
+        <link>https://tutorialsbynick.com/buying-robot-parts/</link>
+        <guid isPermaLink="true">https://tutorialsbynick.com/buying-robot-parts/</guid>
         
         
       </item>
@@ -114,7 +114,7 @@ I figured my first order of business was figuring out what pins were available t
 
 &lt;p&gt;Go to &lt;code&gt;File-&amp;gt;Settings&lt;/code&gt; and search for &lt;code&gt;external tools&lt;/code&gt; in the search box in the top left. A screen like below should show up.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/android-studio-tools-ftc/external-tools.png&quot; alt=&quot;Android Studio External Tools&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://tutorialsbynick.com/images/android-studio-tools-ftc/external-tools.png&quot; alt=&quot;Android Studio External Tools&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;I have already made my tools, but to add a tool click the green &lt;code&gt;+&lt;/code&gt;.&lt;/p&gt;
 
@@ -122,7 +122,7 @@ I figured my first order of business was figuring out what pins were available t
 
 &lt;p&gt;This is the tool that will restart ADB to use over the network. Enter in information like I did below:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/android-studio-tools-ftc/restart-adb.png&quot; alt=&quot;Restart ADB Tool&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://tutorialsbynick.com/images/android-studio-tools-ftc/restart-adb.png&quot; alt=&quot;Restart ADB Tool&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;So there are a lot of fields here, but the most important ones are&lt;/p&gt;
 
@@ -170,7 +170,7 @@ I figured my first order of business was figuring out what pins were available t
 
 &lt;p&gt;This tool will actually connect over wifi from your computer to the phone.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/android-studio-tools-ftc/connect.png&quot; alt=&quot;Wifi Connect Tool&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://tutorialsbynick.com/images/android-studio-tools-ftc/connect.png&quot; alt=&quot;Wifi Connect Tool&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Inside the &lt;code&gt;Parameters&lt;/code&gt;, you tell &lt;code&gt;adb&lt;/code&gt; to connect to a certain IP address and port. The port is the one we specified earlier, and the IP address is the identifier used to find the Robot Controller on the network. You’ll need to change this to whatever IP address is listed under the Robot Controller’s About page which is under the menu button in the top right.&lt;/p&gt;
 
@@ -182,7 +182,7 @@ I figured my first order of business was figuring out what pins were available t
 
 &lt;p&gt;Sometimes when the FTC SDK updates, bugfixes are released or helpful updates are added. When this happens, we need to update the Robot Controllers code, and the Driver Station app. Helpfully, FTC keeps the Driver Station app apk installer file inside of &lt;code&gt;YourProjectNameFolder/doc/apk/FtcDriverStation-release.apk&lt;/code&gt;. We can also use &lt;code&gt;adb&lt;/code&gt; to install programs! Let’s make the tool to do this:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/android-studio-tools-ftc/install-ds.png&quot; alt=&quot;Install Driver Station Tool&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://tutorialsbynick.com/images/android-studio-tools-ftc/install-ds.png&quot; alt=&quot;Install Driver Station Tool&quot; /&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;actually-installing-the-driver-station&quot;&gt;Actually installing the Driver Station&lt;/h1&gt;
 
@@ -202,8 +202,8 @@ I figured my first order of business was figuring out what pins were available t
 
 </description>
         <pubDate>Tue, 19 Sep 2017 00:00:00 -0400</pubDate>
-        <link>http://tutorialsbynick.com/android-studio-tools-ftc/</link>
-        <guid isPermaLink="true">http://tutorialsbynick.com/android-studio-tools-ftc/</guid>
+        <link>https://tutorialsbynick.com/android-studio-tools-ftc/</link>
+        <guid isPermaLink="true">https://tutorialsbynick.com/android-studio-tools-ftc/</guid>
         
         
       </item>
@@ -214,58 +214,58 @@ I figured my first order of business was figuring out what pins were available t
 
 &lt;p&gt;First you create a repository on Github Desktop like in my &lt;a href=&quot;/github-basics/&quot;&gt;Github Basics&lt;/a&gt; tutorial. Then, open the repository folder from the repository you created earlier:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/using-github-pages/open-folder.png&quot; alt=&quot;VSCode Open Folder&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://tutorialsbynick.com/images/using-github-pages/open-folder.png&quot; alt=&quot;VSCode Open Folder&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;In my case, the repository folder name is &lt;code&gt;my-first-app&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;If you hover over the folder name, some icons should pop up like below.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/using-github-pages/hover-folder.png&quot; alt=&quot;VSCode Hover Folder&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://tutorialsbynick.com/images/using-github-pages/hover-folder.png&quot; alt=&quot;VSCode Hover Folder&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Click the first icon, which creates a new file, and make a file named &lt;code&gt;.nojekyll&lt;/code&gt;. This tells Github Pages that your repository is a simple static page one and not a Jekyll one. Press &lt;code&gt;Enter&lt;/code&gt; to save the file.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/using-github-pages/nojekyll.png&quot; alt=&quot;VSCode Create .nojekyll&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://tutorialsbynick.com/images/using-github-pages/nojekyll.png&quot; alt=&quot;VSCode Create .nojekyll&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Now in Github Desktop, we can commit the files to git and push them to the server:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/using-github-pages/commit.png&quot; alt=&quot;Github Desktop commit&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://tutorialsbynick.com/images/using-github-pages/commit.png&quot; alt=&quot;Github Desktop commit&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Now go to your Github repository on the Github website. My repository name is &lt;code&gt;my-first-app&lt;/code&gt; and my username is &lt;code&gt;nicholasday&lt;/code&gt;, so the url for me would be &lt;a href=&quot;https://github.com/nicholasday/my-first-app&quot;&gt;github.com/nicholasday/my-first-app&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/using-github-pages/repo-online.png&quot; alt=&quot;Github repo online&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://tutorialsbynick.com/images/using-github-pages/repo-online.png&quot; alt=&quot;Github repo online&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Click on the &lt;em&gt;Settings&lt;/em&gt; link, and scroll down until you see &lt;em&gt;Github Pages Settings&lt;/em&gt; header.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/using-github-pages/github-pages-settings.png&quot; alt=&quot;Github Pages Settings&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://tutorialsbynick.com/images/using-github-pages/github-pages-settings.png&quot; alt=&quot;Github Pages Settings&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Click on &lt;em&gt;None&lt;/em&gt; and select the &lt;em&gt;master branch&lt;/em&gt; option. What this does is build your Github Pages website from your master branch rather than a different branch that you have created.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/using-github-pages/select-master.png&quot; alt=&quot;Github Pages Select Master&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://tutorialsbynick.com/images/using-github-pages/select-master.png&quot; alt=&quot;Github Pages Select Master&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Don’t forget to save your selection!&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/using-github-pages/save-master.png&quot; alt=&quot;Github Pages Save Master&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://tutorialsbynick.com/images/using-github-pages/save-master.png&quot; alt=&quot;Github Pages Save Master&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;The page should reload and if you scroll back down to &lt;em&gt;Github Pages Settings&lt;/em&gt; there should be a website link. For me it’s https://nicholasday.github.io/my-first-app/.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/using-github-pages/website-link.png&quot; alt=&quot;Website Link&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://tutorialsbynick.com/images/using-github-pages/website-link.png&quot; alt=&quot;Website Link&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Previously, in my &lt;a href=&quot;/github-basics/&quot;&gt;Github Basics&lt;/a&gt; tutorial we created a file called &lt;code&gt;test.txt&lt;/code&gt;. So we go to the url they showed us earlier, and add &lt;code&gt;/test.txt&lt;/code&gt;. The url would then be https://nicholasday.github.io/my-first-app/test.txt. As you can see VSCode and the website both have the same page!&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/using-github-pages/vscode-test-file.png&quot; alt=&quot;VSCode Test File&quot; /&gt;
-&lt;img src=&quot;http://tutorialsbynick.com/images/using-github-pages/website-test-file.png&quot; alt=&quot;Website Test File&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://tutorialsbynick.com/images/using-github-pages/vscode-test-file.png&quot; alt=&quot;VSCode Test File&quot; /&gt;
+&lt;img src=&quot;https://tutorialsbynick.com/images/using-github-pages/website-test-file.png&quot; alt=&quot;Website Test File&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;If you want something to show up when you just go to a folder, place an &lt;code&gt;index.html&lt;/code&gt; file in that folder. So if we want something to show up when we go to https://nicholasday.github.io/my-first-app/, we create an &lt;code&gt;index.html&lt;/code&gt; in the base repository folder. Then, all you have to do is commit it to Github and push it to their servers. It should show up almost immediately on your website.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/using-github-pages/create-index.png&quot; alt=&quot;Create Index&quot; /&gt;
-&lt;img src=&quot;http://tutorialsbynick.com/images/using-github-pages/index-website.png&quot; alt=&quot;Index Website&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://tutorialsbynick.com/images/using-github-pages/create-index.png&quot; alt=&quot;Create Index&quot; /&gt;
+&lt;img src=&quot;https://tutorialsbynick.com/images/using-github-pages/index-website.png&quot; alt=&quot;Index Website&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Feels good, right? You can now show people your work by sending them a nice link!&lt;/p&gt;
 
 </description>
         <pubDate>Thu, 14 Sep 2017 00:00:00 -0400</pubDate>
-        <link>http://tutorialsbynick.com/using-github-pages/</link>
-        <guid isPermaLink="true">http://tutorialsbynick.com/using-github-pages/</guid>
+        <link>https://tutorialsbynick.com/using-github-pages/</link>
+        <guid isPermaLink="true">https://tutorialsbynick.com/using-github-pages/</guid>
         
         
       </item>
@@ -531,8 +531,8 @@ I figured my first order of business was figuring out what pins were available t
 
 </description>
         <pubDate>Thu, 14 Sep 2017 00:00:00 -0400</pubDate>
-        <link>http://tutorialsbynick.com/canvas-physics-and-keyboard/</link>
-        <guid isPermaLink="true">http://tutorialsbynick.com/canvas-physics-and-keyboard/</guid>
+        <link>https://tutorialsbynick.com/canvas-physics-and-keyboard/</link>
+        <guid isPermaLink="true">https://tutorialsbynick.com/canvas-physics-and-keyboard/</guid>
         
         
       </item>
@@ -559,29 +559,29 @@ I figured my first order of business was figuring out what pins were available t
 
 &lt;p&gt;First, download &lt;a href=&quot;https://desktop.github.com/&quot;&gt;Github for Desktop&lt;/a&gt;. Once you install it, the following window should pop up:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/github-basics/first-window.png&quot; alt=&quot;Github Desktop First Screen&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://tutorialsbynick.com/images/github-basics/first-window.png&quot; alt=&quot;Github Desktop First Screen&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Click &lt;em&gt;Sign into Github&lt;/em&gt; or &lt;em&gt;Create your free account&lt;/em&gt; if you don’t have one.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/github-basics/registration.png&quot; alt=&quot;Github Registration&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://tutorialsbynick.com/images/github-basics/registration.png&quot; alt=&quot;Github Registration&quot; /&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;creating-your-first-repository&quot;&gt;Creating your first repository&lt;/h1&gt;
 
 &lt;p&gt;Once you’re signed in a screen like below should show up. This name and email will show up when you contribute to a project.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/github-basics/configure-git.png&quot; alt=&quot;Github Desktop Configure Git&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://tutorialsbynick.com/images/github-basics/configure-git.png&quot; alt=&quot;Github Desktop Configure Git&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Now Github Desktop should look like this:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/github-basics/logged-in.png&quot; alt=&quot;Github Desktop Logged In&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://tutorialsbynick.com/images/github-basics/logged-in.png&quot; alt=&quot;Github Desktop Logged In&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;You’re ready to create your first repository! Click on &lt;em&gt;Create new repository&lt;/em&gt; and then select a folder to put your repository in. Usually the default option is fine, but you’ll have to remember where it’s stored so you can edit your code inside of your repository folder. In my case, the repository is located at &lt;code&gt;/home/nicholas/downloads/Github/my-first-app&lt;/code&gt;. When you clone a project that means download for the first time onto this computer.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/github-basics/repo-creation.png&quot; alt=&quot;Github Desktop Repository Creation&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://tutorialsbynick.com/images/github-basics/repo-creation.png&quot; alt=&quot;Github Desktop Repository Creation&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;You can switch repositories by clicking on the dropdown at the top.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/github-basics/repo-list.png&quot; alt=&quot;Github Desktop Repository List&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://tutorialsbynick.com/images/github-basics/repo-list.png&quot; alt=&quot;Github Desktop Repository List&quot; /&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;making-your-first-commit&quot;&gt;Making your first commit&lt;/h1&gt;
 
@@ -591,31 +591,31 @@ I figured my first order of business was figuring out what pins were available t
 
 &lt;p&gt;On the right is a ‘diff’. This shows a line by line summary of the changes that you’ve made to the selected file.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/github-basics/first-commit.png&quot; alt=&quot;Github Desktop First Commit&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://tutorialsbynick.com/images/github-basics/first-commit.png&quot; alt=&quot;Github Desktop First Commit&quot; /&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;publishing-your-repository&quot;&gt;Publishing your Repository&lt;/h1&gt;
 
 &lt;p&gt;Before we do anything, let’s publish our repository to Github. Click the &lt;em&gt;Publish repository&lt;/em&gt; button, and make sure to uncheck &lt;em&gt;keep this code private&lt;/em&gt; unless you want to pay Github for a private repository (public repositories are free by default). If you’re a student with an edu email, you can sign up for the &lt;a href=&quot;https://education.github.com/pack&quot;&gt;Github Student Developer Pack&lt;/a&gt; which has free private repos, and some free server hosting credits.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/github-basics/publish-button.png&quot; alt=&quot;Github Desktop Publish Button&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://tutorialsbynick.com/images/github-basics/publish-button.png&quot; alt=&quot;Github Desktop Publish Button&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/github-basics/publish-repo.png&quot; alt=&quot;Github Desktop Publish Repo&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://tutorialsbynick.com/images/github-basics/publish-repo.png&quot; alt=&quot;Github Desktop Publish Repo&quot; /&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;pushing-and-pulling&quot;&gt;Pushing and Pulling&lt;/h1&gt;
 
 &lt;p&gt;If you want to share your changes or back them up, you can push to origin. Origin is the main server that you’ll use for git, but there can be other servers that you can push to. Like if you wanted to push to another server and it would put your code onto a website and deploy it. Github Desktop has a handy button for that at the top.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/github-basics/push-button.png&quot; alt=&quot;Github Desktop Push Button&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://tutorialsbynick.com/images/github-basics/push-button.png&quot; alt=&quot;Github Desktop Push Button&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Pulling and fetching download code from the server onto your computer and can merge the code from the server with your code. This is handy if you want to backup your code, move computers, or collaborate with other people.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/github-basics/fetch-button.png&quot; alt=&quot;Github Desktop Fetch Button&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://tutorialsbynick.com/images/github-basics/fetch-button.png&quot; alt=&quot;Github Desktop Fetch Button&quot; /&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;your-history&quot;&gt;Your History&lt;/h1&gt;
 
 &lt;p&gt;Next to the &lt;em&gt;History&lt;/em&gt; tab, there is a tab for the history of your repository. When you click on it, you should be able to see a log of all the the commits you have made and their diffs.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/github-basics/history.png&quot; alt=&quot;Github Desktop History&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://tutorialsbynick.com/images/github-basics/history.png&quot; alt=&quot;Github Desktop History&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;You can also right click on a commit and revert it. This will undo your changes in the commit. Its a very handy feature for when you make a mistake and want to undo it, even a few commits later. Its important to commit small working changes for this purpose.&lt;/p&gt;
 
@@ -625,8 +625,8 @@ I figured my first order of business was figuring out what pins were available t
 
 </description>
         <pubDate>Thu, 07 Sep 2017 00:00:00 -0400</pubDate>
-        <link>http://tutorialsbynick.com/github-basics/</link>
-        <guid isPermaLink="true">http://tutorialsbynick.com/github-basics/</guid>
+        <link>https://tutorialsbynick.com/github-basics/</link>
+        <guid isPermaLink="true">https://tutorialsbynick.com/github-basics/</guid>
         
         
       </item>
@@ -648,19 +648,19 @@ I figured my first order of business was figuring out what pins were available t
 
 &lt;p&gt;You should have Android Studio and the FTC SDK downloaded. &lt;a href=&quot;https://ftc-tricks.com/android-studio-setup/&quot;&gt;Here&lt;/a&gt; is a good tutorial on how to do that. Open up the SDK inside Android Studio, You may see a notification like this:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/ftc-code-overview/update-gradle.png&quot; alt=&quot;Update Gradle&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://tutorialsbynick.com/images/ftc-code-overview/update-gradle.png&quot; alt=&quot;Update Gradle&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Click &lt;code&gt;Update&lt;/code&gt; to make sure you’re on the latest version. Another error may pop up like below. You should click the links for &lt;em&gt;Update Build Tools.&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/ftc-code-overview/update-build-tools.png&quot; alt=&quot;Update Build Tools&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://tutorialsbynick.com/images/ftc-code-overview/update-build-tools.png&quot; alt=&quot;Update Build Tools&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;A status bar like below shows the status of your program compiling or uploading to the phone.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/ftc-code-overview/status-bar.png&quot; alt=&quot;Android Studio Status Bar&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://tutorialsbynick.com/images/ftc-code-overview/status-bar.png&quot; alt=&quot;Android Studio Status Bar&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Next you should disable &lt;em&gt;Instant Run&lt;/em&gt; in Android Studio because sometimes it stops new OpModes from showing up on the phones, and occasionally stop OpModes from updating with new code. Go to File-&amp;gt;Settings in the toolbar and search for instant run and make sure it’s unchecked.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/ftc-code-overview/instant-run.png&quot; alt=&quot;Android Studio Instant Run&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://tutorialsbynick.com/images/ftc-code-overview/instant-run.png&quot; alt=&quot;Android Studio Instant Run&quot; /&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;creating-your-first-opmode&quot;&gt;Creating your first OpMode&lt;/h1&gt;
 
@@ -806,8 +806,8 @@ I figured my first order of business was figuring out what pins were available t
 
 </description>
         <pubDate>Tue, 05 Sep 2017 00:00:00 -0400</pubDate>
-        <link>http://tutorialsbynick.com/ftc-basic-teleop/</link>
-        <guid isPermaLink="true">http://tutorialsbynick.com/ftc-basic-teleop/</guid>
+        <link>https://tutorialsbynick.com/ftc-basic-teleop/</link>
+        <guid isPermaLink="true">https://tutorialsbynick.com/ftc-basic-teleop/</guid>
         
         
       </item>
@@ -987,8 +987,8 @@ I figured my first order of business was figuring out what pins were available t
 
 </description>
         <pubDate>Fri, 01 Sep 2017 00:00:00 -0400</pubDate>
-        <link>http://tutorialsbynick.com/javascript-animation-basics/</link>
-        <guid isPermaLink="true">http://tutorialsbynick.com/javascript-animation-basics/</guid>
+        <link>https://tutorialsbynick.com/javascript-animation-basics/</link>
+        <guid isPermaLink="true">https://tutorialsbynick.com/javascript-animation-basics/</guid>
         
         
       </item>
@@ -1118,8 +1118,8 @@ I figured my first order of business was figuring out what pins were available t
 &lt;/ul&gt;
 </description>
         <pubDate>Thu, 31 Aug 2017 00:00:00 -0400</pubDate>
-        <link>http://tutorialsbynick.com/basics-of-html-and-css/</link>
-        <guid isPermaLink="true">http://tutorialsbynick.com/basics-of-html-and-css/</guid>
+        <link>https://tutorialsbynick.com/basics-of-html-and-css/</link>
+        <guid isPermaLink="true">https://tutorialsbynick.com/basics-of-html-and-css/</guid>
         
         
       </item>
@@ -1144,7 +1144,7 @@ documentation available for you to utilize when programming complex projects.&lt
 &lt;p&gt;First, you should go to the &lt;a href=&quot;https://python.org&quot;&gt;Python website&lt;/a&gt;. It should show
 up in your URL bar as something like this:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/python-installation/python-url.jpg&quot; alt=&quot;Python website url&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://tutorialsbynick.com/images/python-installation/python-url.jpg&quot; alt=&quot;Python website url&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Make sure that you see the green lock to the left of the url with the words
 &lt;code&gt;Python Software Foundation&lt;/code&gt; because that signifies that this website is
@@ -1153,17 +1153,17 @@ officially sanctioned by the organization that develops Python.&lt;/p&gt;
 &lt;p&gt;Hover over the downloads link in the navigation bar, and click on the Windows
 link provided.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/python-installation/hover-downloads.jpg&quot; alt=&quot;Python download link&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://tutorialsbynick.com/images/python-installation/hover-downloads.jpg&quot; alt=&quot;Python download link&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Once the page has loaded, you should see the following links below:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/python-installation/select-python3-releases.jpg&quot; alt=&quot;Select python3 releases&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://tutorialsbynick.com/images/python-installation/select-python3-releases.jpg&quot; alt=&quot;Select python3 releases&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Click the link which has the words &lt;code&gt;Latest Python 3 Release&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;This will take you to a page which has the following table:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/python-installation/download-table.jpg&quot; alt=&quot;Download table&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://tutorialsbynick.com/images/python-installation/download-table.jpg&quot; alt=&quot;Download table&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Select &lt;code&gt;Windows x86-64 executable installer&lt;/code&gt; if you have a 64-bit computer.&lt;/p&gt;
 
@@ -1171,39 +1171,39 @@ link provided.&lt;/p&gt;
 
 &lt;p&gt;A download dialog should pop up on your screen:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/python-installation/download-dialog.jpg&quot; alt=&quot;Download dialog&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://tutorialsbynick.com/images/python-installation/download-dialog.jpg&quot; alt=&quot;Download dialog&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Click &lt;code&gt;Save File&lt;/code&gt; because you’ll want to run it later to install Python.&lt;/p&gt;
 
 &lt;p&gt;After it has finished downloading, select the download from the dropdown menu in
 your browser to start installing Python.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/python-installation/run-from-downloads.jpg&quot; alt=&quot;Run from downloads&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://tutorialsbynick.com/images/python-installation/run-from-downloads.jpg&quot; alt=&quot;Run from downloads&quot; /&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;installing-python&quot;&gt;Installing Python&lt;/h1&gt;
 
 &lt;p&gt;This screen should come up after running the download:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/python-installation/first-installation-screen.jpg&quot; alt=&quot;First installation screen&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://tutorialsbynick.com/images/python-installation/first-installation-screen.jpg&quot; alt=&quot;First installation screen&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Be sure to have the checkbox titled, &lt;code&gt;Add Python to PATH&lt;/code&gt;, checked:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/python-installation/check-python-path.jpg&quot; alt=&quot;Check python path&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://tutorialsbynick.com/images/python-installation/check-python-path.jpg&quot; alt=&quot;Check python path&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Now click &lt;code&gt;Install Now&lt;/code&gt; to start the installation.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/python-installation/select-install-now.jpg&quot; alt=&quot;Install now&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://tutorialsbynick.com/images/python-installation/select-install-now.jpg&quot; alt=&quot;Install now&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;A window may pop up asking whether you want to allow the installation access to
 your hard drive. Click yes because you want to install Python.&lt;/p&gt;
 
 &lt;p&gt;The Python installer should show its progress like this:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/python-installation/python-installing-window.jpg&quot; alt=&quot;Python installing window&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://tutorialsbynick.com/images/python-installation/python-installing-window.jpg&quot; alt=&quot;Python installing window&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Congratulations! If you see a window like the one below, your Python installation is finished!&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://tutorialsbynick.com/images/python-installation/python-installation-finished.jpg&quot; alt=&quot;Python installation finished&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://tutorialsbynick.com/images/python-installation/python-installation-finished.jpg&quot; alt=&quot;Python installation finished&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Click &lt;code&gt;Close&lt;/code&gt; to exit the installer.&lt;/p&gt;
 
@@ -1216,8 +1216,8 @@ comments what you’re using Python for!&lt;/p&gt;
 
 </description>
         <pubDate>Wed, 14 Sep 2016 00:00:00 -0400</pubDate>
-        <link>http://tutorialsbynick.com/how-to-install-python-on-windows/</link>
-        <guid isPermaLink="true">http://tutorialsbynick.com/how-to-install-python-on-windows/</guid>
+        <link>https://tutorialsbynick.com/how-to-install-python-on-windows/</link>
+        <guid isPermaLink="true">https://tutorialsbynick.com/how-to-install-python-on-windows/</guid>
         
         
       </item>

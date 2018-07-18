@@ -10,8 +10,8 @@
   <meta name="description" content="">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://tutorialsbynick.com/adding-encoders/">
-  <link rel="alternate" type="application/rss+xml" title="Tutorials By Nick" href="http://tutorialsbynick.com/feed.xml">
+  <link rel="canonical" href="https://tutorialsbynick.com/adding-encoders/">
+  <link rel="alternate" type="application/rss+xml" title="Tutorials By Nick" href="https://tutorialsbynick.com/feed.xml">
 <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet"> 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-79125896-1"></script>
 <script>
@@ -69,7 +69,7 @@
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <p><img src="http://tutorialsbynick.com/images/adding-encoders/robot.jpg" alt="Picture of my robot" /></p>
+    <p><img src="https://tutorialsbynick.com/images/adding-encoders/robot.jpg" alt="Picture of my robot" /></p>
 
 <p>Hello again! Today, I added <a href="https://www.pololu.com/product/3081">these encoders</a> onto my motors. The holes for soldering the data wires are really small, so I suggest using a magnifying glass if you have one.</p>
 
@@ -82,7 +82,7 @@ I figured my first order of business was figuring out what pins were available t
 
 <p>Luckily, Pololu has this handy <a href="https://www.pololu.com/docs/0J66">User’s Guide</a> where they document what resources are used on the microcontroller, the pinout, and other helpful information. They had the following graphic on their site:</p>
 
-<p><img src="http://tutorialsbynick.com/images/adding-encoders/pololu-pinout.jpg" alt="Pololu A-Star Pinout" /></p>
+<p><img src="https://tutorialsbynick.com/images/adding-encoders/pololu-pinout.jpg" alt="Pololu A-Star Pinout" /></p>
 
 <p>So, I’m looking for 4 pins for the 2 encoders on the microcontroller that are interrupts (INT). Pins 0-3 are available, but 2 and 3 are used for Raspberry Pi communication. 0 and 1 are used for UART communication, and the gyro sensor I bought for measuring the angle can use either UART or I2C to transfer data. Pins 7-11 are interrupts, but 9-11 are taken up for UART and motor control. The only interrupt pins left are 14-17, and they’re right next to each other! Even though those pins also serve as SPI communication protocol pins, I don’t have a use for SPI, so I’ll use those pins for the encoders.</p>
 
@@ -143,7 +143,7 @@ inbox just for subscribing.</p>
   <div id="disqus_thread"></div>
 <script>
     var disqus_config = function () {
-        this.page.url = "http://tutorialsbynick.com/adding-encoders/";
+        this.page.url = "https://tutorialsbynick.com/adding-encoders/";
         this.page.identifier = "Adding Encoders";
     };
 (function() {
