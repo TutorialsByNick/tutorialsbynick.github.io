@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Raspberry Pi Code Deployment</title>
+  <meta name="description" content="Pololu wrote some code to interface the Raspberry Pi with the Arduino. It uses a Python web server to host a webpage on the Raspberry Pi. When it’s connected...">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://tutorialsbynick.com/raspberry-pi-code-deployment/">
+  <link rel="alternate" type="application/rss+xml" title="Tutorials By Nick" href="https://tutorialsbynick.com/feed.xml">
+<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet"> 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-79125896-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-79125896-1');
+</script>
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">Tutorials By Nick</a>
+
+    <nav class="site-nav">
+      <div class="trigger">
+          <a class="page-link" href="http://robotics.tutorialsbynick.com">Robotics Simulator</a>
+          <a class="page-link" href="/articles">Articles</a>
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Raspberry Pi Code Deployment</h1>
+    <p class="post-meta post-line">
+        By <a class="author" href="/about"><span itemprop="author" itemscope
+        itemtype="http://schema.org/Person"><span itemprop="name">Nicholas Day</span></span></a>
+        &nbsp;|&nbsp;&nbsp;<time datetime="2018-07-19T00:00:00-04:00" itemprop="datePublished">Jul 19, 2018</time>
+    </p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>Pololu wrote some code to interface the Raspberry Pi with the Arduino. It uses a Python web server to host a webpage on the Raspberry Pi. When it’s connected to your network, you can go to its IP address, and interact with the web page. Then, the Python web server sends and receives information from the Arduino over the I2C bus. Both the Raspberry Pi and the Arduino are connected with a few wires to make the I2C bus, so that they can share information.</p>
+
+<p>The cool thing about this setup is that you can edit the Python web server quickly to change the web page without uploading to the Arduino with a USB cord (This takes some time). You could have new robot scripts just by editing what commands are sent to the Arduino, or by introducing a camera to dynamically recognize and follow objects!</p>
+
+<p>Pololu’s <a href="https://www.pololu.com/blog/577/building-a-raspberry-pi-robot-with-the-a-star-32u4-robot-controller">guide</a> has you download the Python code onto the Raspberry Pi and start running the server. This is great for setting up one time, but if you want to do a series of quick edits you’ll need some way to automate deploying code.</p>
+
+<p>The process consists of</p>
+<ul>
+  <li>Logging into the server using SSH, a secure computer control protocol</li>
+  <li>Downloading code</li>
+  <li>Restarting the service</li>
+</ul>
+
+<p>We can make that into one Python script that is run from another computer using <a href="http://www.fabfile.org/">Fabric</a>. I think their website says what it is best: “Fabric is a high level Python (2.7, 3.4+) library designed to execute shell commands remotely over SSH, yielding useful Python objects in return.”</p>
+
+<p>A <code>Connection</code> from the library lets you execute shell commands on the server.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="c1"># pi is the default username on the Raspberry Pi</span>
+<span class="c1"># the number is the IP address of the Raspberry Pi</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">Connection</span><span class="p">(</span><span class="s2">&quot;pi@192.168.1.109&quot;</span><span class="p">)</span>
+
+<span class="c1"># This lists all the files in the home directory on the server</span>
+<span class="n">c</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;ls&quot;</span><span class="p">)</span></code></pre></figure>
+
+<p>What we want to do is transfer files from our computer to the Raspberry Pi, then run a command to restart the Python code.</p>
+
+<p>On the <a href="http://docs.fabfile.org/en/2.2/getting-started.html#transfer-files">Getting started docs</a>, there is a command, <code>Connection.put(file)</code>, for transferring files. Because there are many Python files that make up the server functionality, I checked the <code>put()</code> <a href="http://docs.fabfile.org/en/2.2/api/connection.html#fabric.connection.Connection.put">docs</a> which lead to the <code>Transfer.put()</code> <a href="http://docs.fabfile.org/en/2.2/api/transfer.html#fabric.transfer.Transfer.put">docs</a>. Unfortunately it seems that <code>Transfer.put()</code> or <code>put()</code> doesn’t support uploading files, so we have to implement that ourselves.</p>
+
+<p>I was honestly too lazy to make a function to open a folder and manually upload each file, so I decided to compress the folder into a single file, then upload that. I knew of the Linux <code>tar</code> command, but I didn’t know exactly what arguments to provide so I used the <code>man</code> command in the shell, and judicious Google.</p>
+
+<p>Here’s what I found out:</p>
+<ul>
+  <li><code>tar -cf archive.tar folder/</code> puts the <code>folder/</code> into a compressed archive named <code>archive.tar</code></li>
+  <li><code>tar -xf archive.tar -C folder/</code> extracts the compressed files from <code>archive.tar</code> and puts it in <code>folder/</code></li>
+</ul>
+
+<p>So the process for uploading a folder should look like this:</p>
+<ul>
+  <li>Make a compressed archive of the folder locally</li>
+  <li>Use the <code>put()</code> command to upload the compressed archive</li>
+  <li>Use the <code>run()</code> command on the <code>Connection</code> to extract the folder from the compressed archive</li>
+  <li>Delete the compressed archive locally</li>
+  <li>Delete the compressed archive stored on the server</li>
+</ul>
+
+<p>From the Fabric docs, I learned that Fabric internally uses this library called <a href="http://www.pyinvoke.org/">Invoke</a> to run commands, and Fabric does the SSH remote server stuff. I can use the <code>run()</code> command from Invoke to make the local archive and delete it.</p>
+
+<p>This is the function I ended up with for uploading folders:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="k">def</span> <span class="nf">upload</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">folder</span><span class="p">,</span> <span class="n">destination</span><span class="p">):</span>
+    <span class="c1"># Make a compressed archive locally</span>
+    <span class="n">run</span><span class="p">(</span><span class="s2">&quot;tar -cf test.tar &quot;</span> <span class="o">+</span> <span class="n">folder</span><span class="p">)</span>
+
+    <span class="c1"># Put the compressed archive on the server at the destination</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;test.tar&quot;</span><span class="p">,</span> <span class="n">remote</span><span class="o">=</span><span class="n">destination</span> <span class="o">+</span> <span class="s2">&quot;test.tar&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Extract the archive&#39;s files into the destination folder</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;tar -xf &quot;</span> <span class="o">+</span> <span class="n">destination</span> <span class="o">+</span> <span class="s2">&quot;test.tar -C &quot;</span> <span class="o">+</span> <span class="n">destination</span><span class="p">)</span>
+
+    <span class="c1"># Delete the remote archive</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;rm &quot;</span> <span class="o">+</span> <span class="n">destination</span> <span class="o">+</span> <span class="s2">&quot;test.tar&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Delete the local archive</span>
+    <span class="n">run</span><span class="p">(</span><span class="s2">&quot;rm test.tar&quot;</span><span class="p">)</span></code></pre></figure>
+
+<p>Now all that needs to be done is run the <code>upload()</code> function, and restart the Python code. Running the shell command to restart the code requires <code>sudo</code> administrator priviledges, so I copied the sudo helper code from the <a href="http://docs.fabfile.org/en/2.2/getting-started.html#superuser-privileges-via-auto-response">Fabric docs</a> to ask me for my password then securely use it on the server.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="c1"># Asks the user for the password, then safely stores it </span>
+<span class="c1"># Later when we restart the server it uses the sudo password</span>
+<span class="n">sudo_pass</span> <span class="o">=</span> <span class="n">getpass</span><span class="o">.</span><span class="n">getpass</span><span class="p">(</span><span class="s2">&quot;What&#39;s your sudo password? &quot;</span><span class="p">)</span>
+<span class="n">config</span> <span class="o">=</span> <span class="n">Config</span><span class="p">(</span><span class="n">overrides</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;sudo&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;password&#39;</span><span class="p">:</span> <span class="n">sudo_pass</span><span class="p">}})</span>
+
+<span class="c1"># Had to setup a ssh key for this to work</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">Connection</span><span class="p">(</span><span class="s1">&#39;pi@192.168.1.118&#39;</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
+
+<span class="c1"># Upload the src/ folder to /home/pi/tank-drive/</span>
+<span class="n">upload</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="s2">&quot;src/&quot;</span><span class="p">,</span> <span class="s2">&quot;/home/pi/tank-drive/&quot;</span><span class="p">)</span>
+
+<span class="c1"># Uses the sudo password to get administrator priviledges</span>
+<span class="c1"># Restarts the server like in the Pololu guide</span>
+<span class="n">c</span><span class="o">.</span><span class="n">sudo</span><span class="p">(</span><span class="s2">&quot;systemctl restart a_star_slave&quot;</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">sudo</span><span class="p">(</span><span class="s2">&quot;systemctl restart a_star_heartbeat&quot;</span><span class="p">)</span></code></pre></figure>
+
+<p>Hope you enjoyed it! The next post will focus on designing simple 3d printed gears using <a href="http://www.openscad.org/">OpenSCAD</a>.</p>
+
+
+
+    
+
+  <h4>Check out other posts in this series</h4>
+
+  <ul>
+
+  
+  
+      <li>
+          <a href="/buying-robot-parts/">Buying Robot Parts</a>
+      </li>
+    
+      <li>
+          <a href="/adding-encoders/">Adding Encoders</a>
+      </li>
+    
+      <li>
+          <a href="/state-machines-and-movement/">State Machines and Movement</a>
+      </li>
+    
+      <li>
+          <a href="/raspberry-pi-code-deployment/">Raspberry Pi Code Deployment</a>
+      </li>
+    
+  </ul>
+
+  
+
+
+
+
+
+
+<div class="center intro-above"><h1>Join me in learning about how computers work</h1></div>
+
+<p>Just enter your email into the box below. You'll also receive my free 12 page
+guide, <i>Getting Started with Operating System Development</i>, straight to your
+inbox just for subscribing.</p>
+
+<div class="intro-above intro">
+<div class="float-left">
+<img class="guide-image" alt="Getting Started with Operating System Development Ebook"
+     src="/images/osdev-book-cover.jpg" />
+</div>
+
+<div class="float-left">
+<!-- Begin MailChimp Signup Form -->
+<div id="mc_embed_signup">
+<form action="//tutorialsbynick.us13.list-manage.com/subscribe/post?u=99cb9d82916998aa9e5915fa3&amp;id=65aafcd362" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	<h3>Where do I send your free guide to?</h3>
+<div class="mc-field-group">
+	<input type="email" value="" placeholder="Email Address" name="EMAIL" class="required email" id="mce-EMAIL">
+</div>
+	<div id="mce-responses" class="clear">
+		<div class="response" id="mce-error-response" style="display:none"></div>
+		<div class="response" id="mce-success-response" style="display:none"></div>
+	</div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_99cb9d82916998aa9e5915fa3_65aafcd362" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" style="margin-top: 10px;" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+</div>
+</div>
+<div class="clear"></div>
+
+
+  </div>
+
+
+  
+  <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+        this.page.url = "https://tutorialsbynick.com/raspberry-pi-code-deployment/";
+        this.page.identifier = "Raspberry Pi Code Deployment";
+    };
+(function() {
+        var d = document, s = d.createElement('script');
+        
+        s.src = '//tutorialsbynick.disqus.com/embed.js';
+        
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+  
+
+</article>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Tutorials By Nick</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>Tutorials By Nick</li>
+          <li><a href="mailto:nick@tutorialsbynick.com">nick@tutorialsbynick.com</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/nicholasday"><span class="icon icon--github"><svg viewBox="0 0 16 16"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">nicholasday</span></a>
+
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/nicholasbday"><span class="icon icon--twitter"><svg viewBox="0 0 16 16"><path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/></svg>
+</span><span class="username">nicholasbday</span></a>
+
+          </li>
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p>I like to learn how computers work and share my knowledge in my newsletter.
+</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>
